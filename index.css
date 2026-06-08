@@ -1061,11 +1061,14 @@ body.loading-state {
     position: relative;
     border: 1px solid rgba(212, 175, 55, 0.12);
     background-color: var(--color-chocolate-dark);
+    max-width: 450px;
+    margin: 0 auto;
 }
 
 @media (max-width: 768px) {
     .gallery-viewport {
-        height: 420px;
+        height: 500px;
+        max-width: 100%;
     }
 }
 
@@ -1086,7 +1089,7 @@ body.loading-state {
 .gallery-slide img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     background-color: var(--color-chocolate-dark);
 }
 
@@ -1227,8 +1230,10 @@ body.loading-state {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 0;
+    padding: 16px 8px;
     transition: var(--transition-quick);
+    touch-action: manipulation;
+    user-select: none;
 }
 
 .faq-question-btn:hover {

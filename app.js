@@ -277,14 +277,46 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (index < 0) activeSlide = totalSlides - 1;
         else activeSlide = index;
         
-        gallerySlider.style.transform = `translateX(-${activeSlide * 100}%)`;
+        if (gallerySlider) {
+            gallerySlider.style.transform = `translateX(-${activeSlide * 100}%)`;
+        }
     }
 
-    prevBtn.addEventListener('click', () => showSlide(activeSlide - 1));
-    nextBtn.addEventListener('click', () => showSlide(activeSlide + 1));
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => showSlide(activeSlide - 1));
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => showSlide(activeSlide + 1));
+    }
 
     // Auto rotate every 8 seconds
     setInterval(() => showSlide(activeSlide + 1), 8000);
+
+    // Touch Swiping Support for Gallery Slider
+    if (gallerySlider) {
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        gallerySlider.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        
+        gallerySlider.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50; // minimum pixels to swipe
+            if (touchStartX - touchEndX > swipeThreshold) {
+                // Swiped left -> next slide
+                showSlide(activeSlide + 1);
+            } else if (touchEndX - touchStartX > swipeThreshold) {
+                // Swiped right -> prev slide
+                showSlide(activeSlide - 1);
+            }
+        }
+    }
 
     // ----------------------------------------------------
     // 6. REAL TIME SALON HOURS OPEN STATUS
@@ -860,9 +892,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     }
 
-    bookingsTrigger.addEventListener('click', openDrawer);
-    closeDrawerBtn.addEventListener('click', closeDrawer);
-    drawerOverlay.addEventListener('click', closeDrawer);
+    if (bookingsTrigger) {
+        bookingsTrigger.addEventListener('click', openDrawer);
+    }
+    if (closeDrawerBtn) {
+        closeDrawerBtn.addEventListener('click', closeDrawer);
+    }
+    if (drawerOverlay) {
+        drawerOverlay.addEventListener('click', closeDrawer);
+    }
 
     // Mobile menu drawer elements
     const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
