@@ -9,20 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hide preloader with luxury animation after assets load
     window.addEventListener('load', () => {
         setTimeout(() => {
-            preloader.classList.add('loader-fade-out');
-            setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 800);
+            preloader.classList.add('preloader-hidden');
+            document.body.classList.remove('loading-state');
         }, 1000); // Small delay to appreciate the entry animation
     });
 
     // In case load event fired before listener
     if (document.readyState === 'complete') {
         setTimeout(() => {
-            preloader.classList.add('loader-fade-out');
-            setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 800);
+            preloader.classList.add('preloader-hidden');
+            document.body.classList.remove('loading-state');
         }, 1000);
     }
 
@@ -34,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let particles = [];
     const particleCount = 60;
-    let mouse = { x: null, y: null, radius: 100 };
+    let mouse = { x: null, y: null, radius: 120 };
 
     function resizeCanvas() {
         canvas.width = window.innerWidth;
@@ -165,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     // 4. NAVIGATION, TABS & SERVICE SEARCH FILTERING
     // ----------------------------------------------------
-    const catNavItems = document.querySelectorAll('.category-nav-item');
+    const catNavItems = document.querySelectorAll('.category-btn');
     const sections = document.querySelectorAll('.catalog-section');
 
     catNavItems.forEach(item => {
@@ -173,12 +169,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetCat = item.getAttribute('data-category');
             
             // Update nav item active states
-            catNavItems.forEach(nav => {
-                nav.classList.remove('active', 'bg-chocolate', 'text-gold');
-                nav.classList.add('text-chocolate/80', 'hover:bg-chocolate/5');
-            });
-            item.classList.add('active', 'bg-chocolate', 'text-gold');
-            item.classList.remove('text-chocolate/80', 'hover:bg-chocolate/5');
+            catNavItems.forEach(nav => nav.classList.remove('active'));
+            item.classList.add('active');
             
             // Toggle visible sections
             sections.forEach(sec => {
@@ -215,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sections.forEach(sec => sec.classList.remove('hidden'));
         } else {
             // Revert back to active category tab if search empty
-            const activeTab = document.querySelector('.category-nav-item.active').getAttribute('data-category');
+            const activeTab = document.querySelector('.category-btn.active').getAttribute('data-category');
             sections.forEach(sec => {
                 if (sec.id === `section-${activeTab}`) {
                     sec.classList.remove('hidden');
@@ -428,11 +420,11 @@ document.addEventListener('DOMContentLoaded', () => {
             specialistItems.forEach(el => {
                 el.classList.remove('active');
                 el.querySelector('.specialist-check').textContent = 'radio_button_unchecked';
-                el.querySelector('.specialist-check').classList.replace('text-gold', 'text-chocolate/20');
+                el.querySelector('.specialist-check').classList.replace('text-gold', 'text-muted');
             });
             item.classList.add('active');
             item.querySelector('.specialist-check').textContent = 'radio_button_checked';
-            item.querySelector('.specialist-check').classList.replace('text-chocolate/20', 'text-gold');
+            item.querySelector('.specialist-check').classList.replace('text-muted', 'text-gold');
             
             bookingData.specialist = item.getAttribute('data-specialist');
         });
@@ -493,9 +485,9 @@ document.addEventListener('DOMContentLoaded', () => {
         step4.classList.add('hidden');
         
         // Remove active indicators
-        ind1.classList.remove('text-chocolate');
-        ind2.classList.remove('text-chocolate');
-        ind3.classList.remove('text-chocolate');
+        ind1.classList.remove('active');
+        ind2.classList.remove('active');
+        ind3.classList.remove('active');
 
         modalBackBtn.classList.add('hidden');
         modalNextBtn.classList.remove('hidden');
@@ -503,14 +495,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (currentStep === 1) {
             step1.classList.remove('hidden');
-            ind1.classList.add('text-chocolate');
+            ind1.classList.add('active');
         } else if (currentStep === 2) {
             step2.classList.remove('hidden');
-            ind2.classList.add('text-chocolate');
+            ind2.classList.add('active');
             modalBackBtn.classList.remove('hidden');
         } else if (currentStep === 3) {
             step3.classList.remove('hidden');
-            ind3.classList.add('text-chocolate');
+            ind3.classList.add('active');
             modalBackBtn.classList.remove('hidden');
             modalNextBtn.textContent = 'Confirmar Reserva';
         } else if (currentStep === 4) {
@@ -589,7 +581,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Clear time slots when re-rendering month
         timeSlotsContainer.innerHTML = '';
-        noSlotsMessage.classList.remove('hidden');
+        noSlotsMessage.style.display = 'block';
     }
 
     prevMonthBtn.addEventListener('click', () => {
@@ -605,7 +597,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // GENERATE TURN SLOTS BASED ON SALON HOURS
     function generateTimeSlots(date) {
         timeSlotsContainer.innerHTML = '';
-        noSlotsMessage.classList.add('hidden');
+        noSlotsMessage.style.display = 'none';
 
         const dayOfWeek = date.getDay(); // 0 = Sun, 1 = Mon, ...
         let slots = [];
@@ -634,7 +626,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (slots.length === 0) {
-            noSlotsMessage.classList.remove('hidden');
+            noSlotsMessage.style.display = 'block';
             return;
         }
 
@@ -702,9 +694,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const bookings = JSON.parse(localStorage.getItem('piel_canela_bookings')) || [];
         if (bookings.length > 0) {
             bookingBadge.textContent = bookings.length;
-            bookingBadge.classList.replace('hidden', 'flex');
+            bookingBadge.style.display = 'flex';
         } else {
-            bookingBadge.classList.replace('flex', 'hidden');
+            bookingBadge.style.display = 'none';
         }
     }
     updateBookingsBadge();
@@ -714,31 +706,31 @@ document.addEventListener('DOMContentLoaded', () => {
         appointmentsList.innerHTML = '';
         
         if (bookings.length === 0) {
-            emptyState.classList.remove('hidden');
+            emptyState.style.display = 'flex';
             return;
         }
         
-        emptyState.classList.add('hidden');
+        emptyState.style.display = 'none';
         
         // Render from newest to oldest
         bookings.slice().reverse().forEach(booking => {
             const card = document.createElement('div');
-            card.className = 'border border-gold/15 bg-chocolate/5 p-4 rounded-2xl relative space-y-2';
+            card.className = 'drawer-appointment-item';
             
             const dateObj = new Date(booking.date);
             const dateStr = dateObj.toLocaleDateString('es-ES', { weekday: 'short', month: 'short', day: 'numeric' });
             
             card.innerHTML = `
-                <div class="flex justify-between items-start pr-6">
-                    <span class="font-bold text-chocolate text-sm">${booking.service.name}</span>
-                    <span class="text-xs font-bold text-gold-dark">${booking.service.price} €</span>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; padding-right: 24px;">
+                    <span class="drawer-apt-title">${booking.service.name}</span>
+                    <span class="drawer-apt-price">${booking.service.price} €</span>
                 </div>
-                <div class="text-[11px] text-chocolate/80 space-y-0.5">
-                    <p class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-gold">calendar_month</span> ${dateStr} a las ${booking.time} (${booking.service.duration})</p>
-                    <p class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-gold">person</span> Especialista: ${booking.specialist === 'cualquiera' ? 'Cualquiera' : booking.specialist}</p>
+                <div class="drawer-apt-meta">
+                    <p><span class="material-symbols-outlined">calendar_month</span> ${dateStr} a las ${booking.time} (${booking.service.duration})</p>
+                    <p><span class="material-symbols-outlined">person</span> Especialista: ${booking.specialist === 'cualquiera' ? 'Cualquiera' : booking.specialist}</p>
                 </div>
-                <button class="absolute top-4 right-4 text-chocolate/30 hover:text-red-500 transition-colors delete-booking-btn" data-id="${booking.id}">
-                    <span class="material-symbols-outlined text-base">delete</span>
+                <button class="btn-cancel-apt delete-booking-btn" data-id="${booking.id}">
+                    <span class="material-symbols-outlined">delete</span>
                 </button>
             `;
             
@@ -805,7 +797,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chatTriggerBtn.addEventListener('click', () => {
         chatWindow.classList.toggle('active');
         // Clear indicator dot if clicked
-        const dot = chatTriggerBtn.querySelector('span.absolute.top-0');
+        const dot = chatTriggerBtn.querySelector('.notification-dot');
         if (dot) dot.remove();
     });
 
@@ -836,17 +828,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const wrap = document.createElement('div');
         
         if (direction === 'in') {
-            wrap.className = 'flex gap-2.5 items-start message-in';
+            wrap.className = 'chat-bubble-row message-in';
             wrap.innerHTML = `
-                <div class="w-7 h-7 rounded-full bg-chocolate/10 flex items-center justify-center text-gold shrink-0 border border-gold/20 text-xs font-bold">C</div>
-                <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-gold/10 text-xs text-chocolate-dark leading-relaxed shadow-sm max-w-[80%]">
+                <div class="chat-avatar">C</div>
+                <div class="chat-text">
                     ${isHtml ? text : escapeHTML(text).replace(/\n/g, '<br>')}
                 </div>
             `;
         } else {
-            wrap.className = 'flex justify-end message-out';
+            wrap.className = 'chat-bubble-row message-out';
             wrap.innerHTML = `
-                <div class="bg-chocolate text-white p-3 rounded-2xl rounded-tr-none text-xs leading-relaxed shadow-sm max-w-[80%]">
+                <div class="chat-text">
                     ${escapeHTML(text)}
                 </div>
             `;
@@ -865,10 +857,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Simulate typing micro-animation
     function simulateTypingReply(callback) {
         const typingWrap = document.createElement('div');
-        typingWrap.className = 'flex gap-2.5 items-start message-in temp-typing';
+        typingWrap.className = 'chat-bubble-row message-in temp-typing';
         typingWrap.innerHTML = `
-            <div class="w-7 h-7 rounded-full bg-chocolate/10 flex items-center justify-center text-gold shrink-0 border border-gold/20 text-xs font-bold">C</div>
-            <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-gold/10 text-xs leading-none shadow-sm max-w-[80%] flex items-center h-8">
+            <div class="chat-avatar">C</div>
+            <div class="chat-text">
                 <div class="typing-bubble">
                     <span class="typing-dot"></span>
                     <span class="typing-dot"></span>
@@ -887,7 +879,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Quick replies mapping
-    chatQuickReplies.querySelectorAll('.chat-pill').forEach(pill => {
+    chatQuickReplies.querySelectorAll('.chat-reply-pill').forEach(pill => {
         pill.addEventListener('click', () => {
             const action = pill.getAttribute('data-action');
             const label = pill.textContent;
@@ -928,11 +920,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showInlineChatBookingButtons() {
         const btnBox = document.createElement('div');
-        btnBox.className = 'flex flex-col gap-1.5 mt-2 max-w-[80%] ml-9 animate-slide-up inline-action-buttons';
+        btnBox.className = 'inline-action-buttons';
         btnBox.innerHTML = `
-            <button class="bg-chocolate text-gold text-[10px] py-2 px-3 rounded-lg font-semibold text-left transition-all hover:bg-chocolate-light chat-booking-inline-btn" data-id="bronceado-sencillo" data-name="Bronceado sencillo" data-price="50.00" data-duration="45 min">Reservar Sencillo (50€)</button>
-            <button class="bg-chocolate text-gold text-[10px] py-2 px-3 rounded-lg font-semibold text-left transition-all hover:bg-chocolate-light chat-booking-inline-btn" data-id="dark-tanning" data-name="Dark tanning" data-price="65.00" data-duration="45 min">Reservar Dark (65€)</button>
-            <button class="bg-chocolate text-gold text-[10px] py-2 px-3 rounded-lg font-semibold text-left transition-all hover:bg-chocolate-light chat-booking-inline-btn" data-id="berry-bronze" data-name="Berry bronze" data-price="100.00" data-duration="1h">Reservar Berry (100€)</button>
+            <button class="chat-booking-inline-btn" data-id="bronceado-sencillo" data-name="Bronceado sencillo" data-price="50.00" data-duration="45 min">Reservar Sencillo (50€)</button>
+            <button class="chat-booking-inline-btn" data-id="dark-tanning" data-name="Dark tanning" data-price="65.00" data-duration="45 min">Reservar Dark (65€)</button>
+            <button class="chat-booking-inline-btn" data-id="berry-bronze" data-name="Berry bronze" data-price="100.00" data-duration="1h">Reservar Berry (100€)</button>
         `;
         chatMessagesLog.appendChild(btnBox);
         chatMessagesLog.scrollTop = chatMessagesLog.scrollHeight;
@@ -983,14 +975,14 @@ document.addEventListener('DOMContentLoaded', () => {
         appendMessage("Perfecto. ¿Qué día prefieres?", 'in');
 
         const btnBox = document.createElement('div');
-        btnBox.className = 'flex flex-wrap gap-1.5 mt-2 max-w-[80%] ml-9 animate-slide-up inline-action-buttons';
+        btnBox.className = 'inline-action-buttons';
         
         dates.forEach(d => {
             const dateISO = d.toISOString().split('T')[0];
             const dateStr = d.toLocaleDateString('es-ES', { weekday: 'short', month: 'short', day: 'numeric' });
             
             const btn = document.createElement('button');
-            btn.className = 'bg-chocolate text-gold text-[10px] py-2 px-3 rounded-lg font-semibold transition-all hover:bg-chocolate-light chat-booking-inline-btn';
+            btn.className = 'chat-booking-inline-btn';
             btn.textContent = dateStr;
             btn.setAttribute('data-date', dateISO);
             
@@ -1022,11 +1014,11 @@ document.addEventListener('DOMContentLoaded', () => {
         appendMessage("Selecciona la hora que mejor te venga:", 'in');
 
         const btnBox = document.createElement('div');
-        btnBox.className = 'grid grid-cols-2 gap-1.5 mt-2 max-w-[80%] ml-9 animate-slide-up inline-action-buttons';
+        btnBox.className = 'inline-action-buttons';
         
         hours.forEach(h => {
             const btn = document.createElement('button');
-            btn.className = 'bg-chocolate text-gold text-[10px] py-2 px-2.5 rounded-lg font-semibold text-center transition-all hover:bg-chocolate-light chat-booking-inline-btn';
+            btn.className = 'chat-booking-inline-btn';
             btn.textContent = h;
             btn.setAttribute('data-time', h);
             btnBox.appendChild(btn);
