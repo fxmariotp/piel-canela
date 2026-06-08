@@ -1,0 +1,4 @@
+CookieConsent.setCookie("{stamp:%274s0rMDvUKV/pmJpxJwQ1OxSY2YxJ8fm9QHXg6A+tD7K9WSpQkTm7Tg==%27%2Cnecessary:true%2Cpreferences:false%2Cstatistics:false%2Cmarketing:false%2Cmethod:%27explicit%27%2Cver:1%2Cutc:1780934115422%2Cregion:%27es%27}", new Date(1812470115422), '/', '', '');
+if (typeof CookieConsent.resetBulkDomains!='undefined') {CookieConsent.resetBulkDomains(["aarrrtest.t1.booksy.pm","akademiaversum.pl","biz.booksy.com","blog.booksy.com","boars1.t1.booksy.pm","booksy.com","booksy-biz.webflow.io","cf.booksy.com","edusalon.pl","karty-podarunkowe.booksy.com","kiute.fr","pro.kiute.com","trends-es.booksy.com","trends-pl.booksy.com","trends-uk.booksy.com","trends-us.booksy.com","versum.com","versum.pl","widget-2024.booksy.com"],true);}
+CookieConsent.userCountry = 'es';
+if (typeof CookieConsent.registerBulkConsent!='undefined') {CookieConsent.registerBulkConsent(12);}

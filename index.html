@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>PIEL CANELA BRONZE - Spa de Bronceado Brasilero en Sevilla</title>
+    <meta name="description" content="Primer Spa de Bronceado Brasilero en Andalucía. Bronceado natural, uniforme y duradero sin colorantes ni caña de azúcar en Sevilla. Reserva online estilo Booksy."/>
+    <link rel="icon" type="image/png" href="assets/favicon.png"/>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="index.css"/>
+</head>
+<body class="bg-cream text-bronze-dark font-sans antialiased overflow-x-hidden">
+
+    <!-- PRELOADER LOADER -->
+    <div id="preloader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-chocolate text-gold">
+        <div class="loader-logo-container relative mb-6">
+            <!-- Sun Rays Circular Logo -->
+            <img src="assets/brand_logo.png" alt="Piel Canela Logo" class="w-32 h-32 loader-logo animate-pulse-slow">
+            <div class="absolute inset-0 rounded-full border-2 border-gold/30 animate-ping-slow"></div>
+        </div>
+        <h1 class="font-serif text-2xl md:text-3xl tracking-widest text-gold animate-fade-in font-bold">PIEL CANELA</h1>
+        <p class="text-xs uppercase tracking-widest text-gold/60 mt-2">Spa de Bronceado Brasilero</p>
+    </div>
+
+    <!-- INTERACTIVE PARTICLE CANVAS -->
+    <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo & Name -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full overflow-hidden border border-gold/50 group-hover:border-gold transition-all duration-300">
+                    <img src="assets/brand_logo.png" alt="Logo" class="w-full h-full object-cover">
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-lg md:text-xl font-bold tracking-widest text-gold group-hover:text-gold-light transition-colors">PIEL CANELA</span>
+                    <span class="text-[9px] uppercase tracking-widest text-gold/80 -mt-1 font-semibold">BRONZE &bull; SEVILLA</span>
+                </div>
+            </a>
+
+            <!-- Navigation Actions -->
+            <div class="flex items-center gap-4">
+                <!-- Search bar desktop -->
+                <div class="relative hidden md:block">
+                    <input type="text" id="search-services" placeholder="Buscar servicios..." class="bg-chocolate-light/40 backdrop-blur border border-gold/20 focus:border-gold text-white placeholder-white/40 text-xs rounded-full py-2 px-4 pl-9 w-64 transition-all focus:outline-none focus:ring-1 focus:ring-gold focus:w-80">
+                    <span class="material-symbols-outlined absolute left-3 top-2.5 text-white/50 text-base">search</span>
+                </div>
+                
+                <!-- My Bookings Trigger -->
+                <button id="bookings-trigger" class="flex items-center gap-2 border border-gold/30 hover:border-gold bg-chocolate-light/20 hover:bg-chocolate-light/50 text-gold-light text-xs font-semibold uppercase tracking-wider px-4 py-2.5 rounded-full transition-all duration-300">
+                    <span class="material-symbols-outlined text-base">calendar_month</span>
+                    <span class="hidden sm:inline">Mis Citas</span>
+                    <span id="booking-badge" class="hidden w-5 h-5 bg-gold text-chocolate rounded-full items-center justify-center text-[10px] font-bold">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN APP CONTAINER -->
+    <main class="relative z-10 pt-24 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- HERO / COVER AREA -->
+        <section class="mb-12 relative rounded-3xl overflow-hidden shadow-2xl border border-gold/10 group-3d">
+            <div class="absolute inset-0 bg-gradient-to-t from-chocolate-dark via-chocolate/60 to-transparent z-10"></div>
+            <div class="w-full h-[320px] md:h-[450px] overflow-hidden">
+                <img src="assets/hero_spa.png" alt="Interior del spa Piel Canela" class="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-all duration-1000" id="hero-img">
+            </div>
+            
+            <div class="absolute bottom-0 left-0 w-full p-6 md:p-10 z-20 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                <!-- Salon details -->
+                <div class="text-white max-w-2xl reveal-container">
+                    <div class="flex items-center gap-2 mb-3 animate-slide-up">
+                        <span class="bg-gold text-chocolate text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full">Nº 1 en Andalucía</span>
+                        <div class="flex items-center gap-1 text-gold">
+                            <span class="material-symbols-outlined text-sm font-fill">star</span>
+                            <span class="font-bold text-xs">4.7</span>
+                            <span class="text-white/60 text-xs">(77 opiniones)</span>
+                        </div>
+                    </div>
+                    
+                    <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-wide mb-3 animate-slide-up text-reveal">
+                        PIEL CANELA &bull; BRONZE
+                    </h2>
+                    <p class="text-white/80 text-xs md:text-sm max-w-xl font-light mb-2 animate-slide-up">
+                        Primer Spa de Bronceado Brasilero en Andalucía. Resultados radiantes y uniformes sin químicos ni caña de azúcar. Técnicas seguras y personalizadas.
+                    </p>
+                    <div class="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs text-white/60 animate-slide-up">
+                        <span class="flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm text-gold">location_on</span>
+                            Calle Luis de Morales, 32 (Edif. Fórum), Local 9, Sevilla
+                        </span>
+                        <span class="flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm text-gold">schedule</span>
+                            <span id="opening-status" class="font-semibold text-gold-light">Consultando...</span>
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Quick CTA button -->
+                <div class="shrink-0 animate-slide-up">
+                    <button id="hero-cta-btn" class="magnetic-btn px-8 py-4 bg-gold hover:bg-gold-light text-chocolate-dark font-bold text-xs uppercase tracking-wider rounded-full shadow-lg transition-all duration-300 flex items-center gap-2">
+                        Reservar Cita
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- BOOKING INTERFACE: TWO COLUMNS (SALON INFO & BOOKING WIDGET) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- LEFT COLUMN: CATEGORY SELECTOR & ABOUT (4 COLS) -->
+            <aside class="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
+                
+                <!-- Categories Card -->
+                <div class="bg-white/80 backdrop-blur-md rounded-2xl p-6 border border-gold/10 shadow-md card-tilt">
+                    <h3 class="font-serif text-lg font-bold tracking-wide text-chocolate mb-4 border-b border-gold/20 pb-2 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-gold">category</span>
+                        Categorías
+                    </h3>
+                    <nav class="flex flex-col gap-1.5" id="category-navigation">
+                        <button class="category-nav-item active text-left py-2 px-3 rounded-xl transition-all duration-300 text-sm font-semibold flex justify-between items-center bg-chocolate text-gold" data-category="bronceados">
+                            Bronceado Brasilero
+                            <span class="material-symbols-outlined text-xs">arrow_right</span>
+                        </button>
+                        <button class="category-nav-item text-left py-2 px-3 rounded-xl hover:bg-chocolate/5 transition-all duration-300 text-sm font-medium text-chocolate/80 hover:text-chocolate flex justify-between items-center" data-category="bonos">
+                            Bonos Ahorro
+                            <span class="material-symbols-outlined text-xs">arrow_right</span>
+                        </button>
+                        <button class="category-nav-item text-left py-2 px-3 rounded-xl hover:bg-chocolate/5 transition-all duration-300 text-sm font-medium text-chocolate/80 hover:text-chocolate flex justify-between items-center" data-category="corporales">
+                            Tratamientos Corporales
+                            <span class="material-symbols-outlined text-xs">arrow_right</span>
+                        </button>
+                        <button class="category-nav-item text-left py-2 px-3 rounded-xl hover:bg-chocolate/5 transition-all duration-300 text-sm font-medium text-chocolate/80 hover:text-chocolate flex justify-between items-center" data-category="cejas">
+                            Cejas y Pestañas
+                            <span class="material-symbols-outlined text-xs">arrow_right</span>
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- Open Hours Card -->
+                <div class="bg-white/80 backdrop-blur-md rounded-2xl p-6 border border-gold/10 shadow-md card-tilt">
+                    <h3 class="font-serif text-lg font-bold tracking-wide text-chocolate mb-4 border-b border-gold/20 pb-2 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-gold">schedule</span>
+                        Horario de Apertura
+                    </h3>
+                    <ul class="text-xs text-chocolate/80 space-y-2.5">
+                        <li class="flex justify-between items-center">
+                            <span>Lunes</span>
+                            <span class="font-medium">10:00 - 15:00 &bull; 16:00 - 20:30</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>Martes</span>
+                            <span class="font-medium">10:00 - 15:00 &bull; 16:00 - 20:00</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>Miércoles</span>
+                            <span class="font-medium">10:00 - 15:00 &bull; 16:00 - 20:30</span>
+                        </li>
+                        <li class="flex justify-between items-center flex-bold bg-gold/10 p-1.5 rounded-lg border border-gold/20">
+                            <span class="font-bold flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-gold animate-ping"></span>Jueves</span>
+                            <span class="font-bold">10:00 - 15:00 &bull; 16:00 - 20:30</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>Viernes</span>
+                            <span class="font-medium">10:00 - 15:00 &bull; 16:00 - 20:00</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>Sábado</span>
+                            <span class="font-medium text-gold-dark font-bold">10:00 - 14:00</span>
+                        </li>
+                        <li class="flex justify-between items-center text-chocolate/40">
+                            <span>Domingo</span>
+                            <span class="font-medium">Cerrado</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Info Map Card -->
+                <div class="bg-white/80 backdrop-blur-md rounded-2xl p-6 border border-gold/10 shadow-md card-tilt overflow-hidden">
+                    <h3 class="font-serif text-lg font-bold tracking-wide text-chocolate mb-3 border-b border-gold/20 pb-2 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-gold">map</span>
+                        Ubicación
+                    </h3>
+                    <div class="rounded-xl overflow-hidden border border-gold/20 h-40 relative bg-chocolate-dark">
+                        <!-- Custom Mock Luxury Map -->
+                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center z-10">
+                            <span class="material-symbols-outlined text-gold text-4xl animate-bounce">location_on</span>
+                            <span class="text-white text-xs font-bold mt-1">Luis de Morales, 32</span>
+                            <span class="text-white/60 text-[10px] mt-0.5">Edificio Fórum, Sevilla</span>
+                            <a href="https://maps.google.com/?q=Calle+Luis+de+Morales+32+Sevilla" target="_blank" class="mt-2.5 text-[10px] bg-gold text-chocolate px-3 py-1 rounded-full font-bold uppercase hover:bg-gold-light transition-all">Ver en Google Maps</a>
+                        </div>
+                        <!-- Stylized Map Graphic background -->
+                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#dfba8c_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- RIGHT COLUMN: SERVICES & CATALOG LIST (8 COLS) -->
+            <section class="lg:col-span-8 space-y-8">
+                
+                <!-- Search bar for Mobile -->
+                <div class="relative md:hidden w-full">
+                    <input type="text" id="search-services-mobile" placeholder="Buscar servicios..." class="w-full bg-white border border-gold/20 focus:border-gold text-chocolate placeholder-chocolate/40 text-xs rounded-full py-3 px-4 pl-10 focus:outline-none">
+                    <span class="material-symbols-outlined absolute left-3.5 top-3.5 text-chocolate/50 text-base">search</span>
+                </div>
+
+                <!-- Services Container -->
+                <div id="services-catalog" class="space-y-10">
+                    <!-- Categories will be rendered dynamically, but pre-filled for SEO & Instant load -->
+                    
+                    <!-- CATEGORY: Bronceados -->
+                    <div class="catalog-section" id="section-bronceados">
+                        <h4 class="font-serif text-2xl font-bold text-chocolate mb-4 flex items-center gap-2">
+                            Bronceado Brasilero
+                            <span class="h-0.5 bg-gold/30 flex-grow"></span>
+                        </h4>
+                        <div class="space-y-4">
+                            <!-- Service Item 1 -->
+                            <div class="service-card bg-white/80 backdrop-blur rounded-2xl p-5 border border-gold/10 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-gold/30 hover:shadow transition-all duration-300 card-tilt" data-name="bronceado sencillo" data-desc="servicio basico para un tono dorado natural">
+                                <div class="flex-grow space-y-1">
+                                    <h5 class="font-bold text-base text-chocolate">Bronceado sencillo</h5>
+                                    <div class="flex items-center gap-2 text-xs text-chocolate/60">
+                                        <span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-sm">schedule</span>45 min</span>
+                                        <span>&bull;</span>
+                                        <span class="font-bold text-chocolate-dark">50,00 €</span>
+                                    </div>
+                                    <p class="text-xs text-chocolate/70 font-light leading-relaxed">Servicio básico para lograr un tono dorado natural y uniforme desde la primera sesión.</p>
+                                </div>
+                                <button class="book-service-btn shrink-0 w-full sm:w-auto bg-chocolate hover:bg-chocolate-light text-gold font-bold text-xs uppercase tracking-wider py-3 px-6 rounded-full transition-all duration-300" data-service-id="bronceado-sencillo" data-service-name="Bronceado sencillo" data-service-price="50.00" data-service-duration="45 min">
+                                    Reservar
+                                </button>
+                            </div>
+                            
+                            <!-- Service Item 2 -->
+                            <div class="service-card bg-white/80 backdrop-blur rounded-2xl p-5 border border-gold/10 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-gold/30 hover:shadow transition-all duration-300 card-tilt" data-name="dark tanning" data-desc="bronceado de alta intensidad para un tono chocolate mas marcado">
+                                <div class="flex-grow space-y-1">
+                                    <h5 class="font-bold text-base text-chocolate">Dark tanning</h5>
+                                    <div class="flex items-center gap-2 text-xs text-chocolate/60">
+                                        <span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-sm">schedule</span>45 min</span>
+                                        <span>&bull;</span>
+                                        <span class="font-bold text-chocolate-dark">65,00 €</span>
+                                    </div>
+                                    <p class="text-xs text-chocolate/70 font-light leading-relaxed">Bronceado de alta intensidad formulado para un tono chocolate profundo y duradero.</p>
+                                </div>
+                                <button class="book-service-btn shrink-0 w-full sm:w-auto bg-chocolate hover:bg-chocolate-light text-gold font-bold text-xs uppercase tracking-wider py-3 px-6 rounded-full transition-all duration-300" data-service-id="dark-tanning" data-service-name="Dark tanning" data-service-price="65.00" data-service-duration="45 min">
+                                    Reservar
+                                </button>
+                            </div>
+
+                            <!-- Service Item 3 -->
+                            <div class="service-card bg-white/80 backdrop-blur rounded-2xl p-5 border border-gold/10 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-gold/30 hover:shadow transition-all duration-300 card-tilt" data-name="berry bronze" data-desc="bronceado premium con efecto berry luminoso e hidratacion profunda">
+                                <div class="flex-grow space-y-1">
+                                    <h5 class="font-bold text-base text-chocolate">Berry bronze</h5>
+                                    <div class="flex items-center gap-2 text-xs text-chocolate/60">
+                                        <span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-sm">schedule</span>1h</span>
+                                        <span>&bull;</span>
+                                        <span class="font-bold text-chocolate-dark">100,00 €</span>
+                                    </div>
+                                    <p class="text-xs text-chocolate/70 font-light leading-relaxed">Bronceado premium enriquecido con efecto berry luminoso e hidratación profunda antienvejecimiento.</p>
+                                </div>
+                                <button class="book-service-btn shrink-0 w-full sm:w-auto bg-chocolate hover:bg-chocolate-light text-gold font-bold text-xs uppercase tracking-wider py-3 px-6 rounded-full transition-all duration-300" data-service-id="berry-bronze" data-service-name="Berry bronze" data-service-price="100.00" data-service-duration="1h">
+                                    Reservar
+                                </button>
+                            </div>
+
+                            <!-- Service Item 4 -->
+                            <div class="service-card bg-white/80 backdrop-blur rounded-2xl p-5 border border-gold/10 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-gold/30 hover:shadow transition-all duration-300 card-tilt" data-name="metamorfosis" data-desc="el tratamiento mas completo para una transformacion total del bronceado brasilero">
+                                <div class="flex-grow space-y-1">
+                                    <h5 class="font-bold text-base text-chocolate">Metamorfosis</h5>
+                                    <div class="flex items-center gap-2 text-xs text-chocolate/60">
+                                        <span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-sm">schedule</span>1h</span>
+                                        <span>&bull;</span>
+                                        <span class="font-bold text-chocolate-dark">150,00 €</span>
+                                    </div>
+                                    <p class="text-xs text-chocolate/70 font-light leading-relaxed">El ritual más exclusivo y completo. Diseñado para una transformación total con exfoliación, hidratación y bronceado de lujo.</p>
+                                </div>
+                                <button class="book-service-btn shrink-0 w-full sm:w-auto bg-chocolate hover:bg-chocolate-light text-gold font-bold text-xs uppercase tracking-wider py-3 px-6 rounded-full transition-all duration-300" data-service-id="metamorfosis" data-service-name="Metamorfosis" data-service-price="150.00" data-service-duration="1h">
+                                    Reservar
+                                </button>
+                            </div>
+
+                            <!-- Service Item 5 -->
+                            <div class="service-card bg-white/80 backdrop-blur rounded-2xl p-5 border border-gold/10 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-gold/30 hover:shadow transition-all duration-300 card-tilt" data-name="mantenimiento" data-desc="sesion expres para conservar tu tono ideal">
+                                <div class="flex-grow space-y-1">
+                                    <h5 class="font-bold text-base text-chocolate">Mantenimiento</h5>
+                                    <div class="flex items-center gap-2 text-xs text-chocolate/60">
+                                        <span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-sm">schedule</span>30 min</span>
+                                        <span>&bull;</span>
+                                        <span class="font-bold text-chocolate-dark">35,00 €</span>
+                                    </div>
+                                    <p class="text-xs text-chocolate/70 font-light leading-relaxed">Sesión exprés para prolongar, retocar y conservar tu tono ideal por más tiempo.</p>
+                                </div>
+                                <button class="book-service-btn shrink-0 w-full sm:w-auto bg-chocolate hover:bg-chocolate-light text-gold font-bold text-xs uppercase tracking-wider py-3 px-6 rounded-full transition-all duration-300" data-service-id="mantenimiento" data-service-name="Mantenimiento" data-service-price="35.00" data-service-duration="30 min">
+                                    Reservar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CATEGORY: Bonos -->
+                    <div class="catalog-section hidden" id="section-bonos">
+                        <h4 class="font-serif text-2xl font-bold text-chocolate mb-4 flex items-center gap-2">
+                            Bonos Ahorro
+                            <span class="h-0.5 bg-gold/30 flex-grow"></span>
+                        </h4>
+                        <div class="space-y-4">
+                            <!-- Service Item 6 -->
+                            <div class="service-card bg-white/80 backdrop-blur rounded-2xl p-5 border border-gold/10 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-gold/30 hover:shadow transition-all duration-300 card-tilt" data-name="bono dark tanning" data-desc="pack de 3 sesiones de dark tanning">
+                                <div class="flex-grow space-y-1">
+                                    <h5 class="font-bold text-base text-chocolate flex items-center gap-1.5">
+                                        BONO DARK TANNING
+                                        <span class="bg-gold/20 text-gold-dark text-[9px] uppercase tracking-wide px-1.5 py-0.5 rounded font-bold">Ahorro</span>
+                                    </h5>
+                                    <div class="flex items-center gap-2 text-xs text-chocolate/60">
+                                        <span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-sm">schedule</span>1h</span>
+                                        <span>&bull;</span>
+                                        <span class="font-bold text-chocolate-dark">195,00 €</span>
+                                    </div>
+                                    <p class="text-xs text-chocolate/70 font-light leading-relaxed">Pack promocional de 3 sesiones completas de bronceado brasileño Dark Tanning.</p>
+                                </div>
+                                <button class="book-service-btn shrink-0 w-full sm:w-auto bg-chocolate hover:bg-chocolate-light text-gold font-bold text-xs uppercase tracking-wider py-3 px-6 rounded-full transition-all duration-300" data-service-id="bono-dark-tanning" data-service-name="BONO DARK TANNING" data-service-price="195.00" data-service-duration="1h">
+                                    Reservar
+                                </button>
+                            </div>
+
+                            <!-- Service Item 7 -->
+                            <div class="service-card bg-white/80 backdrop-blur rounded-2xl p-5 border border-gold/10 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-gold/30 hover:shadow transition-all duration-300 card-tilt" data-name="bono berry bronze" data-desc="pack de 3 sesiones de berry bronze">
+                                <div class="flex-grow space-y-1">
+                                    <h5 class="font-bold text-base text-chocolate flex items-center gap-1.5">
+                                        BONO BERRY BRONZE
+                                        <span class="bg-gold/20 text-gold-dark text-[9px] uppercase tracking-wide px-1.5 py-0.5 rounded font-bold">Ahorro</span>
+                                    </h5>
+                                    <div class="flex items-center gap-2 text-xs text-chocolate/60">
+                                        <span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-sm">schedule</span>1h</span>
+                                        <span>&bull;</span>
+                                        <span class="font-bold text-chocolate-dark">300,00 €</span>
+                                    </div>
+                                    <p class="text-xs text-chocolate/70 font-light leading-relaxed">Pack de ahorro con 3 sesiones completas del tratamiento premium Berry Bronze.</p>
+                                </div>
+                                <button class="book-service-btn shrink-0 w-full sm:w-auto bg-chocolate hover:bg-chocolate-light text-gold font-bold text-xs uppercase tracking-wider py-3 px-6 rounded-full transition-all duration-300" data-service-id="bono-berry-bronze" data-service-name="BONO BERRY BRONZE" data-service-price="300.00" data-service-duration="1h">
+                                    Reservar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CATEGORY: Tratamientos Corporales -->
+                    <div class="catalog-section hidden" id="section-corporales">
+                        <h4 class="font-serif text-2xl font-bold text-chocolate mb-4 flex items-center gap-2">
+                            Tratamientos Corporales
+                            <span class="h-0.5 bg-gold/30 flex-grow"></span>
+                        </h4>
+                        <div class="space-y-4">
+                            <!-- Service Item 8 -->
+                            <div class="service-card bg-white/80 backdrop-blur rounded-2xl p-5 border border-gold/10 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-gold/30 hover:shadow transition-all duration-300 card-tilt" data-name="quemadores de grasa" data-desc="tratamiento corporal quemagrasa localizado">
+                                <div class="flex-grow space-y-1">
+                                    <h5 class="font-bold text-base text-chocolate">Quemadores de grasa</h5>
+                                    <div class="flex items-center gap-2 text-xs text-chocolate/60">
+                                        <span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-sm">schedule</span>45 min</span>
+                                        <span>&bull;</span>
+                                        <span class="font-bold text-chocolate-dark">65,00 €</span>
+                                    </div>
+                                    <p class="text-xs text-chocolate/70 font-light leading-relaxed">Tratamiento de estética corporal enfocado en activar la quema de grasa localizada.</p>
+                                </div>
+                                <button class="book-service-btn shrink-0 w-full sm:w-auto bg-chocolate hover:bg-chocolate-light text-gold font-bold text-xs uppercase tracking-wider py-3 px-6 rounded-full transition-all duration-300" data-service-id="quemadores-grasa" data-service-name="Quemadores de grasa" data-service-price="65.00" data-service-duration="45 min">
+                                    Reservar
+                                </button>
+                            </div>
+
+                            <!-- Service Item 9 -->
+                            <div class="service-card bg-white/80 backdrop-blur rounded-2xl p-5 border border-gold/10 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-gold/30 hover:shadow transition-all duration-300 card-tilt" data-name="tratamiento tonificante" data-desc="tonificacion intensiva de la piel">
+                                <div class="flex-grow space-y-1">
+                                    <h5 class="font-bold text-base text-chocolate">Tratamiento tonificante</h5>
+                                    <div class="flex items-center gap-2 text-xs text-chocolate/60">
+                                        <span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-sm">schedule</span>45 min</span>
+                                        <span>&bull;</span>
+                                        <span class="font-bold text-chocolate-dark">65,00 €</span>
+                                    </div>
+                                    <p class="text-xs text-chocolate/70 font-light leading-relaxed">Sesión de estimulación reafirmante corporal para aportar elasticidad y tono a la piel.</p>
+                                </div>
+                                <button class="book-service-btn shrink-0 w-full sm:w-auto bg-chocolate hover:bg-chocolate-light text-gold font-bold text-xs uppercase tracking-wider py-3 px-6 rounded-full transition-all duration-300" data-service-id="tratamiento-tonificante" data-service-name="Tratamiento tonificante" data-service-price="65.00" data-service-duration="45 min">
+                                    Reservar
+                                </button>
+                            </div>
+
+                            <!-- Service Item 10 -->
+                            <div class="service-card bg-white/80 backdrop-blur rounded-2xl p-5 border border-gold/10 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-gold/30 hover:shadow transition-all duration-300 card-tilt" data-name="aclarador de zonas" data-desc="aclarado estetico de zonas intimas o axilas e ingles">
+                                <div class="flex-grow space-y-1">
+                                    <h5 class="font-bold text-base text-chocolate">Aclarador de zonas</h5>
+                                    <div class="flex items-center gap-2 text-xs text-chocolate/60">
+                                        <span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-sm">schedule</span>30 min</span>
+                                        <span>&bull;</span>
+                                        <span class="font-bold text-chocolate-dark">30,00 €</span>
+                                    </div>
+                                    <p class="text-xs text-chocolate/70 font-light leading-relaxed">Tratamiento estético despigmentante para aclarar zonas oscurecidas (axilas, ingles o zonas íntimas).</p>
+                                </div>
+                                <button class="book-service-btn shrink-0 w-full sm:w-auto bg-chocolate hover:bg-chocolate-light text-gold font-bold text-xs uppercase tracking-wider py-3 px-6 rounded-full transition-all duration-300" data-service-id="aclarador-zonas" data-service-name="Aclarador de zonas" data-service-price="30.00" data-service-duration="30 min">
+                                    Reservar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CATEGORY: Cejas -->
+                    <div class="catalog-section hidden" id="section-cejas">
+                        <h4 class="font-serif text-2xl font-bold text-chocolate mb-4 flex items-center gap-2">
+                            Cejas y Pestañas
+                            <span class="h-0.5 bg-gold/30 flex-grow"></span>
+                        </h4>
+                        <div class="space-y-4">
+                            <!-- Service Item 11 -->
+                            <div class="service-card bg-white/80 backdrop-blur rounded-2xl p-5 border border-gold/10 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-gold/30 hover:shadow transition-all duration-300 card-tilt" data-name="lifting de cejas" data-desc="lifting de cejas para mirada alzada">
+                                <div class="flex-grow space-y-1">
+                                    <h5 class="font-bold text-base text-chocolate">Lifting de cejas</h5>
+                                    <div class="flex items-center gap-2 text-xs text-chocolate/60">
+                                        <span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-sm">schedule</span>20 min</span>
+                                        <span>&bull;</span>
+                                        <span class="font-bold text-chocolate-dark">10,00 €</span>
+                                    </div>
+                                    <p class="text-xs text-chocolate/70 font-light leading-relaxed">Definición y peinado semipermanente de cejas para levantar y dar volumen a la mirada.</p>
+                                </div>
+                                <button class="book-service-btn shrink-0 w-full sm:w-auto bg-chocolate hover:bg-chocolate-light text-gold font-bold text-xs uppercase tracking-wider py-3 px-6 rounded-full transition-all duration-300" data-service-id="lifting-cejas" data-service-name="Lifting de cejas" data-service-price="10.00" data-service-duration="20 min">
+                                    Reservar
+                                </button>
+                            </div>
+
+                            <!-- Service Item 12 -->
+                            <div class="service-card bg-white/80 backdrop-blur rounded-2xl p-5 border border-gold/10 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-gold/30 hover:shadow transition-all duration-300 card-tilt" data-name="lifting y diseno de cejas" data-desc="completo tratamiento de cejas con diseno">
+                                <div class="flex-grow space-y-1">
+                                    <h5 class="font-bold text-base text-chocolate">Lifting + diseño de cejas</h5>
+                                    <div class="flex items-center gap-2 text-xs text-chocolate/60">
+                                        <span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-sm">schedule</span>45 min</span>
+                                        <span>&bull;</span>
+                                        <span class="font-bold text-chocolate-dark">30,00 €</span>
+                                    </div>
+                                    <p class="text-xs text-chocolate/70 font-light leading-relaxed">Tratamiento completo: laminado/lifting, depilación de precisión y tinte para unas cejas perfectas.</p>
+                                </div>
+                                <button class="book-service-btn shrink-0 w-full sm:w-auto bg-chocolate hover:bg-chocolate-light text-gold font-bold text-xs uppercase tracking-wider py-3 px-6 rounded-full transition-all duration-300" data-service-id="lifting-diseno-cejas" data-service-name="Lifting + diseño de cejas" data-service-price="30.00" data-service-duration="45 min">
+                                    Reservar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHOTO GALLERY / BEFORE & AFTER (Motionsites-style carousel) -->
+                <div class="mt-12 bg-chocolate text-white rounded-3xl p-8 border border-gold/20 shadow-xl overflow-hidden relative">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gold/10 rounded-full blur-3xl"></div>
+                    <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 mb-6">
+                        <div>
+                            <span class="text-gold text-[10px] font-extrabold uppercase tracking-widest">Nuestra Galería</span>
+                            <h4 class="font-serif text-2xl font-bold mt-1 text-white">Resultados Radiantes</h4>
+                        </div>
+                        <div class="flex gap-2">
+                            <button id="gallery-prev" class="w-8 h-8 rounded-full border border-gold/30 hover:border-gold flex items-center justify-center text-gold hover:bg-gold/10 transition-all">
+                                <span class="material-symbols-outlined text-sm">arrow_back</span>
+                            </button>
+                            <button id="gallery-next" class="w-8 h-8 rounded-full border border-gold/30 hover:border-gold flex items-center justify-center text-gold hover:bg-gold/10 transition-all">
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-hidden relative rounded-2xl h-[240px]">
+                        <div class="flex transition-transform duration-500 h-full w-full" id="gallery-slider">
+                            <div class="min-w-full h-full relative shrink-0">
+                                <img src="assets/bronze_glow.png" alt="Resultado de bronceado brasileño" class="w-full h-full object-cover">
+                                <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent text-xs text-white">
+                                    <span class="font-bold text-gold">Bronceado Brasilero</span> &bull; Tono radiante e uniforme en una sesión.
+                                </div>
+                            </div>
+                            <div class="min-w-full h-full relative shrink-0">
+                                <img src="assets/hero_spa.png" alt="Spa Piel Canela" class="w-full h-full object-cover">
+                                <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent text-xs text-white">
+                                    <span class="font-bold text-gold">Nuestras Cabinas</span> &bull; Equipos de alta tecnología y seguridad.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REAL REVIEWS SECTION -->
+                <div class="mt-12 bg-white/70 backdrop-blur rounded-3xl p-8 border border-gold/10 shadow-md">
+                    <div class="flex items-center justify-between mb-6">
+                        <h4 class="font-serif text-xl font-bold text-chocolate">Lo que dicen nuestras clientas</h4>
+                        <div class="flex items-center text-gold gap-0.5">
+                            <span class="material-symbols-outlined font-fill text-base">star</span>
+                            <span class="font-bold text-sm text-chocolate">4.7 / 5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="border-l-2 border-gold pl-4 py-1 space-y-1">
+                            <div class="flex text-gold">
+                                <span class="material-symbols-outlined font-fill text-xs">star</span>
+                                <span class="material-symbols-outlined font-fill text-xs">star</span>
+                                <span class="material-symbols-outlined font-fill text-xs">star</span>
+                                <span class="material-symbols-outlined font-fill text-xs">star</span>
+                                <span class="material-symbols-outlined font-fill text-xs">star</span>
+                            </div>
+                            <p class="text-xs text-chocolate/80 italic font-light">"Súper contenta con los resultados"</p>
+                            <span class="text-[10px] text-chocolate/50 font-bold block">— Gema Sánchez R.</span>
+                        </div>
+                        <div class="border-l-2 border-gold pl-4 py-1 space-y-1">
+                            <div class="flex text-gold">
+                                <span class="material-symbols-outlined font-fill text-xs">star</span>
+                                <span class="material-symbols-outlined font-fill text-xs">star</span>
+                                <span class="material-symbols-outlined font-fill text-xs">star</span>
+                                <span class="material-symbols-outlined font-fill text-xs">star</span>
+                                <span class="material-symbols-outlined font-fill text-xs">star</span>
+                            </div>
+                            <p class="text-xs text-chocolate/80 italic font-light">"Me encantó y la chica muy guapa y agradable. ¡Volveré! 🫶🏼"</p>
+                            <span class="text-[10px] text-chocolate/50 font-bold block">— Selene A.</span>
+                        </div>
+                        <div class="border-l-2 border-gold pl-4 py-1 space-y-1">
+                            <div class="flex text-gold">
+                                <span class="material-symbols-outlined font-fill text-xs">star</span>
+                                <span class="material-symbols-outlined font-fill text-xs">star</span>
+                                <span class="material-symbols-outlined font-fill text-xs">star</span>
+                                <span class="material-symbols-outlined font-fill text-xs">star</span>
+                                <span class="material-symbols-outlined font-fill text-xs">star</span>
+                            </div>
+                            <p class="text-xs text-chocolate/80 italic font-light">"Me encantó el resultado 😍"</p>
+                            <span class="text-[10px] text-chocolate/50 font-bold block">— Angela M.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ ACCORDION SECTION -->
+                <div class="mt-12 bg-white/70 backdrop-blur rounded-3xl p-8 border border-gold/10 shadow-md">
+                    <h4 class="font-serif text-xl font-bold text-chocolate mb-6">Preguntas Frecuentes</h4>
+                    <div class="space-y-4" id="faq-accordion">
+                        <div class="faq-item border-b border-gold/10 pb-4">
+                            <button class="w-full flex justify-between items-center text-left text-sm font-bold text-chocolate hover:text-gold transition-colors focus:outline-none py-2" onclick="window.toggleFaq(this)">
+                                <span>¿Qué diferencia hay con otros bronceados?</span>
+                                <span class="material-symbols-outlined text-gold transition-transform duration-300 faq-icon">expand_more</span>
+                            </button>
+                            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300">
+                                <p class="text-xs text-chocolate/70 font-light leading-relaxed mt-2 pl-1">
+                                    A diferencia del autobronceado químico o de caña de azúcar, nuestra técnica estimula el color natural de tu piel de manera segura, consiguiendo una tonalidad radiante, uniforme y sin manchas naranjas.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="faq-item border-b border-gold/10 pb-4">
+                            <button class="w-full flex justify-between items-center text-left text-sm font-bold text-chocolate hover:text-gold transition-colors focus:outline-none py-2" onclick="window.toggleFaq(this)">
+                                <span>¿Cuánto dura el bronceado brasilero?</span>
+                                <span class="material-symbols-outlined text-gold transition-transform duration-300 faq-icon">expand_more</span>
+                            </button>
+                            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300">
+                                <p class="text-xs text-chocolate/70 font-light leading-relaxed mt-2 pl-1">
+                                    Suele durar entre 2 y 3 semanas, dependiendo del tipo de piel y de los cuidados posteriores. Recomendamos hidratar mucho la piel diariamente y realizar sesiones de mantenimiento para conservarlo indefinidamente.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="faq-item pb-2">
+                            <button class="w-full flex justify-between items-center text-left text-sm font-bold text-chocolate hover:text-gold transition-colors focus:outline-none py-2" onclick="window.toggleFaq(this)">
+                                <span>¿Cómo debo prepararme para la sesión?</span>
+                                <span class="material-symbols-outlined text-gold transition-transform duration-300 faq-icon">expand_more</span>
+                            </button>
+                            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300">
+                                <p class="text-xs text-chocolate/70 font-light leading-relaxed mt-2 pl-1">
+                                    Recomendamos exfoliar tu cuerpo 24 horas antes de la sesión. El día de la cita acude con ropa cómoda y suelta de color oscuro, sin perfumes, aceites, desodorante ni maquillaje en la piel.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- STEP-BY-STEP BOOKING DRAWER / MODAL -->
+    <div id="booking-modal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-chocolate-dark/60 backdrop-blur-sm transition-opacity" id="modal-overlay"></div>
+        
+        <div class="absolute bottom-0 right-0 w-full sm:max-w-md h-[90vh] sm:h-full bg-white rounded-t-3xl sm:rounded-l-3xl sm:rounded-tr-none shadow-2xl flex flex-col border-t sm:border-t-0 sm:border-l border-gold/20 transform translate-y-full sm:translate-x-full transition-transform duration-300 overflow-hidden" id="modal-container">
+            
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-gold/20 bg-chocolate text-white flex items-center justify-between">
+                <div class="flex flex-col">
+                    <span class="text-[10px] text-gold font-bold uppercase tracking-widest">Reserva tu cita</span>
+                    <h4 id="modal-title-service" class="font-serif text-lg font-bold">Bronceado Sencillo</h4>
+                </div>
+                <button id="close-modal-btn" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all">
+                    <span class="material-symbols-outlined text-lg">close</span>
+                </button>
+            </div>
+
+            <!-- Steps indicator -->
+            <div class="px-6 py-3 bg-chocolate-light/10 border-b border-gold/15 flex justify-between text-[10px] font-bold text-chocolate/50">
+                <span id="step-indicator-1" class="text-chocolate">1. ESPECIALISTA</span>
+                <span id="step-indicator-2">&bull; 2. FECHA Y HORA</span>
+                <span id="step-indicator-3">&bull; 3. DATOS</span>
+            </div>
+
+            <!-- Modal Body (Steps Content) -->
+            <div class="flex-grow overflow-y-auto p-6 space-y-6">
+                
+                <!-- STEP 1: SELECT SPECIALIST -->
+                <div id="booking-step-1" class="space-y-4">
+                    <h5 class="font-serif text-base font-bold text-chocolate">Elige un profesional</h5>
+                    <div class="space-y-3">
+                        <div class="specialist-item border border-gold/20 hover:border-gold p-4 rounded-2xl flex items-center justify-between cursor-pointer hover:bg-gold/5 transition-all active" data-specialist="cualquiera">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center text-gold">
+                                    <span class="material-symbols-outlined">group</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-chocolate">Cualquier profesional</span>
+                                    <span class="text-[10px] text-chocolate/60">Asignación automática y rápida</span>
+                                </div>
+                            </div>
+                            <span class="material-symbols-outlined text-gold specialist-check">radio_button_checked</span>
+                        </div>
+                        <div class="specialist-item border border-gold/10 hover:border-gold p-4 rounded-2xl flex items-center justify-between cursor-pointer hover:bg-gold/5 transition-all" data-specialist="Maria">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-chocolate/10 flex items-center justify-center text-chocolate font-bold text-sm">M</div>
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-chocolate">María</span>
+                                    <span class="text-[10px] text-chocolate/60">Especialista en Bronceado Brasilero</span>
+                                </div>
+                            </div>
+                            <span class="material-symbols-outlined text-chocolate/20 specialist-check">radio_button_unchecked</span>
+                        </div>
+                        <div class="specialist-item border border-gold/10 hover:border-gold p-4 rounded-2xl flex items-center justify-between cursor-pointer hover:bg-gold/5 transition-all" data-specialist="Angelica">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-chocolate/10 flex items-center justify-center text-chocolate font-bold text-sm">A</div>
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-chocolate">Angélica</span>
+                                    <span class="text-[10px] text-chocolate/60">Diseñadora de Estética Corporal</span>
+                                </div>
+                            </div>
+                            <span class="material-symbols-outlined text-chocolate/20 specialist-check">radio_button_unchecked</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: SELECT DATE & TIME -->
+                <div id="booking-step-2" class="space-y-4 hidden">
+                    <h5 class="font-serif text-base font-bold text-chocolate">Selecciona fecha y hora</h5>
+                    
+                    <!-- Calendar element -->
+                    <div class="calendar-wrapper border border-gold/10 rounded-2xl p-4 bg-chocolate/5">
+                        <div class="flex justify-between items-center mb-3">
+                            <button id="calendar-prev-month" class="text-chocolate hover:text-gold"><span class="material-symbols-outlined">chevron_left</span></button>
+                            <span id="calendar-month-year" class="font-serif font-bold text-chocolate text-sm">Junio 2026</span>
+                            <button id="calendar-next-month" class="text-chocolate hover:text-gold"><span class="material-symbols-outlined">chevron_right</span></button>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1 text-center text-[10px] font-bold text-chocolate/40 mb-2">
+                            <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1 text-center text-xs" id="calendar-days">
+                            <!-- Dynamic days will be rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- Time slots area -->
+                    <div class="space-y-2">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-chocolate/60 block">Turnos Disponibles</span>
+                        <div class="grid grid-cols-3 gap-2" id="time-slots-container">
+                            <!-- Dynamic hours pills -->
+                        </div>
+                        <p id="no-slots-message" class="text-xs text-chocolate/60 italic text-center py-4 hidden">No hay horarios disponibles para esta fecha. Selecciona otro día.</p>
+                    </div>
+                </div>
+
+                <!-- STEP 3: CLIENT DETAILS -->
+                <div id="booking-step-3" class="space-y-4 hidden">
+                    <h5 class="font-serif text-base font-bold text-chocolate">Tus datos de contacto</h5>
+                    <form id="booking-form" class="space-y-3">
+                        <div>
+                            <label class="block text-[10px] font-bold text-chocolate/60 uppercase mb-1" for="client-name">Nombre Completo *</label>
+                            <input type="text" id="client-name" required class="w-full bg-chocolate/5 border border-gold/20 focus:border-gold rounded-xl px-4 py-3 text-sm focus:outline-none" placeholder="Ingresa tu nombre">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-chocolate/60 uppercase mb-1" for="client-phone">Teléfono Móvil *</label>
+                            <input type="tel" id="client-phone" required class="w-full bg-chocolate/5 border border-gold/20 focus:border-gold rounded-xl px-4 py-3 text-sm focus:outline-none" placeholder="Ej: 600 000 000">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-chocolate/60 uppercase mb-1" for="client-email">Correo Electrónico *</label>
+                            <input type="email" id="client-email" required class="w-full bg-chocolate/5 border border-gold/20 focus:border-gold rounded-xl px-4 py-3 text-sm focus:outline-none" placeholder="ejemplo@correo.com">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-chocolate/60 uppercase mb-1" for="client-notes">Notas (Opcional)</label>
+                            <textarea id="client-notes" rows="2" class="w-full bg-chocolate/5 border border-gold/20 focus:border-gold rounded-xl px-4 py-3 text-sm focus:outline-none" placeholder="Alguna indicación o preferencia..."></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- STEP 4: BOOKING SUCCESS SCREEN -->
+                <div id="booking-step-4" class="space-y-6 text-center py-6 hidden">
+                    <div class="w-20 h-20 bg-gold/15 rounded-full flex items-center justify-center text-gold mx-auto animate-bounce">
+                        <span class="material-symbols-outlined text-4xl">task_alt</span>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="font-serif text-2xl font-bold text-chocolate">¡Cita Confirmada!</h4>
+                        <p class="text-xs text-chocolate/80 px-4">Tu reserva ha sido registrada correctamente. Te esperamos en la clínica. Guarda los detalles a continuación.</p>
+                    </div>
+                    
+                    <div class="border border-gold/20 rounded-2xl p-5 bg-gold/5 text-left text-xs space-y-2 max-w-xs mx-auto">
+                        <div class="flex justify-between border-b border-gold/10 pb-1.5"><span class="text-chocolate/60">Servicio:</span><span class="font-bold text-chocolate" id="summary-service">-</span></div>
+                        <div class="flex justify-between border-b border-gold/10 pb-1.5"><span class="text-chocolate/60">Fecha:</span><span class="font-bold text-chocolate" id="summary-date">-</span></div>
+                        <div class="flex justify-between border-b border-gold/10 pb-1.5"><span class="text-chocolate/60">Hora:</span><span class="font-bold text-chocolate" id="summary-time">-</span></div>
+                        <div class="flex justify-between border-b border-gold/10 pb-1.5"><span class="text-chocolate/60">Profesional:</span><span class="font-bold text-chocolate" id="summary-specialist">-</span></div>
+                        <div class="flex justify-between"><span class="text-chocolate/60">Precio:</span><span class="font-bold text-chocolate" id="summary-price">-</span></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer (Navigation controls) -->
+            <div class="p-6 border-t border-gold/20 flex gap-3 bg-white" id="modal-footer">
+                <button id="modal-back-btn" class="flex-1 border border-gold/30 hover:border-gold text-chocolate font-bold text-xs uppercase tracking-wider py-3.5 rounded-full transition-all duration-300 hidden">
+                    Atrás
+                </button>
+                <button id="modal-next-btn" class="flex-1 bg-chocolate hover:bg-chocolate-light text-gold font-bold text-xs uppercase tracking-wider py-3.5 rounded-full transition-all duration-300">
+                    Siguiente
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MY APPOINTMENTS SIDEBAR DRAWER -->
+    <div id="appointments-drawer" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-chocolate-dark/50 backdrop-blur-sm" id="drawer-overlay"></div>
+        <div class="absolute top-0 right-0 w-full sm:max-w-md h-full bg-white shadow-2xl border-l border-gold/20 flex flex-col transform translate-x-full transition-transform duration-300 overflow-hidden" id="drawer-container">
+            <!-- Header -->
+            <div class="p-6 border-b border-gold/20 bg-chocolate text-white flex items-center justify-between">
+                <h4 class="font-serif text-lg font-bold">Mis Citas</h4>
+                <button id="close-drawer-btn" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all">
+                    <span class="material-symbols-outlined text-lg">close</span>
+                </button>
+            </div>
+            <!-- Body -->
+            <div class="flex-grow overflow-y-auto p-6 space-y-4" id="drawer-appointments-list">
+                <!-- Bookings rendered in JavaScript -->
+            </div>
+            <!-- Empty state -->
+            <div id="drawer-empty-state" class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center pointer-events-none hidden">
+                <span class="material-symbols-outlined text-gold/30 text-5xl mb-3">event_busy</span>
+                <span class="text-sm font-bold text-chocolate/60">No tienes citas programadas</span>
+                <span class="text-xs text-chocolate/40 mt-1">¡Selecciona un tratamiento del catálogo para agendar!</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- PERSISTENT CONVERSION CHATBOT ("Canela AI") -->
+    <div id="chatbot-wrapper" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <!-- Floating chat window -->
+        <div id="chat-window" class="w-[340px] sm:w-[380px] h-[480px] bg-white rounded-3xl border border-gold/20 shadow-2xl overflow-hidden flex flex-col transform scale-90 translate-y-10 opacity-0 pointer-events-none transition-all duration-300 origin-bottom-right mb-4">
+            
+            <!-- Chat Header -->
+            <div class="bg-chocolate text-white p-4 flex items-center justify-between border-b border-gold/20">
+                <div class="flex items-center gap-3">
+                    <div class="relative w-9 h-9 rounded-full bg-gold/15 flex items-center justify-center border border-gold/40">
+                        <img src="assets/brand_logo.png" alt="Bot Logo" class="w-7 h-7 object-cover">
+                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-chocolate"></span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-xs">Canela AI</span>
+                        <span class="text-[9px] uppercase tracking-wider text-gold">Asistente de Reservas</span>
+                    </div>
+                </div>
+                <!-- Controls -->
+                <button id="close-chat-btn" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all">
+                    <span class="material-symbols-outlined text-base">close</span>
+                </button>
+            </div>
+
+            <!-- Chat Messages Log -->
+            <div class="flex-grow overflow-y-auto p-4 space-y-4 bg-cream/30" id="chat-messages-log">
+                <!-- Welcome Message from Canela -->
+                <div class="flex gap-2.5 items-start message-in animate-slide-up">
+                    <div class="w-7 h-7 rounded-full bg-chocolate/10 flex items-center justify-center text-gold shrink-0 border border-gold/20 text-xs font-bold">C</div>
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-gold/10 text-xs text-chocolate-dark leading-relaxed shadow-sm max-w-[80%]">
+                        ¡Hola! 🌞 Soy Canela, asistente virtual de **Piel Canela Bronze**. ¿Lista para conseguir un bronceado espectacular? 🤎
+                        <br><br>
+                        ¿En qué te puedo ayudar hoy? Elige una opción rápida o escribe tu consulta.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Quick Replies Options -->
+            <div class="p-3 bg-white border-t border-gold/10 flex flex-wrap gap-1.5" id="chat-quick-replies">
+                <button class="chat-pill text-[10px] font-semibold text-chocolate bg-gold/10 border border-gold/30 rounded-full py-1.5 px-3 hover:bg-gold hover:text-chocolate-dark transition-all" data-action="recomendar">Recomendar bronceado 🤎</button>
+                <button class="chat-pill text-[10px] font-semibold text-chocolate bg-gold/10 border border-gold/30 rounded-full py-1.5 px-3 hover:bg-gold hover:text-chocolate-dark transition-all" data-action="preparar">¿Cómo me preparo? 🧖‍♀️</button>
+                <button class="chat-pill text-[10px] font-semibold text-chocolate bg-gold/10 border border-gold/30 rounded-full py-1.5 px-3 hover:bg-gold hover:text-chocolate-dark transition-all" data-action="donde">¿Dónde están? 📍</button>
+                <button class="chat-pill text-[10px] font-semibold text-chocolate bg-gold/10 border border-gold/30 rounded-full py-1.5 px-3 hover:bg-gold hover:text-chocolate-dark transition-all" data-action="reservar">Reservar una cita 📅</button>
+            </div>
+
+            <!-- Chat Input Area -->
+            <div class="p-3 border-t border-gold/10 bg-white flex items-center gap-2">
+                <input type="text" id="chat-input-field" placeholder="Escribe tu mensaje..." class="flex-grow bg-chocolate/5 border border-gold/20 focus:border-gold rounded-full py-2.5 px-4 text-xs focus:outline-none">
+                <button id="send-chat-btn" class="w-9 h-9 rounded-full bg-chocolate text-gold flex items-center justify-center hover:bg-chocolate-light transition-all shrink-0">
+                    <span class="material-symbols-outlined text-base">send</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat Trigger Bubble -->
+        <button id="chat-trigger-btn" class="magnetic-btn relative w-14 h-14 bg-chocolate text-gold rounded-full shadow-2xl flex items-center justify-center group border border-gold/35 focus:outline-none">
+            <!-- Pulsing outer ring -->
+            <span class="absolute inset-0 rounded-full border border-gold/40 animate-ping"></span>
+            
+            <span class="material-symbols-outlined text-2xl transition-transform duration-300 group-hover:scale-110" id="chat-trigger-icon">chat_bubble</span>
+            
+            <!-- Unread notification indicator dot -->
+            <span class="absolute top-0 right-0 w-3.5 h-3.5 bg-gold border-2 border-chocolate rounded-full flex items-center justify-center text-[8px] font-bold text-chocolate-dark">1</span>
+        </button>
+    </div>
+
+    <!-- Core Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
