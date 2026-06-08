@@ -852,6 +852,10 @@ body.loading-state {
     gap: 40px;
 }
 
+.catalog-section {
+    scroll-margin-top: 110px; /* Offset to prevent overlap with the fixed header */
+}
+
 .catalog-section-title {
     font-family: var(--font-serif);
     font-size: 1.45rem;

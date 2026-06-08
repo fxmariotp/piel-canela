@@ -208,10 +208,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetCat = link.getAttribute('data-category');
             selectCategory(targetCat);
             
-            // Smooth scroll to services catalog section
-            const catalogSec = document.getElementById('services-catalog');
-            if (catalogSec) {
-                catalogSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Smooth scroll to target category section in catalog
+            const targetSection = document.getElementById(`section-${targetCat}`);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
@@ -342,6 +342,49 @@ document.addEventListener('DOMContentLoaded', () => {
     updateOpeningStatus();
     // Update every minute
     setInterval(updateOpeningStatus, 60000);
+
+    // Dynamic Opening Hours Day Highlighting
+    function highlightCurrentDay() {
+        const currentDay = new Date().getDay(); // 0 = Sun, 1 = Mon, ..., 6 = Sat
+        
+        // Remove active class, ping dot and custom styles from all days first
+        const dayRows = document.querySelectorAll('.hours-list li');
+        dayRows.forEach(row => {
+            row.classList.remove('current-day-row');
+            const dot = row.querySelector('.ping-dot');
+            if (dot) dot.remove();
+            
+            const dayName = row.querySelector('.day-name');
+            const hoursVal = row.querySelector('.hours-val');
+            // Do not strip classes from Saturday (data-day="6") as they are hardcoded custom styles (font-bold text-gold)
+            if (row.getAttribute('data-day') !== "6") {
+                if (dayName) dayName.classList.remove('font-bold');
+                if (hoursVal) hoursVal.classList.remove('font-bold');
+            }
+        });
+
+        // Add class and ping dot to current day
+        const activeRow = document.querySelector(`.hours-list li[data-day="${currentDay}"]`);
+        if (activeRow) {
+            activeRow.classList.add('current-day-row');
+            const dayName = activeRow.querySelector('.day-name');
+            const hoursVal = activeRow.querySelector('.hours-val');
+            
+            if (dayName) {
+                dayName.classList.add('font-bold');
+                // Create and insert ping dot
+                if (!dayName.querySelector('.ping-dot')) {
+                    const dot = document.createElement('span');
+                    dot.className = 'ping-dot';
+                    dayName.insertBefore(dot, dayName.firstChild);
+                }
+            }
+            if (hoursVal) {
+                hoursVal.classList.add('font-bold');
+            }
+        }
+    }
+    highlightCurrentDay();
 
     // FAQ Accordion global function
     window.toggleFaq = (button) => {
