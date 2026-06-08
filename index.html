@@ -63,10 +63,15 @@
                 </div>
                 
                 <!-- My Bookings Trigger -->
-                <button id="bookings-trigger" class="btn-bookings">
+                <button id="bookings-trigger" class="btn-bookings desktop-only">
                     <span class="material-symbols-outlined btn-icon">calendar_month</span>
                     <span class="btn-text">Mis Citas</span>
                     <span id="booking-badge" class="booking-badge">0</span>
+                </button>
+                
+                <!-- Mobile Menu Trigger -->
+                <button id="mobile-menu-trigger" class="btn-menu-toggle mobile-only">
+                    <span class="material-symbols-outlined">menu</span>
                 </button>
             </div>
         </div>
@@ -570,7 +575,7 @@
                     <h4 class="faq-card-title">Preguntas Frecuentes</h4>
                     <div class="faq-accordion" id="faq-accordion">
                         <div class="faq-item">
-                            <button class="faq-question-btn" onclick="window.toggleFaq(this)">
+                            <button class="faq-question-btn">
                                 <span>¿Qué diferencia hay con otros bronceados?</span>
                                 <span class="material-symbols-outlined faq-arrow">expand_more</span>
                             </button>
@@ -581,7 +586,7 @@
                             </div>
                         </div>
                         <div class="faq-item">
-                            <button class="faq-question-btn" onclick="window.toggleFaq(this)">
+                            <button class="faq-question-btn">
                                 <span>¿Cuánto dura el bronceado brasilero?</span>
                                 <span class="material-symbols-outlined faq-arrow">expand_more</span>
                             </button>
@@ -592,7 +597,7 @@
                             </div>
                         </div>
                         <div class="faq-item">
-                            <button class="faq-question-btn" onclick="window.toggleFaq(this)">
+                            <button class="faq-question-btn">
                                 <span>¿Cómo debo prepararme para la sesión?</span>
                                 <span class="material-symbols-outlined faq-arrow">expand_more</span>
                             </button>
@@ -774,6 +779,53 @@
                 <span class="material-symbols-outlined empty-icon">event_busy</span>
                 <span class="empty-title">No tienes citas programadas</span>
                 <span class="empty-desc">¡Selecciona un tratamiento del catálogo para agendar!</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOBILE MENU SIDEBAR DRAWER -->
+    <div id="mobile-menu-drawer" class="drawer-wrapper">
+        <div class="drawer-overlay" id="menu-drawer-overlay"></div>
+        <div class="drawer-container" id="menu-drawer-container">
+            <!-- Header -->
+            <div class="drawer-header">
+                <h4 class="drawer-title">Menú</h4>
+                <button id="close-menu-drawer-btn" class="drawer-close-btn">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <!-- Body -->
+            <div class="drawer-body">
+                <nav class="mobile-drawer-nav">
+                    <span class="drawer-section-title">Servicios</span>
+                    <button class="mobile-drawer-nav-link" data-category="bronceados">
+                        <span class="material-symbols-outlined">spa</span>
+                        Bronceado Brasilero
+                    </button>
+                    <button class="mobile-drawer-nav-link" data-category="bonos">
+                        <span class="material-symbols-outlined">local_activity</span>
+                        Bonos Ahorro
+                    </button>
+                    <button class="mobile-drawer-nav-link" data-category="corporales">
+                        <span class="material-symbols-outlined">accessibility_new</span>
+                        Tratamientos Corporales
+                    </button>
+                    <button class="mobile-drawer-nav-link" data-category="cejas">
+                        <span class="material-symbols-outlined">visibility</span>
+                        Cejas y Pestañas
+                    </button>
+                    <button class="mobile-drawer-nav-link" id="mobile-about-us-link">
+                        <span class="material-symbols-outlined">info</span>
+                        Sobre Nosotros
+                    </button>
+                    
+                    <span class="drawer-section-title" style="margin-top: 24px;">Mis Reservas</span>
+                    <button class="mobile-drawer-nav-link highlight-link" id="mobile-bookings-trigger">
+                        <span class="material-symbols-outlined">calendar_month</span>
+                        <span>Mis Citas</span>
+                        <span id="mobile-booking-badge" class="booking-badge inline-badge">0</span>
+                    </button>
+                </nav>
             </div>
         </div>
     </div>

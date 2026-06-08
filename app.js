@@ -386,25 +386,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     highlightCurrentDay();
 
-    // FAQ Accordion global function
-    window.toggleFaq = (button) => {
-        const item = button.closest('.faq-item');
-        const content = item.querySelector('.faq-content');
-        
-        if (item.classList.contains('active')) {
-            item.classList.remove('active');
-            content.style.maxHeight = '0px';
-        } else {
-            // Close other items
-            document.querySelectorAll('.faq-item').forEach(el => {
-                el.classList.remove('active');
-                el.querySelector('.faq-content').style.maxHeight = '0px';
-            });
+    // FAQ Accordion click handlers
+    document.querySelectorAll('.faq-question-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const item = button.closest('.faq-item');
+            const content = item.querySelector('.faq-content');
             
-            item.classList.add('active');
-            content.style.maxHeight = content.scrollHeight + 'px';
-        }
-    };
+            if (item.classList.contains('active')) {
+                item.classList.remove('active');
+                content.style.maxHeight = '0px';
+            } else {
+                // Close other items
+                document.querySelectorAll('.faq-item').forEach(el => {
+                    el.classList.remove('active');
+                    const otherContent = el.querySelector('.faq-content');
+                    if (otherContent) otherContent.style.maxHeight = '0px';
+                });
+                
+                item.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+        });
+    });
 
     // ----------------------------------------------------
     // 7. BOOKING SYSTEM LOGIC (MODAL STATE MACHINE)
@@ -734,6 +737,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeDrawerBtn = document.getElementById('close-drawer-btn');
     const bookingsTrigger = document.getElementById('bookings-trigger');
     const bookingBadge = document.getElementById('booking-badge');
+    const mobileBookingBadge = document.getElementById('mobile-booking-badge');
     const appointmentsList = document.getElementById('drawer-appointments-list');
     const emptyState = document.getElementById('drawer-empty-state');
 
@@ -768,11 +772,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateBookingsBadge() {
         const bookings = JSON.parse(localStorage.getItem('piel_canela_bookings')) || [];
-        if (bookings.length > 0) {
-            bookingBadge.textContent = bookings.length;
-            bookingBadge.style.display = 'flex';
-        } else {
-            bookingBadge.style.display = 'none';
+        
+        // Desktop badge
+        if (bookingBadge) {
+            if (bookings.length > 0) {
+                bookingBadge.textContent = bookings.length;
+                bookingBadge.style.display = 'flex';
+            } else {
+                bookingBadge.style.display = 'none';
+            }
+        }
+        
+        // Mobile badge
+        if (mobileBookingBadge) {
+            if (bookings.length > 0) {
+                mobileBookingBadge.textContent = bookings.length;
+                mobileBookingBadge.style.display = 'flex';
+            } else {
+                mobileBookingBadge.style.display = 'none';
+            }
         }
     }
     updateBookingsBadge();
@@ -845,6 +863,76 @@ document.addEventListener('DOMContentLoaded', () => {
     bookingsTrigger.addEventListener('click', openDrawer);
     closeDrawerBtn.addEventListener('click', closeDrawer);
     drawerOverlay.addEventListener('click', closeDrawer);
+
+    // Mobile menu drawer elements
+    const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
+    const menuDrawerOverlay = document.getElementById('menu-drawer-overlay');
+    const menuDrawerContainer = document.getElementById('menu-drawer-container');
+    const closeMenuDrawerBtn = document.getElementById('close-menu-drawer-btn');
+    const mobileMenuTrigger = document.getElementById('mobile-menu-trigger');
+    const mobileDrawerNavLinks = document.querySelectorAll('.mobile-drawer-nav-link[data-category]');
+    const mobileAboutUsLink = document.getElementById('mobile-about-us-link');
+    const mobileBookingsTrigger = document.getElementById('mobile-bookings-trigger');
+
+    function openMenuDrawer() {
+        if (mobileMenuDrawer) {
+            mobileMenuDrawer.classList.add('active');
+            setTimeout(() => {
+                if (menuDrawerOverlay) menuDrawerOverlay.style.opacity = '1';
+                if (menuDrawerContainer) menuDrawerContainer.style.transform = 'translateX(0)';
+            }, 50);
+        }
+    }
+
+    function closeMenuDrawer() {
+        if (mobileMenuDrawer) {
+            if (menuDrawerOverlay) menuDrawerOverlay.style.opacity = '0';
+            if (menuDrawerContainer) {
+                menuDrawerContainer.style.transform = 'translateX(-100%)';
+            }
+            setTimeout(() => {
+                mobileMenuDrawer.classList.remove('active');
+            }, 300);
+        }
+    }
+
+    if (mobileMenuTrigger) {
+        mobileMenuTrigger.addEventListener('click', openMenuDrawer);
+    }
+    if (closeMenuDrawerBtn) {
+        closeMenuDrawerBtn.addEventListener('click', closeMenuDrawer);
+    }
+    if (menuDrawerOverlay) {
+        menuDrawerOverlay.addEventListener('click', closeMenuDrawer);
+    }
+
+    mobileDrawerNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            const category = link.getAttribute('data-category');
+            selectCategory(category);
+            closeMenuDrawer();
+            
+            // Scroll to the selected section
+            const targetSection = document.getElementById(`section-${category}`);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    if (mobileAboutUsLink) {
+        mobileAboutUsLink.addEventListener('click', () => {
+            closeMenuDrawer();
+            openAboutModal();
+        });
+    }
+
+    if (mobileBookingsTrigger) {
+        mobileBookingsTrigger.addEventListener('click', () => {
+            closeMenuDrawer();
+            openDrawer();
+        });
+    }
 
 
     // ----------------------------------------------------
