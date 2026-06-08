@@ -162,24 +162,57 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. NAVIGATION, TABS & SERVICE SEARCH FILTERING
     // ----------------------------------------------------
     const catNavItems = document.querySelectorAll('.category-btn');
+    const headerNavLinks = document.querySelectorAll('.header-nav-link');
     const sections = document.querySelectorAll('.catalog-section');
 
+    function selectCategory(targetCat) {
+        // Update sidebar buttons active states
+        catNavItems.forEach(btn => {
+            if (btn.getAttribute('data-category') === targetCat) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        // Update header navbar links active states
+        headerNavLinks.forEach(link => {
+            if (link.getAttribute('data-category') === targetCat) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+        
+        // Toggle visible sections
+        sections.forEach(sec => {
+            if (sec.id === `section-${targetCat}`) {
+                sec.classList.remove('hidden');
+            } else {
+                sec.classList.add('hidden');
+            }
+        });
+    }
+
+    // Sidebar buttons click handler
     catNavItems.forEach(item => {
         item.addEventListener('click', () => {
             const targetCat = item.getAttribute('data-category');
+            selectCategory(targetCat);
+        });
+    });
+
+    // Top header nav links click handler
+    headerNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            const targetCat = link.getAttribute('data-category');
+            selectCategory(targetCat);
             
-            // Update nav item active states
-            catNavItems.forEach(nav => nav.classList.remove('active'));
-            item.classList.add('active');
-            
-            // Toggle visible sections
-            sections.forEach(sec => {
-                if (sec.id === `section-${targetCat}`) {
-                    sec.classList.remove('hidden');
-                } else {
-                    sec.classList.add('hidden');
-                }
-            });
+            // Smooth scroll to services catalog section
+            const catalogSec = document.getElementById('services-catalog');
+            if (catalogSec) {
+                catalogSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         });
     });
 
@@ -237,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevBtn = document.getElementById('gallery-prev');
     const nextBtn = document.getElementById('gallery-next');
     let activeSlide = 0;
-    const totalSlides = 2; // Fixed 2 slides in markup
+    const totalSlides = 6; // Real client result slides in markup
 
     function showSlide(index) {
         if (index >= totalSlides) activeSlide = 0;
