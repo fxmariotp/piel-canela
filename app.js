@@ -1,6 +1,7 @@
 // PIEL CANELA BRONZE - CORE APPLICATION JAVASCRIPT
 
 document.addEventListener('DOMContentLoaded', () => {
+    const isMobile = window.innerWidth <= 768;
     // ----------------------------------------------------
     // 1. PRELOADER & INITIAL LOAD
     // ----------------------------------------------------
@@ -26,137 +27,144 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. INTERACTIVE PARTICLE CANVAS (GOLD DUST BACKGROUND)
     // ----------------------------------------------------
     const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    
-    let particles = [];
-    const particleCount = 60;
-    let mouse = { x: null, y: null, radius: 120 };
+    if (canvas) {
+        if (isMobile) {
+            canvas.style.display = 'none';
+        } else {
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            const particleCount = 60;
+            let mouse = { x: null, y: null, radius: 120 };
 
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
 
-    // Track mouse coordinates
-    window.addEventListener('mousemove', (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-    });
+            // Track mouse coordinates
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            });
 
-    window.addEventListener('mouseout', () => {
-        mouse.x = null;
-        mouse.y = null;
-    });
+            window.addEventListener('mouseout', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
 
-    // Particle constructor
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.vx = (Math.random() - 0.5) * 0.4;
-            this.vy = (Math.random() - 0.5) * 0.4 - 0.2; // Drift slowly upwards
-            this.size = Math.random() * 1.8 + 0.6;
-            this.alpha = Math.random() * 0.5 + 0.2;
-        }
+            // Particle constructor
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.4;
+                    this.vy = (Math.random() - 0.5) * 0.4 - 0.2; // Drift slowly upwards
+                    this.size = Math.random() * 1.8 + 0.6;
+                    this.alpha = Math.random() * 0.5 + 0.2;
+                }
 
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(232, 197, 149, ${this.alpha})`;
-            ctx.fill();
-        }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(232, 197, 149, ${this.alpha})`;
+                    ctx.fill();
+                }
 
-        update() {
-            // Standard drift
-            this.x += this.vx;
-            this.y += this.vy;
+                update() {
+                    // Standard drift
+                    this.x += this.vx;
+                    this.y += this.vy;
 
-            // Re-wrap when out of screen bounds
-            if (this.x < 0) this.x = canvas.width;
-            if (this.x > canvas.width) this.x = 0;
-            if (this.y < 0) this.y = canvas.height;
-            if (this.y > canvas.height) this.y = 0;
+                    // Re-wrap when out of screen bounds
+                    if (this.x < 0) this.x = canvas.width;
+                    if (this.x > canvas.width) this.x = 0;
+                    if (this.y < 0) this.y = canvas.height;
+                    if (this.y > canvas.height) this.y = 0;
 
-            // Mouse repelling force
-            if (mouse.x !== null && mouse.y !== null) {
-                const dx = this.x - mouse.x;
-                const dy = this.y - mouse.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
+                    // Mouse repelling force
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const dx = this.x - mouse.x;
+                        const dy = this.y - mouse.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
 
-                if (distance < mouse.radius) {
-                    const force = (mouse.radius - distance) / mouse.radius;
-                    // Move away from mouse
-                    this.x += (dx / distance) * force * 2;
-                    this.y += (dy / distance) * force * 2;
+                        if (distance < mouse.radius) {
+                            const force = (mouse.radius - distance) / mouse.radius;
+                            // Move away from mouse
+                            this.x += (dx / distance) * force * 2;
+                            this.y += (dy / distance) * force * 2;
+                        }
+                    }
                 }
             }
+
+            // Initialize particles
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            // Animation loop
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
         }
     }
-
-    // Initialize particles
-    for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-    }
-
-    // Animation loop
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        particles.forEach(p => {
-            p.update();
-            p.draw();
-        });
-        
-        requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
 
     // ----------------------------------------------------
     // 3. MOTION EFFECTS: 3D CARD TILT & MAGNETIC BUTTONS
     // ----------------------------------------------------
     
-    // Apply 3D Tilt effect to selector card-tilt elements
-    const tiltElements = document.querySelectorAll('.card-tilt');
-    tiltElements.forEach(el => {
-        el.addEventListener('mousemove', (e) => {
-            const rect = el.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+    // Apply 3D Tilt effect to selector card-tilt elements (desktop only)
+    if (!isMobile) {
+        const tiltElements = document.querySelectorAll('.card-tilt');
+        tiltElements.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                // Limit tilt angle (max 8 degrees)
+                const rotateX = -((y - centerY) / centerY) * 8;
+                const rotateY = ((x - centerX) / centerX) * 8;
+                
+                el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
+            });
             
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            // Limit tilt angle (max 8 degrees)
-            const rotateX = -((y - centerY) / centerY) * 8;
-            const rotateY = ((x - centerX) / centerX) * 8;
-            
-            el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+            });
         });
-        
-        el.addEventListener('mouseleave', () => {
-            el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-        });
-    });
 
-    // Magnetic Buttons hover mechanics
-    const magneticBtns = document.querySelectorAll('.magnetic-btn');
-    magneticBtns.forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            // Mouse distance from button center
-            const x = e.clientX - (rect.left + rect.width / 2);
-            const y = e.clientY - (rect.top + rect.height / 2);
+        // Magnetic Buttons hover mechanics
+        const magneticBtns = document.querySelectorAll('.magnetic-btn');
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                // Mouse distance from button center
+                const x = e.clientX - (rect.left + rect.width / 2);
+                const y = e.clientY - (rect.top + rect.height / 2);
+                
+                // Pull button slightly (up to 12px)
+                btn.style.transform = `translate(${x * 0.35}px, ${y * 0.35}px) scale(1.05)`;
+            });
             
-            // Pull button slightly (up to 12px)
-            btn.style.transform = `translate(${x * 0.35}px, ${y * 0.35}px) scale(1.05)`;
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0px, 0px) scale(1)';
+            });
         });
-        
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = 'translate(0px, 0px) scale(1)';
-        });
-    });
+    }
 
     // ----------------------------------------------------
     // 4. NAVIGATION, TABS & SERVICE SEARCH FILTERING
@@ -266,56 +274,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     // 5. GALLERY SLIDER CAROUSEL
     // ----------------------------------------------------
-    const gallerySlider = document.getElementById('gallery-slider');
+    // 5. GALLERY SLIDER CAROUSEL (NATIVE SCROLL SNAP)
+    const galleryViewport = document.querySelector('.gallery-viewport');
     const prevBtn = document.getElementById('gallery-prev');
     const nextBtn = document.getElementById('gallery-next');
-    let activeSlide = 0;
-    const totalSlides = 6; // Real client result slides in markup
 
-    function showSlide(index) {
-        if (index >= totalSlides) activeSlide = 0;
-        else if (index < 0) activeSlide = totalSlides - 1;
-        else activeSlide = index;
-        
-        if (gallerySlider) {
-            gallerySlider.style.transform = `translateX(-${activeSlide * 100}%)`;
-        }
+    if (prevBtn && galleryViewport) {
+        prevBtn.addEventListener('click', () => {
+            galleryViewport.scrollBy({ left: -galleryViewport.clientWidth, behavior: 'smooth' });
+        });
+    }
+    if (nextBtn && galleryViewport) {
+        nextBtn.addEventListener('click', () => {
+            galleryViewport.scrollBy({ left: galleryViewport.clientWidth, behavior: 'smooth' });
+        });
     }
 
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => showSlide(activeSlide - 1));
-    }
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => showSlide(activeSlide + 1));
-    }
-
-    // Auto rotate every 8 seconds
-    setInterval(() => showSlide(activeSlide + 1), 8000);
-
-    // Touch Swiping Support for Gallery Slider
-    if (gallerySlider) {
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        gallerySlider.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-        
-        gallerySlider.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, { passive: true });
-        
-        function handleSwipe() {
-            const swipeThreshold = 50; // minimum pixels to swipe
-            if (touchStartX - touchEndX > swipeThreshold) {
-                // Swiped left -> next slide
-                showSlide(activeSlide + 1);
-            } else if (touchEndX - touchStartX > swipeThreshold) {
-                // Swiped right -> prev slide
-                showSlide(activeSlide - 1);
+    // Auto rotate every 8 seconds on desktop only
+    if (!isMobile && galleryViewport) {
+        setInterval(() => {
+            if (galleryViewport.scrollLeft + galleryViewport.clientWidth >= galleryViewport.scrollWidth - 10) {
+                galleryViewport.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                galleryViewport.scrollBy({ left: galleryViewport.clientWidth, behavior: 'smooth' });
             }
-        }
+        }, 8000);
     }
 
     // ----------------------------------------------------
@@ -418,25 +401,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     highlightCurrentDay();
 
-    // FAQ Accordion click handlers
+    // FAQ Accordion click handlers (Toggles CSS class)
     document.querySelectorAll('.faq-question-btn').forEach(button => {
         button.addEventListener('click', () => {
             const item = button.closest('.faq-item');
-            const content = item.querySelector('.faq-content');
             
             if (item.classList.contains('active')) {
                 item.classList.remove('active');
-                content.style.maxHeight = '0px';
             } else {
                 // Close other items
                 document.querySelectorAll('.faq-item').forEach(el => {
                     el.classList.remove('active');
-                    const otherContent = el.querySelector('.faq-content');
-                    if (otherContent) otherContent.style.maxHeight = '0px';
                 });
                 
                 item.classList.add('active');
-                content.style.maxHeight = content.scrollHeight + 'px';
             }
         });
     });
