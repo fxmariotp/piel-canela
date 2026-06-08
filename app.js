@@ -1187,6 +1187,62 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // ----------------------------------------------------
+    // 11. ABOUT US MODAL CONTROLLER
+    // ----------------------------------------------------
+    const aboutUsLink = document.getElementById('about-us-link');
+    const aboutUsSidebarBtn = document.getElementById('about-us-sidebar-btn');
+    const aboutModal = document.getElementById('about-modal');
+    const aboutOverlay = document.getElementById('about-modal-overlay');
+    const aboutContainer = document.getElementById('about-modal-container');
+    const closeAboutBtn = document.getElementById('close-about-btn');
+    const aboutVideo = document.getElementById('about-video');
+
+    function openAboutModal() {
+        aboutModal.classList.add('active');
+        setTimeout(() => {
+            aboutOverlay.style.opacity = '1';
+            aboutContainer.style.transform = 'scale(1)';
+            aboutContainer.style.opacity = '1';
+            
+            // Try to autoplay video
+            if (aboutVideo) {
+                aboutVideo.currentTime = 0;
+                aboutVideo.play().catch(err => {
+                    console.log("Autoplay blocked or failed:", err);
+                });
+            }
+        }, 50);
+    }
+
+    function closeAboutModal() {
+        aboutOverlay.style.opacity = '0';
+        aboutContainer.style.transform = 'scale(0.95)';
+        aboutContainer.style.opacity = '0';
+        
+        // Pause video
+        if (aboutVideo) {
+            aboutVideo.pause();
+        }
+        
+        setTimeout(() => {
+            aboutModal.classList.remove('active');
+        }, 400);
+    }
+
+    if (aboutUsLink) {
+        aboutUsLink.addEventListener('click', openAboutModal);
+    }
+    if (aboutUsSidebarBtn) {
+        aboutUsSidebarBtn.addEventListener('click', openAboutModal);
+    }
+    if (closeAboutBtn) {
+        closeAboutBtn.addEventListener('click', closeAboutModal);
+    }
+    if (aboutOverlay) {
+        aboutOverlay.addEventListener('click', closeAboutModal);
+    }
+
     // Scroll header logic
     const header = document.getElementById('main-header');
     window.addEventListener('scroll', () => {

@@ -51,6 +51,7 @@
                 <button class="header-nav-link" data-category="bonos">Bonos</button>
                 <button class="header-nav-link" data-category="corporales">Corporal</button>
                 <button class="header-nav-link" data-category="cejas">Cejas</button>
+                <button class="header-nav-link" id="about-us-link">Sobre Nosotros</button>
             </nav>
 
             <!-- Navigation Actions -->
@@ -148,6 +149,10 @@
                         </button>
                         <button class="category-btn" data-category="cejas">
                             Cejas y Pestañas
+                            <span class="material-symbols-outlined arrow-icon">arrow_right</span>
+                        </button>
+                        <button class="category-btn" id="about-us-sidebar-btn" style="margin-top: 12px; border-top: 1px solid rgba(223, 186, 140, 0.15); padding-top: 16px;">
+                            Sobre Nosotros
                             <span class="material-symbols-outlined arrow-icon">arrow_right</span>
                         </button>
                     </nav>
@@ -836,6 +841,50 @@
             <!-- Unread notification indicator dot -->
             <span class="notification-dot">1</span>
         </button>
+    </div>
+
+    <!-- ABOUT US MODAL -->
+    <div id="about-modal" class="modal-wrapper">
+        <div class="modal-overlay" id="about-modal-overlay"></div>
+        <div class="about-modal-container" id="about-modal-container">
+            <button id="close-about-btn" class="modal-close-btn">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="about-modal-content">
+                <!-- Video Container -->
+                <div class="about-video-box">
+                    <video id="about-video" class="about-video" playsinline controls loop>
+                        <source src="videos/presentacion.mp4" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                </div>
+                <!-- Text Container -->
+                <div class="about-text-box">
+                    <h3 class="about-title">Sobre Nosotros</h3>
+                    <p class="about-desc">
+                        Bienvenida a <strong>Piel Canela Bronze</strong>, el primer Spa de Bronceado Brasilero en Andalucía. 
+                        Nuestra pasión es ofrecerte un tono dorado espectacular y uniforme utilizando técnicas exclusivas, seguras y personalizadas.
+                    </p>
+                    <p class="about-desc">
+                        En nuestro espacio en Nervión, Sevilla, nos enfocamos en cuidar tu piel sin el uso de colorantes químicos ni caña de azúcar, garantizando una hidratación profunda y un brillo natural desde la primera sesión.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature-item">
+                            <span class="material-symbols-outlined">verified</span>
+                            <span>Bronceado 100% natural y uniforme</span>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="material-symbols-outlined">spa</span>
+                            <span>Cuidado e hidratación profunda de la piel</span>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="material-symbols-outlined">workspace_premium</span>
+                            <span>Especialistas certificados en Sevilla</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Core Scripts -->

@@ -2282,3 +2282,127 @@ body.loading-state {
         height: 440px;
     }
 }
+
+/* About Us Modal Styling */
+.about-modal-container {
+    background: rgba(250, 247, 242, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(223, 186, 140, 0.25);
+    border-radius: var(--radius-lg);
+    width: 90%;
+    max-width: 800px;
+    padding: 32px;
+    position: relative;
+    z-index: 2020;
+    box-shadow: var(--shadow-heavy);
+    transform: scale(0.95);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+#about-modal.active .about-modal-container {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.about-modal-container .modal-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(74, 53, 47, 0.08);
+    color: var(--color-chocolate-dark);
+}
+
+.about-modal-container .modal-close-btn:hover {
+    background-color: rgba(74, 53, 47, 0.15);
+}
+
+.about-modal-content {
+    display: grid;
+    grid-template-columns: 1.1fr 1.3fr;
+    gap: 32px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+@media (max-width: 640px) {
+    .about-modal-content {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    .about-modal-container {
+        padding: 24px;
+        width: 95%;
+    }
+}
+
+.about-video-box {
+    width: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    aspect-ratio: 9/16;
+    box-shadow: var(--shadow-soft);
+    background-color: #000;
+    position: relative;
+}
+
+.about-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.about-text-box {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.about-title {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--color-chocolate-dark);
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.about-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--color-gold);
+}
+
+.about-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(74, 53, 47, 0.85);
+}
+
+.about-features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.about-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-chocolate);
+}
+
+.about-feature-item span.material-symbols-outlined {
+    color: var(--color-gold);
+    font-size: 1.25rem;
+}
