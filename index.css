@@ -2332,6 +2332,10 @@ body.loading-state {
     .catalog-column {
         order: 1;
     }
+    
+    #categories-nav-card {
+        display: none;
+    }
 }
 
 @media (max-width: 768px) {
