@@ -310,13 +310,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevBtn = document.getElementById('gallery-prev');
     const nextBtn = document.getElementById('gallery-next');
 
-    // Prevent dragstart on gallery images to avoid blocking scroll/swipe gestures on mobile
+    // Prevent dragstart on gallery images and implement manual swipe snap fallback
     if (galleryViewport) {
         galleryViewport.querySelectorAll('img').forEach(img => {
             img.addEventListener('dragstart', (e) => {
                 e.preventDefault();
             });
         });
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        galleryViewport.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].screenX;
+        }, { passive: true });
+
+        galleryViewport.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diffX = touchEndX - touchStartX;
+            const threshold = 40; // Minimum touch swipe offset to trigger slide snap
+
+            if (Math.abs(diffX) > threshold) {
+                const slideWidth = galleryViewport.clientWidth;
+                const currentScroll = galleryViewport.scrollLeft;
+                let targetIndex = Math.round(currentScroll / slideWidth);
+
+                if (diffX < 0) {
+                    // Swiped left (next slide)
+                    targetIndex = Math.min(targetIndex + 1, 5); // 6 slides max
+                } else {
+                    // Swiped right (prev slide)
+                    targetIndex = Math.max(targetIndex - 1, 0);
+                }
+
+                galleryViewport.scrollTo({
+                    left: targetIndex * slideWidth,
+                    behavior: 'smooth'
+                });
+            }
+        }, { passive: true });
     }
 
     if (prevBtn && galleryViewport) {
