@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             preloader.classList.add('preloader-hidden');
             document.body.classList.remove('loading-state');
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 800); // Wait for transition opacity 0.8s to finish
         }, 1000); // Small delay to appreciate the entry animation
     });
 
@@ -20,6 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             preloader.classList.add('preloader-hidden');
             document.body.classList.remove('loading-state');
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 800);
         }, 1000);
     }
 
@@ -401,23 +407,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     highlightCurrentDay();
 
-    // FAQ Accordion click handlers (Toggles CSS class)
-    document.querySelectorAll('.faq-question-btn').forEach(button => {
-        button.addEventListener('click', () => {
-            const item = button.closest('.faq-item');
+    // FAQ Accordion click handler (Global window binding for immediate tap response)
+    window.toggleFaq = (button) => {
+        const item = button.closest('.faq-item');
+        if (!item) return;
+        
+        if (item.classList.contains('active')) {
+            item.classList.remove('active');
+        } else {
+            // Close other items
+            document.querySelectorAll('.faq-item').forEach(el => {
+                el.classList.remove('active');
+            });
             
-            if (item.classList.contains('active')) {
-                item.classList.remove('active');
-            } else {
-                // Close other items
-                document.querySelectorAll('.faq-item').forEach(el => {
-                    el.classList.remove('active');
-                });
-                
-                item.classList.add('active');
-            }
-        });
-    });
+            item.classList.add('active');
+        }
+    };
 
     // ----------------------------------------------------
     // 7. BOOKING SYSTEM LOGIC (MODAL STATE MACHINE)
