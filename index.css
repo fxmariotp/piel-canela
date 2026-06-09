@@ -1059,6 +1059,7 @@ body.loading-state {
     border-radius: var(--radius-md);
     overflow-x: auto;
     overflow-y: hidden;
+    display: flex; /* Horizontal slide alignment directly in the viewport */
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
@@ -1071,7 +1072,7 @@ body.loading-state {
     margin: 0 auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-    touch-action: pan-x pan-y;
+    touch-action: pan-x; /* Allow native horizontal swipe, vertical swipe scrolls page */
 }
 
 .gallery-viewport::-webkit-scrollbar {
@@ -1085,25 +1086,42 @@ body.loading-state {
     }
 }
 
-.gallery-track {
-    display: flex;
-    height: 100%;
-    touch-action: pan-x pan-y;
-}
-
 .gallery-slide {
     flex: 0 0 100%;
     width: 100%;
     height: 100%;
     position: relative;
     scroll-snap-align: start;
-    touch-action: pan-x pan-y;
+    touch-action: pan-x;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-color: var(--color-chocolate-dark);
     -webkit-user-drag: none;
     user-select: none;
+}
+
+/* Gallery Dots Pagination */
+.gallery-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.gallery-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(74, 53, 47, 0.25);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gallery-dot.active {
+    background-color: var(--color-gold);
+    transform: scale(1.25);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
 }
 
 .slide-caption {
@@ -1236,6 +1254,7 @@ body.loading-state {
     border: none;
     outline: none;
     text-align: left;
+    font-family: inherit; /* Natively inherit spa font settings */
     font-size: 0.85rem;
     font-weight: 700;
     color: var(--color-chocolate);

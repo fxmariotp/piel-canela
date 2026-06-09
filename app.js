@@ -1,29 +1,6 @@
 // PIEL CANELA BRONZE - CORE APPLICATION JAVASCRIPT
 
-// FAQ Accordion click handler (Global window binding for immediate tap response)
-window.toggleFaq = (button) => {
-    const item = button.closest('.faq-item');
-    if (!item) return;
-    
-    if (item.classList.contains('active')) {
-        item.classList.remove('active');
-    } else {
-        // Close other items
-        document.querySelectorAll('.faq-item').forEach(el => {
-            el.classList.remove('active');
-        });
-        
-        item.classList.add('active');
-    }
-};
-
-// FAQ Accordion keyboard handler for role="button" elements
-window.toggleFaqKey = (event, button) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        window.toggleFaq(button);
-    }
-};
+// FAQ Accordion logic is registered programmatically inside the DOMContentLoaded listener.
 
 document.addEventListener('DOMContentLoaded', () => {
     const isMobile = window.innerWidth <= 768;
@@ -303,52 +280,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ----------------------------------------------------
-    // 5. GALLERY SLIDER CAROUSEL
+    // 5. GALLERY SLIDER CAROUSEL (NATIVE SCROLL SNAP + DOTS)
     // ----------------------------------------------------
-    // 5. GALLERY SLIDER CAROUSEL (NATIVE SCROLL SNAP)
     const galleryViewport = document.querySelector('.gallery-viewport');
     const prevBtn = document.getElementById('gallery-prev');
     const nextBtn = document.getElementById('gallery-next');
+    const galleryDots = document.querySelectorAll('.gallery-dot');
 
-    // Prevent dragstart on gallery images and implement manual swipe snap fallback
     if (galleryViewport) {
-        galleryViewport.querySelectorAll('img').forEach(img => {
-            img.addEventListener('dragstart', (e) => {
-                e.preventDefault();
+        // Sync active dot on scroll
+        galleryViewport.addEventListener('scroll', () => {
+            const slideWidth = galleryViewport.clientWidth;
+            const scrollLeft = galleryViewport.scrollLeft;
+            const activeIndex = Math.round(scrollLeft / slideWidth);
+            
+            galleryDots.forEach((dot, idx) => {
+                if (idx === activeIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
             });
-        });
-
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        galleryViewport.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].screenX;
         }, { passive: true });
 
-        galleryViewport.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            const diffX = touchEndX - touchStartX;
-            const threshold = 40; // Minimum touch swipe offset to trigger slide snap
-
-            if (Math.abs(diffX) > threshold) {
+        // Tapping a dot scrolls directly to that slide
+        galleryDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const targetIndex = parseInt(dot.getAttribute('data-index'), 10);
                 const slideWidth = galleryViewport.clientWidth;
-                const currentScroll = galleryViewport.scrollLeft;
-                let targetIndex = Math.round(currentScroll / slideWidth);
-
-                if (diffX < 0) {
-                    // Swiped left (next slide)
-                    targetIndex = Math.min(targetIndex + 1, 5); // 6 slides max
-                } else {
-                    // Swiped right (prev slide)
-                    targetIndex = Math.max(targetIndex - 1, 0);
-                }
-
+                
                 galleryViewport.scrollTo({
                     left: targetIndex * slideWidth,
                     behavior: 'smooth'
                 });
-            }
-        }, { passive: true });
+            });
+        });
     }
 
     if (prevBtn && galleryViewport) {
@@ -473,7 +439,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     highlightCurrentDay();
 
-    // FAQ Accordion handlers are registered at the top level of app.js (before DOMContentLoaded)
+    // FAQ Accordion programmatic tap/click handlers
+    const faqButtons = document.querySelectorAll('.faq-question-btn');
+    faqButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const item = button.closest('.faq-item');
+            if (!item) return;
+
+            if (item.classList.contains('active')) {
+                item.classList.remove('active');
+            } else {
+                // Close other items
+                document.querySelectorAll('.faq-item').forEach(el => {
+                    el.classList.remove('active');
+                });
+                item.classList.add('active');
+            }
+        });
+    });
 
     // ----------------------------------------------------
     // 7. BOOKING SYSTEM LOGIC (MODAL STATE MACHINE)
