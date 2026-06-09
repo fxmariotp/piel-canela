@@ -1071,6 +1071,7 @@ body.loading-state {
     margin: 0 auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    touch-action: pan-x pan-y;
 }
 
 .gallery-viewport::-webkit-scrollbar {
@@ -1087,6 +1088,7 @@ body.loading-state {
 .gallery-track {
     display: flex;
     height: 100%;
+    touch-action: pan-x pan-y;
 }
 
 .gallery-slide {
@@ -1095,6 +1097,7 @@ body.loading-state {
     height: 100%;
     position: relative;
     scroll-snap-align: start;
+    touch-action: pan-x pan-y;
 }
 
 .gallery-slide img {
@@ -1102,9 +1105,10 @@ body.loading-state {
     height: 100%;
     object-fit: cover;
     background-color: var(--color-chocolate-dark);
-    pointer-events: none;
+    pointer-events: auto;
     -webkit-user-drag: none;
     user-select: none;
+    touch-action: pan-x pan-y;
 }
 
 .slide-caption {
@@ -1250,6 +1254,10 @@ body.loading-state {
 
 .faq-question-btn:hover {
     color: var(--color-gold-dark);
+}
+
+.faq-question-btn * {
+    pointer-events: none;
 }
 
 .faq-arrow {

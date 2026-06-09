@@ -1,5 +1,30 @@
 // PIEL CANELA BRONZE - CORE APPLICATION JAVASCRIPT
 
+// FAQ Accordion click handler (Global window binding for immediate tap response)
+window.toggleFaq = (button) => {
+    const item = button.closest('.faq-item');
+    if (!item) return;
+    
+    if (item.classList.contains('active')) {
+        item.classList.remove('active');
+    } else {
+        // Close other items
+        document.querySelectorAll('.faq-item').forEach(el => {
+            el.classList.remove('active');
+        });
+        
+        item.classList.add('active');
+    }
+};
+
+// FAQ Accordion keyboard handler for role="button" elements
+window.toggleFaqKey = (event, button) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        window.toggleFaq(button);
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     const isMobile = window.innerWidth <= 768;
     // ----------------------------------------------------
@@ -285,6 +310,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevBtn = document.getElementById('gallery-prev');
     const nextBtn = document.getElementById('gallery-next');
 
+    // Prevent dragstart on gallery images to avoid blocking scroll/swipe gestures on mobile
+    if (galleryViewport) {
+        galleryViewport.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', (e) => {
+                e.preventDefault();
+            });
+        });
+    }
+
     if (prevBtn && galleryViewport) {
         prevBtn.addEventListener('click', () => {
             galleryViewport.scrollBy({ left: -galleryViewport.clientWidth, behavior: 'smooth' });
@@ -407,22 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     highlightCurrentDay();
 
-    // FAQ Accordion click handler (Global window binding for immediate tap response)
-    window.toggleFaq = (button) => {
-        const item = button.closest('.faq-item');
-        if (!item) return;
-        
-        if (item.classList.contains('active')) {
-            item.classList.remove('active');
-        } else {
-            // Close other items
-            document.querySelectorAll('.faq-item').forEach(el => {
-                el.classList.remove('active');
-            });
-            
-            item.classList.add('active');
-        }
-    };
+    // FAQ Accordion handlers are registered at the top level of app.js (before DOMContentLoaded)
 
     // ----------------------------------------------------
     // 7. BOOKING SYSTEM LOGIC (MODAL STATE MACHINE)
