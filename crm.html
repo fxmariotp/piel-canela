@@ -1,0 +1,2294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Piel Canela Bronze - Panel CRM Interno</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+    
+    <style>
+        :root {
+            --color-chocolate-dark: #4a352f;
+            --color-chocolate: #6d4c41;
+            --color-gold: #d4af37;
+            --color-gold-dark: #b8972f;
+            --color-gold-light: #fdf6e6;
+            --color-linen: #faf7f2;
+            --color-linen-dark: #f3edd3;
+            --color-white: #ffffff;
+            --color-gray-light: #f7f5f0;
+            --color-text-muted: rgba(74, 53, 47, 0.6);
+            --color-whatsapp: #25d366;
+            --color-whatsapp-dark: #128c7e;
+            
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-full: 9999px;
+            
+            --shadow-soft: 0 4px 20px rgba(74, 53, 47, 0.04);
+            --shadow-medium: 0 8px 30px rgba(74, 53, 47, 0.08);
+            --shadow-heavy: 0 16px 40px rgba(74, 53, 47, 0.12);
+            --transition-quick: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-linen);
+            color: var(--color-chocolate-dark);
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, var(--color-chocolate-dark) 0%, #35231e 100%);
+            color: var(--color-white);
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            flex-shrink: 0;
+            border-right: 1px solid rgba(212, 175, 55, 0.15);
+            min-height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1.5px solid var(--color-gold);
+            background: var(--color-white);
+            padding: 2px;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: var(--color-gold-light);
+            line-height: 1.1;
+        }
+
+        .brand-tag {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-gold);
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            list-style: none;
+            flex-grow: 1;
+        }
+
+        .nav-item button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            text-align: left;
+            transition: var(--transition-quick);
+        }
+
+        .nav-item button:hover {
+            background-color: rgba(255, 255, 255, 0.06);
+            color: var(--color-white);
+        }
+
+        .nav-item.active button {
+            background-color: rgba(212, 175, 55, 0.15);
+            color: var(--color-gold);
+            border-left: 3px solid var(--color-gold);
+            padding-left: 15px;
+        }
+
+        .sidebar-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .back-to-site-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            color: var(--color-gold-light);
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-align: center;
+            transition: var(--transition-quick);
+        }
+
+        .back-to-site-btn:hover {
+            background: var(--color-gold);
+            color: var(--color-chocolate-dark);
+            border-color: var(--color-gold);
+        }
+
+        /* MAIN CONTENT */
+        .main-wrapper {
+            flex-grow: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: calc(100% - 280px);
+        }
+
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-title-box h1 {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            color: var(--color-chocolate-dark);
+            font-weight: 800;
+        }
+
+        .header-title-box p {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            margin-top: 4px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background-color: var(--color-chocolate);
+            color: var(--color-gold-light);
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition-quick);
+            box-shadow: 0 4px 15px rgba(109, 76, 65, 0.25);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-gold);
+            color: var(--color-chocolate-dark);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+        }
+
+        .btn-secondary {
+            background-color: var(--color-white);
+            color: var(--color-chocolate-dark);
+            border: 1px solid rgba(109, 76, 65, 0.2);
+            padding: 12px 24px;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition-quick);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-gold-light);
+            border-color: var(--color-gold);
+        }
+
+        /* STATS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .stat-card {
+            background-color: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            border: 1px solid rgba(223, 186, 140, 0.2);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform var(--transition-quick);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-icon-box {
+            width: 54px;
+            height: 54px;
+            border-radius: 12px;
+            background-color: var(--color-gold-light);
+            color: var(--color-gold-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-icon-box.success {
+            background-color: rgba(37, 211, 102, 0.1);
+            color: var(--color-whatsapp-dark);
+        }
+
+        .stat-icon-box.pending {
+            background-color: rgba(212, 175, 55, 0.15);
+            color: var(--color-gold-dark);
+        }
+
+        .stat-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--color-chocolate-dark);
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            font-weight: 600;
+        }
+
+        /* TAB CONTROLS */
+        .control-panel {
+            background-color: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 20px 24px;
+            border: 1px solid rgba(223, 186, 140, 0.2);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .view-selectors {
+            display: flex;
+            background-color: var(--color-gray-light);
+            padding: 4px;
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(74, 53, 47, 0.05);
+        }
+
+        .view-btn {
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 8px 20px;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--color-text-muted);
+            transition: var(--transition-quick);
+        }
+
+        .view-btn.active {
+            background-color: var(--color-chocolate);
+            color: var(--color-white);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .calendar-nav-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-arrow-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--color-gray-light);
+            border: 1px solid rgba(74, 53, 47, 0.08);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-chocolate-dark);
+            transition: var(--transition-quick);
+        }
+
+        .nav-arrow-btn:hover {
+            background-color: var(--color-gold-light);
+            border-color: var(--color-gold);
+        }
+
+        .current-date-title {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-weight: 800;
+            min-width: 180px;
+            text-align: center;
+        }
+
+        /* FILTER DROPDOWN */
+        .filters-wrapper {
+            display: flex;
+            gap: 12px;
+        }
+
+        .select-filter {
+            padding: 10px 16px;
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(74, 53, 47, 0.15);
+            background-color: var(--color-white);
+            color: var(--color-chocolate-dark);
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 0.82rem;
+            outline: none;
+            cursor: pointer;
+            transition: var(--transition-quick);
+        }
+
+        .select-filter:hover {
+            border-color: var(--color-gold);
+        }
+
+        /* CRM PANEL LAYOUT (CALENDAR AREA) */
+        .crm-panel-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* DAILY TIMELINE VIEW */
+        .timeline-view-container {
+            background-color: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            border: 1px solid rgba(223, 186, 140, 0.2);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .daily-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+        }
+
+        .timeline-row {
+            display: flex;
+            border-bottom: 1px solid rgba(74, 53, 47, 0.05);
+            min-height: 80px;
+            position: relative;
+        }
+
+        .timeline-row:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-hour {
+            width: 80px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            color: var(--color-gold-dark);
+            padding-top: 12px;
+            flex-shrink: 0;
+            border-right: 1.5px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .timeline-content {
+            flex-grow: 1;
+            padding: 8px 0 8px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .appointment-strip {
+            background-color: var(--color-gray-light);
+            border: 1px solid rgba(223, 186, 140, 0.25);
+            border-left: 4px solid var(--color-gold);
+            border-radius: var(--radius-sm);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            transition: var(--transition-quick);
+        }
+
+        .appointment-strip.confirmed {
+            border-left-color: var(--color-whatsapp);
+            background-color: rgba(37, 211, 102, 0.02);
+        }
+
+        .appointment-strip.cancelled {
+            border-left-color: rgba(74, 53, 47, 0.3);
+            opacity: 0.6;
+        }
+
+        .appt-meta-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .appt-time-badge {
+            font-weight: 800;
+            font-size: 0.85rem;
+            background-color: var(--color-chocolate-dark);
+            color: var(--color-white);
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+        }
+
+        .appt-client-name {
+            font-size: 0.95rem;
+            font-weight: 750;
+            color: var(--color-chocolate-dark);
+        }
+
+        .appt-service-name {
+            font-size: 0.85rem;
+            color: var(--color-chocolate);
+            background-color: var(--color-gold-light);
+            padding: 2px 8px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+        }
+
+        .appt-specialist {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .appt-phone {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        .appt-actions-bar {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .status-pill {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            background-color: rgba(212, 175, 55, 0.15);
+            color: var(--color-gold-dark);
+        }
+
+        .status-pill.confirmed {
+            background-color: rgba(37, 211, 102, 0.12);
+            color: var(--color-whatsapp-dark);
+        }
+
+        .status-pill.cancelled {
+            background-color: rgba(74, 53, 47, 0.08);
+            color: rgba(74, 53, 47, 0.6);
+        }
+
+        .btn-whatsapp-confirm {
+            background-color: var(--color-whatsapp);
+            color: var(--color-white);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-quick);
+            box-shadow: 0 2px 10px rgba(37, 211, 102, 0.2);
+        }
+
+        .btn-whatsapp-confirm:hover {
+            background-color: var(--color-whatsapp-dark);
+            transform: scale(1.05);
+        }
+
+        .btn-icon-action {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--color-white);
+            border: 1px solid rgba(74, 53, 47, 0.12);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-chocolate-dark);
+            transition: var(--transition-quick);
+        }
+
+        .btn-icon-action:hover {
+            background-color: var(--color-gold-light);
+            border-color: var(--color-gold);
+            color: var(--color-gold-dark);
+        }
+
+        .btn-icon-action.cancel:hover {
+            background-color: rgba(255, 0, 0, 0.05);
+            border-color: rgba(255, 0, 0, 0.15);
+            color: red;
+        }
+
+        .empty-timeline-info {
+            padding: 24px;
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        /* WEEKLY VIEW GRID */
+        .weekly-grid-view {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 12px;
+            background-color: transparent;
+        }
+
+        .weekly-col {
+            background-color: var(--color-white);
+            border: 1px solid rgba(223, 186, 140, 0.18);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .weekly-col.today-highlight {
+            border: 2px solid var(--color-gold);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .weekly-col-header {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid rgba(74, 53, 47, 0.05);
+            padding-bottom: 8px;
+        }
+
+        .weekly-day-name {
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-gold-dark);
+        }
+
+        .weekly-day-num {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--color-chocolate-dark);
+        }
+
+        .weekly-cards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .weekly-card {
+            background-color: var(--color-gray-light);
+            border: 1px solid rgba(223, 186, 140, 0.15);
+            border-left: 3.5px solid var(--color-gold);
+            border-radius: var(--radius-sm);
+            padding: 8px 12px;
+            font-size: 0.78rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            transition: var(--transition-quick);
+        }
+
+        .weekly-card.confirmed {
+            border-left-color: var(--color-whatsapp);
+            background-color: rgba(37, 211, 102, 0.02);
+        }
+
+        .weekly-card.cancelled {
+            border-left-color: rgba(74, 53, 47, 0.3);
+            opacity: 0.6;
+        }
+
+        .weekly-card:hover {
+            transform: scale(1.02);
+            border-color: var(--color-gold);
+        }
+
+        .weekly-card-time {
+            font-weight: 800;
+            font-size: 0.7rem;
+            color: var(--color-chocolate-dark);
+        }
+
+        .weekly-card-client {
+            font-weight: 750;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .weekly-card-service {
+            font-size: 0.7rem;
+            color: var(--color-text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* MONTHLY CALENDAR VIEW */
+        .monthly-view-wrapper {
+            background-color: var(--color-white);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(223, 186, 140, 0.2);
+            box-shadow: var(--shadow-soft);
+            padding: 32px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .monthly-weekday-row {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-gold-dark);
+            border-bottom: 1px solid rgba(74, 53, 47, 0.08);
+            padding-bottom: 12px;
+        }
+
+        .monthly-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-auto-rows: minmax(100px, 1fr);
+            gap: 1px;
+            background-color: rgba(74, 53, 47, 0.08);
+        }
+
+        .monthly-day-cell {
+            background-color: var(--color-white);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: stretch;
+            cursor: pointer;
+            transition: var(--transition-quick);
+        }
+
+        .monthly-day-cell:hover {
+            background-color: var(--color-gold-light);
+        }
+
+        .monthly-day-cell.other-month {
+            background-color: #fafafa;
+            color: #ccc;
+        }
+
+        .monthly-day-num {
+            font-weight: 700;
+            font-size: 0.85rem;
+            align-self: flex-start;
+        }
+
+        .monthly-day-cell.today-highlight .monthly-day-num {
+            background-color: var(--color-gold);
+            color: var(--color-chocolate-dark);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .monthly-badges-box {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 8px;
+        }
+
+        .monthly-appt-badge {
+            font-size: 0.68rem;
+            padding: 2px 6px;
+            border-radius: var(--radius-sm);
+            background-color: var(--color-gray-light);
+            border-left: 2.5px solid var(--color-gold);
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .monthly-appt-badge.confirmed {
+            border-left-color: var(--color-whatsapp);
+            background-color: rgba(37, 211, 102, 0.03);
+        }
+
+        .monthly-appt-badge.cancelled {
+            border-left-color: rgba(74, 53, 47, 0.3);
+            opacity: 0.6;
+        }
+
+        .monthly-more-indicator {
+            font-size: 0.65rem;
+            color: var(--color-gold-dark);
+            font-weight: 800;
+            text-align: right;
+        }
+
+        /* CLIENTS LIST VIEW */
+        .clients-panel-container {
+            background-color: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            border: 1px solid rgba(223, 186, 140, 0.2);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .search-row {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .search-input-crm {
+            flex-grow: 1;
+            padding: 12px 20px;
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(74, 53, 47, 0.15);
+            outline: none;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            transition: var(--transition-quick);
+        }
+
+        .search-input-crm:focus {
+            border-color: var(--color-gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+        }
+
+        .clients-table-wrapper {
+            overflow-x: auto;
+        }
+
+        .clients-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .clients-table th {
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-gold-dark);
+            padding: 16px 20px;
+            border-bottom: 2px solid rgba(74, 53, 47, 0.08);
+        }
+
+        .clients-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(74, 53, 47, 0.05);
+            font-size: 0.9rem;
+        }
+
+        .clients-table tr:hover td {
+            background-color: var(--color-gray-light);
+        }
+
+        .client-profile-name {
+            font-weight: 750;
+            color: var(--color-chocolate-dark);
+        }
+
+        .client-stat-badge {
+            background-color: var(--color-gold-light);
+            color: var(--color-gold-dark);
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: var(--radius-sm);
+            font-size: 0.78rem;
+        }
+
+        .client-spend-val {
+            font-weight: 800;
+            color: var(--color-chocolate);
+        }
+
+        /* AJUSTES PANEL */
+        .ajustes-panel-container {
+            background-color: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            border: 1px solid rgba(223, 186, 140, 0.2);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .ajustes-section {
+            border-bottom: 1px solid rgba(74, 53, 47, 0.08);
+            padding-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .ajustes-section:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .ajustes-section-title {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--color-chocolate-dark);
+        }
+
+        .ajustes-desc {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        /* MODAL FORMS */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(74, 53, 47, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 3000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            background-color: var(--color-linen);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(223, 186, 140, 0.25);
+            padding: 32px;
+            width: 90%;
+            max-width: 540px;
+            z-index: 3010;
+            display: none;
+            box-shadow: var(--shadow-heavy);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .modal-overlay.active, .modal-container.active {
+            display: block;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(74, 53, 47, 0.08);
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--color-chocolate-dark);
+        }
+
+        .modal-close-btn {
+            background: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            color: var(--color-chocolate-dark);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-quick);
+        }
+
+        .modal-close-btn:hover {
+            background-color: rgba(74, 53, 47, 0.06);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-label {
+            font-size: 0.78rem;
+            font-weight: 750;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-chocolate);
+        }
+
+        .form-input, .form-select {
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(74, 53, 47, 0.15);
+            background-color: var(--color-white);
+            color: var(--color-chocolate-dark);
+            font-family: var(--font-sans);
+            font-size: 0.88rem;
+            outline: none;
+            transition: var(--transition-quick);
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: var(--color-gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 24px;
+            border-top: 1px solid rgba(74, 53, 47, 0.08);
+            padding-top: 20px;
+        }
+
+        /* CLIENT DETAIL VIEW (SIDE PANEL) */
+        .details-side-panel {
+            background-color: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            border: 1px solid rgba(223, 186, 140, 0.2);
+            box-shadow: var(--shadow-soft);
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .details-side-panel.active {
+            display: flex;
+        }
+
+        .details-side-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(74, 53, 47, 0.08);
+            padding-bottom: 12px;
+        }
+
+        .details-side-title {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 800;
+        }
+
+        .details-meta-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            border-bottom: 1px dashed rgba(74, 53, 47, 0.05);
+            padding: 8px 0;
+        }
+
+        .details-meta-label {
+            font-weight: 700;
+            color: var(--color-text-muted);
+        }
+
+        .details-meta-val {
+            font-weight: 600;
+            color: var(--color-chocolate-dark);
+        }
+
+        .details-notes-box {
+            background-color: var(--color-gray-light);
+            border: 1px solid rgba(223, 186, 140, 0.12);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            font-size: 0.8rem;
+            color: var(--color-chocolate-dark);
+            min-height: 60px;
+        }
+
+        /* RESPONSIVE LAYOUT */
+        @media (max-width: 1024px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                min-height: auto;
+                height: auto;
+                position: relative;
+                top: 0;
+                padding: 20px;
+                gap: 20px;
+            }
+            .nav-menu {
+                flex-direction: row;
+                overflow-x: auto;
+                padding-bottom: 8px;
+            }
+            .nav-item button {
+                white-space: nowrap;
+                padding: 10px 16px;
+            }
+            .main-wrapper {
+                width: 100%;
+                padding: 20px;
+            }
+            .weekly-grid-view {
+                grid-template-columns: 1fr;
+            }
+            .weekly-col {
+                min-height: auto;
+            }
+            .monthly-weekday-row {
+                font-size: 0.65rem;
+            }
+            .monthly-day-cell {
+                min-height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo-wrapper">
+            <img src="assets/brand_logo.png" alt="Piel Canela" class="logo-img">
+            <div class="brand-text">
+                <span class="brand-name">PIEL CANELA</span>
+                <span class="brand-tag">Gestión CRM</span>
+            </div>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item active" id="nav-citas">
+                <button onclick="switchTab('citas')">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    Agenda de Citas
+                </button>
+            </li>
+            <li class="nav-item" id="nav-clientes">
+                <button onclick="switchTab('clientes')">
+                    <span class="material-symbols-outlined">group</span>
+                    Base de Clientes
+                </button>
+            </li>
+            <li class="nav-item" id="nav-ajustes">
+                <button onclick="switchTab('ajustes')">
+                    <span class="material-symbols-outlined">settings</span>
+                    Ajustes y Datos
+                </button>
+            </li>
+        </ul>
+        
+        <div class="sidebar-footer">
+            <a href="index.html" class="back-to-site-btn">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Ver Web Clientes
+            </a>
+            <div>&copy; 2026 Piel Canela Bronze</div>
+        </div>
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <main class="main-wrapper">
+        
+        <!-- HEADER BAR -->
+        <header class="header-bar">
+            <div class="header-title-box">
+                <h1 id="crm-page-title">Agenda de Citas</h1>
+                <p id="crm-page-subtitle">Gestiona reservas diarias, semanales o mensuales en tiempo real</p>
+            </div>
+            <div class="header-actions" id="crm-header-actions">
+                <button class="btn-secondary" onclick="openNewBookingModal()">
+                    <span class="material-symbols-outlined">add</span>
+                    Añadir Cita Manual
+                </button>
+                <button class="btn-primary" onclick="generateMockData()">
+                    <span class="material-symbols-outlined">dataset</span>
+                    Cargar Citas Demo
+                </button>
+            </div>
+        </header>
+
+        <!-- STATS BAR -->
+        <section class="stats-grid" id="crm-stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon-box">
+                    <span class="material-symbols-outlined">book_online</span>
+                </div>
+                <div class="stat-details">
+                    <span class="stat-value" id="stat-total-citas">0</span>
+                    <span class="stat-label">Total Reservas</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-box pending">
+                    <span class="material-symbols-outlined">pending_actions</span>
+                </div>
+                <div class="stat-details">
+                    <span class="stat-value" id="stat-pendientes">0</span>
+                    <span class="stat-label">Por Confirmar</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-box success">
+                    <span class="material-symbols-outlined">check_circle</span>
+                </div>
+                <div class="stat-details">
+                    <span class="stat-value" id="stat-confirmadas">0</span>
+                    <span class="stat-label">Confirmadas</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-box">
+                    <span class="material-symbols-outlined">payments</span>
+                </div>
+                <div class="stat-details">
+                    <span class="stat-value" id="stat-estimacion-ingresos">0,00 €</span>
+                    <span class="stat-label">Caja Estimada</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CRM TAB CITAS SECTION -->
+        <section class="crm-panel-container" id="section-citas-panel">
+            
+            <!-- CONTROL PANEL -->
+            <div class="control-panel">
+                <div class="view-selectors">
+                    <button class="view-btn active" id="btn-view-diaria" onclick="setViewMode('diaria')">Diaria</button>
+                    <button class="view-btn" id="btn-view-semanal" onclick="setViewMode('semanal')">Semanal</button>
+                    <button class="view-btn" id="btn-view-mensual" onclick="setViewMode('mensual')">Mensual</button>
+                </div>
+                
+                <div class="calendar-nav-wrapper">
+                    <button class="nav-arrow-btn" onclick="adjustDate(-1)">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <span class="current-date-title" id="current-date-text">Hoy</span>
+                    <button class="nav-arrow-btn" onclick="adjustDate(1)">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                </div>
+
+                <div class="filters-wrapper">
+                    <select class="select-filter" id="filter-status-select" onchange="applyFilters()">
+                        <option value="todos">Todos los Estados</option>
+                        <option value="pendiente">Pendientes</option>
+                        <option value="confirmada">Confirmadas</option>
+                        <option value="cancelada">Canceladas</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- DETAIL PANEL AND MAIN VIEW SPLIT CONTAINER -->
+            <div style="display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start;" id="views-split-grid">
+                
+                <!-- VIEW DISPLAY BOX (DYNAMIC CALENDARS) -->
+                <div id="calendar-view-target" style="width: 100%;">
+                    <!-- Content will be injected dynamically -->
+                </div>
+
+                <!-- RIGHT APPOINTMENT DETAIL DRAWER -->
+                <div class="details-side-panel" id="appt-detail-panel">
+                    <div class="details-side-header">
+                        <span class="details-side-title" id="detail-card-id">Detalle de Cita</span>
+                        <button class="modal-close-btn" onclick="closeDetailPanel()">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 4px;">
+                        <span style="font-size: 1.1rem; font-weight: 800; color: var(--color-chocolate-dark);" id="detail-client-name">Sofía</span>
+                        <span style="font-size: 0.8rem; font-weight: 600; color: var(--color-text-muted);" id="detail-client-phone">+34 600 000 000</span>
+                    </div>
+                    <div style="border-top: 1px solid rgba(74, 53, 47, 0.08); padding-top: 8px;">
+                        <div class="details-meta-row"><span class="details-meta-label">Servicio</span><span class="details-meta-val" id="detail-service">Bronceado</span></div>
+                        <div class="details-meta-row"><span class="details-meta-label">Precio</span><span class="details-meta-val" id="detail-price">50 €</span></div>
+                        <div class="details-meta-row"><span class="details-meta-label">Duración</span><span class="details-meta-val" id="detail-duration">45 min</span></div>
+                        <div class="details-meta-row"><span class="details-meta-label">Especialista</span><span class="details-meta-val" id="detail-specialist">Cualquiera</span></div>
+                        <div class="details-meta-row"><span class="details-meta-label">Fecha</span><span class="details-meta-val" id="detail-date">2026-06-09</span></div>
+                        <div class="details-meta-row"><span class="details-meta-label">Hora</span><span class="details-meta-val" id="detail-time">10:00</span></div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 6px;">
+                        <span class="form-label">Notas del Cliente:</span>
+                        <div class="details-notes-box" id="detail-notes">Ninguna</div>
+                    </div>
+                    <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="btn-primary" id="detail-confirm-btn" style="flex-grow: 1; padding: 10px;" onclick="confirmSelectedAppt()">
+                            Confirmar Cita
+                        </button>
+                        <button class="btn-secondary" id="detail-cancel-btn" style="color: red; border-color: rgba(255,0,0,0.15); padding: 10px;" onclick="cancelSelectedAppt()">
+                            Cancelar Cita
+                        </button>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <a href="#" class="btn-secondary" id="detail-whatsapp-btn" style="flex-grow: 1; padding: 10px; background-color: var(--color-whatsapp); color: var(--color-white); border: none; justify-content: center; text-decoration: none;" target="_blank">
+                            <span class="material-symbols-outlined">chat</span>
+                            Confirmar por WhatsApp
+                        </a>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <a href="#" class="btn-secondary" id="detail-whatsapp-rem-btn" style="flex-grow: 1; padding: 10px; background-color: #075E54; color: var(--color-white); border: none; justify-content: center; text-decoration: none;" target="_blank">
+                            <span class="material-symbols-outlined">notifications</span>
+                            Recordatorio (Mañana)
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- CRM TAB CLIENTES SECTION -->
+        <section class="crm-panel-container" id="section-clientes-panel" style="display: none;">
+            <div class="clients-panel-container">
+                <div class="search-row">
+                    <input type="text" id="client-search-input" placeholder="Buscar clientes por nombre o teléfono..." class="search-input-crm" oninput="searchClients()">
+                </div>
+                <div class="clients-table-wrapper">
+                    <table class="clients-table">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Teléfono</th>
+                                <th>Citas Totales</th>
+                                <th>Visitas Realizadas</th>
+                                <th>Gastado Acumulado</th>
+                                <th>Última Visita</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clients-table-body">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- CRM TAB AJUSTES SECTION -->
+        <section class="ajustes-panel-container" id="section-ajustes-panel" style="display: none;">
+            <div class="ajustes-section">
+                <h3 class="ajustes-section-title">Base de datos de Reservas</h3>
+                <p class="ajustes-desc">Los datos se almacenan de forma local en el almacenamiento persistente (`localStorage`) de tu navegador, garantizando que tanto la web de reservas de los clientes como esta herramienta CRM sincronicen en tiempo real de forma inmediata y automática.</p>
+                <div style="display: flex; gap: 12px; margin-top: 8px;">
+                    <button class="btn-secondary" style="color: red; border-color: rgba(255,0,0,0.15);" onclick="clearAllBookings()">
+                        <span class="material-symbols-outlined">delete_forever</span>
+                        Borrar Todas las Citas
+                    </button>
+                    <button class="btn-primary" onclick="generateMockData()">
+                        <span class="material-symbols-outlined">restart_alt</span>
+                        Reiniciar Base de Datos con Citas Demo
+                    </button>
+                </div>
+            </div>
+            <div class="ajustes-section">
+                <h3 class="ajustes-section-title">Plantillas de Mensajería</h3>
+                <p class="ajustes-desc">Define el texto por defecto que se preparará al presionar el botón de WhatsApp para contactar a tus clientes.</p>
+                <div class="form-group" style="margin-top: 12px;">
+                    <label class="form-label">Mensaje de Confirmación</label>
+                    <textarea class="form-input" id="whatsapp-confirm-template" style="min-height: 80px; resize: vertical; font-family: var(--font-sans);">Hola [NOMBRE], te saludamos de Piel Canela Bronze ☀️ para confirmar tu cita de bronceado el próximo [FECHA] a las [HORA] ([SERVICIO]). ¿Cuentas con ella? ¡Muchas gracias!</textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mensaje de Recordatorio</label>
+                    <textarea class="form-input" id="whatsapp-reminder-template" style="min-height: 80px; resize: vertical; font-family: var(--font-sans);">Hola [NOMBRE], ¡te recordamos tu cita de bronceado mañana [FECHA] a las [HORA] ([SERVICIO])! Recuerda venir con la piel exfoliada y ropa holgada oscura. ¡Te esperamos! 🧴☀️</textarea>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- NEW MANUAL APPOINTMENT MODAL -->
+    <div class="modal-overlay" id="modal-overlay" onclick="closeNewBookingModal()"></div>
+    <div class="modal-container" id="modal-container">
+        <div class="modal-header">
+            <h3 class="modal-title">Añadir Cita Manual</h3>
+            <button class="modal-close-btn" onclick="closeNewBookingModal()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <form id="manual-booking-form" onsubmit="saveManualBooking(event)">
+            <div class="form-group">
+                <label class="form-label" for="manual-client-name">Nombre del Cliente</label>
+                <input type="text" id="manual-client-name" class="form-input" required placeholder="Ej. Alejandra Ruiz">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="manual-client-phone">Teléfono de Contacto</label>
+                <input type="tel" id="manual-client-phone" class="form-input" required placeholder="Ej. 600123456" pattern="[0-9]{9,12}">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="manual-service-select">Servicio solicitado</label>
+                <select id="manual-service-select" class="form-select" required>
+                    <optgroup label="Bronceado Brasilero">
+                        <option value="bronceado-sencillo|Bronceado sencillo|50.00|45 min">Bronceado sencillo — 50,00 € (45 min)</option>
+                        <option value="dark-tanning|Dark tanning|65.00|45 min">Dark tanning — 65,00 € (45 min)</option>
+                        <option value="berry-bronze|Berry bronze|100.00|1h">Berry bronze — 100,00 € (1h)</option>
+                        <option value="metamorfosis|Metamorfosis|150.00|1h">Metamorfosis — 150,00 € (1h)</option>
+                        <option value="mantenimiento|Mantenimiento|35.00|30 min">Mantenimiento — 35,00 € (30 min)</option>
+                    </optgroup>
+                    <optgroup label="Bonos Ahorro">
+                        <option value="bono-dark-tanning|BONO DARK TANNING|195.00|1h">BONO DARK TANNING — 195,00 € (1h)</option>
+                        <option value="bono-berry-bronze|BONO BERRY BRONZE|300.00|1h">BONO BERRY BRONZE — 300,00 € (1h)</option>
+                    </optgroup>
+                    <optgroup label="Tratamientos Corporales">
+                        <option value="quemadores-grasa|Quemadores de grasa|65.00|45 min">Quemadores de grasa — 65,00 € (45 min)</option>
+                        <option value="tratamiento-tonificante|Tratamiento tonificante|65.00|45 min">Tratamiento tonificante — 65,00 € (45 min)</option>
+                        <option value="aclarador-zonas|Aclarador de zonas|30.00|30 min">Aclarador de zonas — 30,00 € (30 min)</option>
+                    </optgroup>
+                    <optgroup label="Cejas y Pestañas">
+                        <option value="lifting-cejas|Lifting de cejas|10.00|20 min">Lifting de cejas — 10,00 € (20 min)</option>
+                        <option value="lifting-diseno-cejas|Lifting + diseño de cejas|30.00|45 min">Lifting + diseño de cejas — 30,00 € (45 min)</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label" for="manual-date">Fecha</label>
+                    <input type="date" id="manual-date" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="manual-time">Hora</label>
+                    <select id="manual-time" class="form-select" required>
+                        <option value="10:00">10:00</option>
+                        <option value="10:30">10:30</option>
+                        <option value="11:00">11:00</option>
+                        <option value="11:30">11:30</option>
+                        <option value="12:00">12:00</option>
+                        <option value="12:30">12:30</option>
+                        <option value="13:00">13:00</option>
+                        <option value="13:30">13:30</option>
+                        <option value="14:00">14:00</option>
+                        <option value="14:30">14:30</option>
+                        <option value="16:00">16:00</option>
+                        <option value="16:30">16:30</option>
+                        <option value="17:00">17:00</option>
+                        <option value="17:30">17:30</option>
+                        <option value="18:00">18:00</option>
+                        <option value="18:30">18:30</option>
+                        <option value="19:00">19:00</option>
+                        <option value="19:30">19:30</option>
+                        <option value="20:00">20:00</option>
+                        <option value="20:30">20:30</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="manual-notes">Notas / Observaciones</label>
+                <input type="text" id="manual-notes" class="form-input" placeholder="Ej. Alérgica a algún compuesto o indicaciones">
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" style="padding: 10px 20px;" onclick="closeNewBookingModal()">Cancelar</button>
+                <button type="submit" class="btn-primary" style="padding: 10px 20px;">Guardar Reserva</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- CORE JS LOGIC -->
+    <script>
+        // Active view states
+        let activeTab = 'citas';
+        let viewMode = 'diaria'; // diaria, semanal, mensual
+        let referenceDate = new Date(); // Pivot date for navigation
+        let selectedApptId = null; // Currently selected appointment in detail panel
+        
+        // On Page Load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current date input default for manual form
+            document.getElementById('manual-date').value = new Date().toISOString().split('T')[0];
+            
+            // Sync/Read bookings
+            refreshCRM();
+        });
+
+        // Load & Refresh Data
+        function refreshCRM() {
+            const bookings = getBookingsFromStorage();
+            updateStats(bookings);
+            renderCalendarView(bookings);
+            renderClientsList(bookings);
+        }
+
+        function getBookingsFromStorage() {
+            return JSON.parse(localStorage.getItem('piel_canela_bookings')) || [];
+        }
+
+        function saveBookingsToStorage(bookings) {
+            localStorage.setItem('piel_canela_bookings', JSON.stringify(bookings));
+        }
+
+        // TAB SWITCHING
+        function switchTab(tab) {
+            activeTab = tab;
+            
+            // Reset nav buttons classes
+            document.querySelectorAll('.nav-menu .nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById('nav-' + tab).classList.add('active');
+            
+            // Toggle panel visibility
+            document.getElementById('section-citas-panel').style.display = (tab === 'citas') ? 'grid' : 'none';
+            document.getElementById('section-clientes-panel').style.display = (tab === 'clientes') ? 'block' : 'none';
+            document.getElementById('section-ajustes-panel').style.display = (tab === 'ajustes') ? 'block' : 'none';
+
+            // Change header details
+            const pageTitle = document.getElementById('crm-page-title');
+            const pageSubtitle = document.getElementById('crm-page-subtitle');
+            
+            if (tab === 'citas') {
+                pageTitle.textContent = "Agenda de Citas";
+                pageSubtitle.textContent = "Gestiona reservas diarias, semanales o mensuales en tiempo real";
+                document.getElementById('crm-header-actions').style.display = 'flex';
+                document.getElementById('crm-stats-grid').style.display = 'grid';
+            } else if (tab === 'clientes') {
+                pageTitle.textContent = "Base de Clientes";
+                pageSubtitle.textContent = "Analiza el historial de visitas, gastos acumulados y preferencias de contacto";
+                document.getElementById('crm-header-actions').style.display = 'none';
+                document.getElementById('crm-stats-grid').style.display = 'none';
+            } else if (tab === 'ajustes') {
+                pageTitle.textContent = "Ajustes del Sistema";
+                pageSubtitle.textContent = "Configura plantillas de WhatsApp y gestiona la base de datos local";
+                document.getElementById('crm-header-actions').style.display = 'none';
+                document.getElementById('crm-stats-grid').style.display = 'none';
+            }
+            
+            closeDetailPanel();
+            refreshCRM();
+        }
+
+        // VIEW MODE CITAS
+        function setViewMode(mode) {
+            viewMode = mode;
+            document.querySelectorAll('.view-selectors button').forEach(el => el.classList.remove('active'));
+            document.getElementById('btn-view-' + mode).classList.add('active');
+            
+            // Reset reference date to today when switching mode for quick navigation
+            referenceDate = new Date();
+            
+            closeDetailPanel();
+            refreshCRM();
+        }
+
+        // STATS CALCULATOR
+        function updateStats(bookings) {
+            let total = 0;
+            let pendientes = 0;
+            let confirmadas = 0;
+            let ingresos = 0;
+
+            const todayStr = new Date().toISOString().split('T')[0];
+
+            bookings.forEach(b => {
+                // We count stats globally or only non-cancelled?
+                // Let's count non-cancelled for expected revenues
+                total++;
+                
+                const status = b.status || 'pendiente';
+                if (status === 'confirmada') {
+                    confirmadas++;
+                } else if (status === 'pendiente') {
+                    pendientes++;
+                }
+
+                if (status !== 'cancelada') {
+                    const price = parseFloat(b.service.price) || 0;
+                    ingresos += price;
+                }
+            });
+
+            document.getElementById('stat-total-citas').textContent = total;
+            document.getElementById('stat-pendientes').textContent = pendientes;
+            document.getElementById('stat-confirmadas').textContent = confirmadas;
+            document.getElementById('stat-estimacion-ingresos').textContent = ingresos.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' €';
+        }
+
+        // DATE NAVIGATION ADJUSTER
+        function adjustDate(direction) {
+            if (viewMode === 'diaria') {
+                referenceDate.setDate(referenceDate.getDate() + direction);
+            } else if (viewMode === 'semanal') {
+                referenceDate.setDate(referenceDate.getDate() + (direction * 7));
+            } else if (viewMode === 'mensual') {
+                referenceDate.setMonth(referenceDate.getMonth() + direction);
+            }
+            refreshCRM();
+            closeDetailPanel();
+        }
+
+        // CALENDAR RENDERER ENGINE
+        function renderCalendarView(bookings) {
+            const container = document.getElementById('calendar-view-target');
+            const dateText = document.getElementById('current-date-text');
+            const statusFilter = document.getElementById('filter-status-select').value;
+            
+            // Filter bookings by status first
+            let filteredBookings = bookings;
+            if (statusFilter !== 'todos') {
+                filteredBookings = bookings.filter(b => (b.status || 'pendiente') === statusFilter);
+            }
+
+            if (viewMode === 'diaria') {
+                const dayStr = referenceDate.toISOString().split('T')[0];
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                dateText.textContent = referenceDate.toLocaleDateString('es-ES', options);
+                
+                // Group bookings for this day by time
+                const dayBookings = filteredBookings.filter(b => b.date === dayStr);
+                dayBookings.sort((a,b) => a.time.localeCompare(b.time));
+                
+                let html = '<div class="timeline-view-container"><div class="daily-timeline">';
+                
+                const hoursList = [
+                    "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30",
+                    "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"
+                ];
+                
+                let hasAny = false;
+                hoursList.forEach(hour => {
+                    const hourBookings = dayBookings.filter(b => b.time === hour);
+                    
+                    html += `
+                        <div class="timeline-row">
+                            <div class="timeline-hour">${hour}</div>
+                            <div class="timeline-content">
+                    `;
+                    
+                    if (hourBookings.length > 0) {
+                        hasAny = true;
+                        hourBookings.forEach(b => {
+                            const status = b.status || 'pendiente';
+                            const statusClass = (status === 'confirmada') ? 'confirmed' : ((status === 'cancelada') ? 'cancelled' : '');
+                            
+                            html += `
+                                <div class="appointment-strip ${statusClass}" onclick="openDetailPanel('${b.id}')" style="cursor:pointer;">
+                                    <div class="appt-meta-info">
+                                        <span class="appt-time-badge">${b.time}</span>
+                                        <span class="appt-client-name">${escapeHTML(b.clientName)}</span>
+                                        <span class="appt-service-name">${escapeHTML(b.service.name)}</span>
+                                        <span class="appt-specialist">
+                                            <span class="material-symbols-outlined" style="font-size:14px;">spa</span>
+                                            ${b.specialist === 'cualquiera' ? 'Cabina Lib.' : escapeHTML(b.specialist)}
+                                        </span>
+                                        <span class="appt-phone">${escapeHTML(b.clientPhone)}</span>
+                                    </div>
+                                    <div class="appt-actions-bar" onclick="event.stopPropagation()">
+                                        <span class="status-pill ${status}">${status}</span>
+                                        <button class="btn-whatsapp-confirm" onclick="sendWhatsAppQuick('${b.id}')" title="Confirmar vía WhatsApp">
+                                            <span class="material-symbols-outlined" style="font-size: 18px;">chat</span>
+                                        </button>
+                                        ${status === 'pendiente' ? `
+                                            <button class="btn-icon-action" onclick="changeStatus('${b.id}', 'confirmada')" title="Marcar como Confirmada">
+                                                <span class="material-symbols-outlined" style="font-size: 18px; color: green;">done</span>
+                                            </button>
+                                        ` : ''}
+                                        ${status !== 'cancelada' ? `
+                                            <button class="btn-icon-action cancel" onclick="changeStatus('${b.id}', 'cancelada')" title="Cancelar Reserva">
+                                                <span class="material-symbols-outlined" style="font-size: 18px;">block</span>
+                                            </button>
+                                        ` : `
+                                            <button class="btn-icon-action" onclick="changeStatus('${b.id}', 'pendiente')" title="Reabrir Reserva">
+                                                <span class="material-symbols-outlined" style="font-size: 18px;">restore</span>
+                                            </button>
+                                        `}
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        html += `<div style="color: rgba(74, 53, 47, 0.25); font-size: 0.8rem; font-weight: 500;">Disponible</div>`;
+                    }
+                    
+                    html += `
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += '</div></div>';
+                container.innerHTML = html;
+                
+            } else if (viewMode === 'semanal') {
+                // Get start of reference week (Monday)
+                const startOfWeek = getMonday(new Date(referenceDate));
+                const endOfWeek = new Date(startOfWeek);
+                endOfWeek.setDate(endOfWeek.getDate() + 6);
+                
+                const startStr = startOfWeek.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+                const endStr = endOfWeek.toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+                dateText.textContent = `${startStr} - ${endStr}`;
+                
+                let html = '<div class="weekly-grid-view">';
+                
+                const todayStr = new Date().toISOString().split('T')[0];
+                
+                for (let i = 0; i < 7; i++) {
+                    const thisDate = new Date(startOfWeek);
+                    thisDate.setDate(startOfWeek.getDate() + i);
+                    const thisDateStr = thisDate.toISOString().split('T')[0];
+                    
+                    const isToday = (thisDateStr === todayStr);
+                    const dayBookings = filteredBookings.filter(b => b.date === thisDateStr);
+                    dayBookings.sort((a,b) => a.time.localeCompare(b.time));
+                    
+                    const dayLabels = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+                    
+                    html += `
+                        <div class="weekly-col ${isToday ? 'today-highlight' : ''}">
+                            <div class="weekly-col-header">
+                                <span class="weekly-day-name">${dayLabels[i]}</span>
+                                <span class="weekly-day-num">${thisDate.getDate()}</span>
+                            </div>
+                            <div class="weekly-cards-list">
+                    `;
+                    
+                    if (dayBookings.length > 0) {
+                        dayBookings.forEach(b => {
+                            const status = b.status || 'pendiente';
+                            const statusClass = (status === 'confirmada') ? 'confirmed' : ((status === 'cancelada') ? 'cancelled' : '');
+                            html += `
+                                <div class="weekly-card ${statusClass}" onclick="openDetailPanel('${b.id}')">
+                                    <span class="weekly-card-time">${b.time}</span>
+                                    <span class="weekly-card-client">${escapeHTML(b.clientName)}</span>
+                                    <span class="weekly-card-service">${escapeHTML(b.service.name)}</span>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        html += `<div class="empty-timeline-info" style="margin: auto 0; font-size:0.75rem;">Libre</div>`;
+                    }
+                    
+                    html += `
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                html += '</div>';
+                container.innerHTML = html;
+                
+            } else if (viewMode === 'mensual') {
+                const options = { year: 'numeric', month: 'long' };
+                dateText.textContent = referenceDate.toLocaleDateString('es-ES', options);
+                
+                const year = referenceDate.getFullYear();
+                const month = referenceDate.getMonth();
+                
+                // First day of selected month
+                const firstDayOfMonth = new Date(year, month, 1);
+                // Get day index of the first day (Monday starts at 1, Sunday at 0)
+                let startOffset = firstDayOfMonth.getDay();
+                // Map Sunday (0) to index 6, Monday (1) to 0, etc.
+                startOffset = (startOffset === 0) ? 6 : startOffset - 1;
+                
+                // Days count in selected month
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                
+                let html = `
+                    <div class="monthly-view-wrapper">
+                        <div class="monthly-weekday-row">
+                            <span>Lunes</span><span>Martes</span><span>Miércoles</span><span>Jueves</span><span>Viernes</span><span>Sábado</span><span>Domingo</span>
+                        </div>
+                        <div class="monthly-grid">
+                `;
+                
+                const todayStr = new Date().toISOString().split('T')[0];
+                
+                // Render empty day offsets from previous month
+                const prevMonthEnd = new Date(year, month, 0).getDate();
+                for (let i = startOffset - 1; i >= 0; i--) {
+                    const prevDay = prevMonthEnd - i;
+                    html += `
+                        <div class="monthly-day-cell other-month">
+                            <span class="monthly-day-num">${prevDay}</span>
+                        </div>
+                    `;
+                }
+                
+                // Render days of the month
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const thisDate = new Date(year, month, day);
+                    const thisDateStr = thisDate.toISOString().split('T')[0];
+                    const isToday = (thisDateStr === todayStr);
+                    
+                    const dayBookings = filteredBookings.filter(b => b.date === thisDateStr);
+                    dayBookings.sort((a,b) => a.time.localeCompare(b.time));
+                    
+                    html += `
+                        <div class="monthly-day-cell ${isToday ? 'today-highlight' : ''}" onclick="switchViewToDay('${thisDateStr}')">
+                            <span class="monthly-day-num">${day}</span>
+                            <div class="monthly-badges-box">
+                    `;
+                    
+                    // Display up to 2 items
+                    const maxDisplay = 2;
+                    dayBookings.slice(0, maxDisplay).forEach(b => {
+                        const status = b.status || 'pendiente';
+                        const statusClass = (status === 'confirmada') ? 'confirmed' : ((status === 'cancelada') ? 'cancelled' : '');
+                        html += `
+                            <div class="monthly-appt-badge ${statusClass}">
+                                <strong>${b.time}</strong> ${escapeHTML(b.clientName)}
+                            </div>
+                        `;
+                    });
+                    
+                    if (dayBookings.length > maxDisplay) {
+                        html += `<div class="monthly-more-indicator">+${dayBookings.length - maxDisplay} más</div>`;
+                    }
+                    
+                    html += `
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Fill remaining days of grid (next month)
+                const gridTotalCells = 42; // standard 6 rows of 7 days
+                const cellsRendered = startOffset + daysInMonth;
+                const remainingCells = gridTotalCells - cellsRendered;
+                
+                for (let nextDay = 1; nextDay <= remainingCells; nextDay++) {
+                    html += `
+                        <div class="monthly-day-cell other-month">
+                            <span class="monthly-day-num">${nextDay}</span>
+                        </div>
+                    `;
+                }
+                
+                html += '</div></div>';
+                container.innerHTML = html;
+            }
+        }
+
+        // NAVIGATION FROM MONTH CELL CLICK TO DAY VIEW
+        function switchViewToDay(dateStr) {
+            referenceDate = new Date(dateStr);
+            setViewMode('diaria');
+        }
+
+        function getMonday(d) {
+            const day = d.getDay();
+            const diff = d.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
+            return new Date(d.setDate(diff));
+        }
+
+        // FILTER EVENT LISTENER
+        function applyFilters() {
+            refreshCRM();
+            closeDetailPanel();
+        }
+
+        // APPOINTMENT DETAIL DRAWER MANAGER
+        function openDetailPanel(id) {
+            selectedApptId = id;
+            const bookings = getBookingsFromStorage();
+            const b = bookings.find(item => item.id === id);
+            if (!b) return;
+
+            document.getElementById('detail-card-id').textContent = 'Ficha: ' + b.id;
+            document.getElementById('detail-client-name').textContent = b.clientName;
+            document.getElementById('detail-client-phone').textContent = b.clientPhone;
+            document.getElementById('detail-service').textContent = b.service.name;
+            document.getElementById('detail-price').textContent = parseFloat(b.service.price).toFixed(2) + ' €';
+            document.getElementById('detail-duration').textContent = b.service.duration;
+            document.getElementById('detail-specialist').textContent = b.specialist === 'cualquiera' ? 'Cabina Libre' : b.specialist;
+            document.getElementById('detail-date').textContent = b.date;
+            document.getElementById('detail-time').textContent = b.time;
+            document.getElementById('detail-notes').textContent = b.clientNotes || 'Sin comentarios adicionales.';
+
+            // Setup WhatsApp links
+            const confirmTemplate = document.getElementById('whatsapp-confirm-template').value;
+            const confirmText = encodeURIComponent(
+                confirmTemplate
+                    .replace('[NOMBRE]', b.clientName)
+                    .replace('[FECHA]', formatDateFriendly(b.date))
+                    .replace('[HORA]', b.time)
+                    .replace('[SERVICIO]', b.service.name)
+            );
+            
+            const cleanPhone = b.clientPhone.replace(/\D/g, '');
+            // Append country code 34 if it looks like a spanish cell phone (9 digits starting with 6 or 7)
+            const fullPhone = (cleanPhone.length === 9 && (cleanPhone.startsWith('6') || cleanPhone.startsWith('7'))) ? '34' + cleanPhone : cleanPhone;
+            
+            document.getElementById('detail-whatsapp-btn').href = `https://wa.me/${fullPhone}?text=${confirmText}`;
+
+            const reminderTemplate = document.getElementById('whatsapp-reminder-template').value;
+            const reminderText = encodeURIComponent(
+                reminderTemplate
+                    .replace('[NOMBRE]', b.clientName)
+                    .replace('[FECHA]', formatDateFriendly(b.date))
+                    .replace('[HORA]', b.time)
+                    .replace('[SERVICIO]', b.service.name)
+            );
+            document.getElementById('detail-whatsapp-rem-btn').href = `https://wa.me/${fullPhone}?text=${reminderText}`;
+
+            // Adjust detail panel buttons based on status
+            const status = b.status || 'pendiente';
+            const confirmBtn = document.getElementById('detail-confirm-btn');
+            const cancelBtn = document.getElementById('detail-cancel-btn');
+
+            if (status === 'confirmada') {
+                confirmBtn.textContent = 'Marcar como Pendiente';
+                confirmBtn.onclick = () => changeStatus(b.id, 'pendiente');
+                cancelBtn.style.display = 'block';
+            } else if (status === 'pendiente') {
+                confirmBtn.textContent = 'Confirmar Cita';
+                confirmBtn.onclick = () => changeStatus(b.id, 'confirmada');
+                cancelBtn.style.display = 'block';
+            } else if (status === 'cancelada') {
+                confirmBtn.textContent = 'Reabrir Cita';
+                confirmBtn.onclick = () => changeStatus(b.id, 'pendiente');
+                cancelBtn.style.display = 'none';
+            }
+
+            // Adjust grid layout to show side panel
+            document.getElementById('appt-detail-panel').classList.add('active');
+            document.getElementById('views-split-grid').style.gridTemplateColumns = '1fr 320px';
+        }
+
+        function closeDetailPanel() {
+            selectedApptId = null;
+            document.getElementById('appt-detail-panel').classList.remove('active');
+            document.getElementById('views-split-grid').style.gridTemplateColumns = '1fr';
+        }
+
+        // STATUS CHANGER ACTION
+        function changeStatus(id, newStatus) {
+            let bookings = getBookingsFromStorage();
+            bookings = bookings.map(b => {
+                if (b.id === id) {
+                    b.status = newStatus;
+                }
+                return b;
+            });
+            saveBookingsToStorage(bookings);
+            refreshCRM();
+            
+            // Re-open detail if it was open to refresh states
+            if (selectedApptId === id) {
+                openDetailPanel(id);
+            }
+        }
+
+        function confirmSelectedAppt() {
+            if (selectedApptId) changeStatus(selectedApptId, 'confirmada');
+        }
+
+        function cancelSelectedAppt() {
+            if (selectedApptId) changeStatus(selectedApptId, 'cancelada');
+        }
+
+        // WHATSAPP QUICK SENDER (DIARIA ROW ACTION)
+        function sendWhatsAppQuick(id) {
+            const bookings = getBookingsFromStorage();
+            const b = bookings.find(item => item.id === id);
+            if (!b) return;
+
+            const confirmTemplate = document.getElementById('whatsapp-confirm-template').value;
+            const confirmText = encodeURIComponent(
+                confirmTemplate
+                    .replace('[NOMBRE]', b.clientName)
+                    .replace('[FECHA]', formatDateFriendly(b.date))
+                    .replace('[HORA]', b.time)
+                    .replace('[SERVICIO]', b.service.name)
+            );
+            
+            const cleanPhone = b.clientPhone.replace(/\D/g, '');
+            const fullPhone = (cleanPhone.length === 9 && (cleanPhone.startsWith('6') || cleanPhone.startsWith('7'))) ? '34' + cleanPhone : cleanPhone;
+            
+            window.open(`https://wa.me/${fullPhone}?text=${confirmText}`, '_blank');
+            
+            // Auto confirm booking status on contact
+            changeStatus(id, 'confirmada');
+        }
+
+        // CLIENT DIRECTORY GENERATION
+        function renderClientsList(bookings) {
+            const tbody = document.getElementById('clients-table-body');
+            const searchVal = document.getElementById('client-search-input').value.toLowerCase().trim();
+            
+            // Map bookings to unique clients based on name + phone
+            const clientsMap = {};
+            bookings.forEach(b => {
+                const key = (b.clientName + '_' + b.clientPhone).toLowerCase();
+                const price = parseFloat(b.service.price) || 0;
+                const status = b.status || 'pendiente';
+                
+                if (!clientsMap[key]) {
+                    clientsMap[key] = {
+                        name: b.clientName,
+                        phone: b.clientPhone,
+                        totalCitas: 0,
+                        visitasRealizadas: 0,
+                        gastado: 0,
+                        ultimaVisita: b.date,
+                        bookingsList: []
+                    };
+                }
+                
+                clientsMap[key].totalCitas++;
+                clientsMap[key].bookingsList.push(b);
+                
+                if (status === 'confirmada') {
+                    clientsMap[key].visitasRealizadas++;
+                    clientsMap[key].gastado += price;
+                }
+                
+                if (new Date(b.date) > new Date(clientsMap[key].ultimaVisita)) {
+                    clientsMap[key].ultimaVisita = b.date;
+                }
+            });
+
+            // Convert to array
+            let clientsArray = Object.values(clientsMap);
+            
+            // Apply search filter
+            if (searchVal.length > 0) {
+                clientsArray = clientsArray.filter(c => 
+                    c.name.toLowerCase().includes(searchVal) || 
+                    c.phone.includes(searchVal)
+                );
+            }
+
+            // Render
+            let html = '';
+            if (clientsArray.length > 0) {
+                clientsArray.forEach(c => {
+                    const formattedSpend = c.gastado.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' €';
+                    html += `
+                        <tr>
+                            <td><span class="client-profile-name">${escapeHTML(c.name)}</span></td>
+                            <td><span class="appt-phone">${escapeHTML(c.phone)}</span></td>
+                            <td><span class="client-stat-badge">${c.totalCitas}</span></td>
+                            <td><span class="client-stat-badge" style="background-color:rgba(37,211,102,0.1); color:green;">${c.visitasRealizadas}</span></td>
+                            <td><span class="client-spend-val">${formattedSpend}</span></td>
+                            <td><span style="font-weight:600; font-size:0.85rem;">${formatDateFriendly(c.ultimaVisita)}</span></td>
+                            <td>
+                                <div style="display:flex; gap:6px;">
+                                    <button class="btn-primary" style="padding:6px 12px; font-size:0.75rem;" onclick="openNewManualBookingForClient('${escapeJS(c.name)}', '${escapeJS(c.phone)}')">
+                                        + Cita
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } else {
+                html = `<tr><td colspan="7" style="text-align:center; color:var(--color-text-muted); padding:32px;">No se encontraron clientes registrados.</td></tr>`;
+            }
+            
+            tbody.innerHTML = html;
+        }
+
+        function searchClients() {
+            const bookings = getBookingsFromStorage();
+            renderClientsList(bookings);
+        }
+
+        function openNewManualBookingForClient(name, phone) {
+            switchTab('citas');
+            openNewBookingModal();
+            document.getElementById('manual-client-name').value = name;
+            document.getElementById('manual-client-phone').value = phone;
+        }
+
+        // MANUAL APPOINTMENT CREATOR MODAL
+        function openNewBookingModal() {
+            document.getElementById('modal-overlay').classList.add('active');
+            document.getElementById('modal-container').classList.add('active');
+        }
+
+        function closeNewBookingModal() {
+            document.getElementById('modal-overlay').classList.remove('active');
+            document.getElementById('modal-container').classList.remove('active');
+            document.getElementById('manual-booking-form').reset();
+            document.getElementById('manual-date').value = new Date().toISOString().split('T')[0];
+        }
+
+        function saveManualBooking(e) {
+            e.preventDefault();
+            
+            const clientName = document.getElementById('manual-client-name').value.trim();
+            const clientPhone = document.getElementById('manual-client-phone').value.trim();
+            const serviceStr = document.getElementById('manual-service-select').value; // format: id|name|price|duration
+            const date = document.getElementById('manual-date').value;
+            const time = document.getElementById('manual-time').value;
+            const clientNotes = document.getElementById('manual-notes').value.trim();
+
+            const serviceParts = serviceStr.split('|');
+            const selectedServiceObj = {
+                id: serviceParts[0],
+                name: serviceParts[1],
+                price: serviceParts[2],
+                duration: serviceParts[3]
+            };
+
+            const bookings = getBookingsFromStorage();
+            const newBooking = {
+                id: 'BK-' + Date.now(),
+                service: selectedServiceObj,
+                specialist: 'cualquiera',
+                date: date,
+                time: time,
+                clientName: clientName,
+                clientPhone: clientPhone,
+                clientNotes: clientNotes,
+                status: 'pendiente'
+            };
+
+            bookings.push(newBooking);
+            saveBookingsToStorage(bookings);
+            
+            closeNewBookingModal();
+            refreshCRM();
+        }
+
+        // CLEAR DATABASE SETTING
+        function clearAllBookings() {
+            if (confirm('¿Estás completamente seguro de eliminar todas las citas de la base de datos? Esta acción es irreversible.')) {
+                localStorage.removeItem('piel_canela_bookings');
+                refreshCRM();
+                closeDetailPanel();
+            }
+        }
+
+        // MOCK DATA GENERATOR (THE WOW FACTOR)
+        function generateMockData() {
+            const today = new Date();
+            const bookings = [];
+
+            // Helper to build dates of this week
+            const getRelativeDateStr = (offset) => {
+                const d = new Date(today);
+                d.setDate(today.getDate() + offset);
+                return d.toISOString().split('T')[0];
+            };
+
+            const names = [
+                "Sofía Alarcón", "Alejandra Ruiz", "Marta Gómez", "Lucía Torres", "Gema Sánchez", 
+                "Selene Andreu", "Angela Martínez", "Clara Benítez", "Julia Ramos", "Cristina Ortiz",
+                "Patricia Valero", "Estefanía Soler", "Rocío Castro", "Nuria Gil", "Laura Vidal"
+            ];
+            
+            const phones = [
+                "612345678", "600987654", "654321098", "690112233", "670445566",
+                "611223344", "622334455", "633445566", "644556677", "655667788",
+                "666778899", "677889900", "688990011", "699001122", "600112233"
+            ];
+
+            const services = [
+                { id: "bronceado-sencillo", name: "Bronceado sencillo", price: "50.00", duration: "45 min" },
+                { id: "dark-tanning", name: "Dark tanning", price: "65.00", duration: "45 min" },
+                { id: "berry-bronze", name: "Berry bronze", price: "100.00", duration: "1h" },
+                { id: "metamorfosis", name: "Metamorfosis", price: "150.00", duration: "1h" },
+                { id: "mantenimiento", name: "Mantenimiento", price: "35.00", duration: "30 min" },
+                { id: "bono-dark-tanning", name: "BONO DARK TANNING", price: "195.00", duration: "1h" },
+                { id: "quemadores-grasa", name: "Quemadores de grasa", price: "65.00", duration: "45 min" },
+                { id: "lifting-diseno-cejas", name: "Lifting + diseño de cejas", price: "30.00", duration: "45 min" }
+            ];
+
+            const hours = [
+                "10:00", "11:00", "12:30", "13:30", "16:00", "17:30", "19:00", "20:00"
+            ];
+
+            const notes = [
+                "Quiere marcas de bikini muy marcadas.",
+                "Piel sensible, aplicar fórmula clásica.",
+                "Trae bono activo de 3 sesiones.",
+                "Preguntar por diseño de cejas con henna.",
+                "Viene por primera vez. Explicar preparación.",
+                "Prefiere cabina número 1.",
+                "", ""
+            ];
+
+            const statuses = ["pendiente", "confirmada", "confirmada", "pendiente", "cancelada"];
+
+            // Generate 25 random bookings spread over the current week (from -3 days to +3 days)
+            for (let i = 0; i < 22; i++) {
+                const nameIdx = i % names.length;
+                const serviceIdx = i % services.length;
+                const hourIdx = (i * 3) % hours.length;
+                const offset = (i % 7) - 3; // offsets between -3 and +3 days
+                const statusIdx = i % statuses.length;
+                const notesIdx = i % notes.length;
+
+                // Ensure Sat / Sun rules
+                const bookingDate = new Date(today);
+                bookingDate.setDate(today.getDate() + offset);
+                if (bookingDate.getDay() === 0) continue; // Skip Sundays
+
+                const hour = hours[hourIdx];
+                if (bookingDate.getDay() === 6 && parseInt(hour) >= 14) continue; // Skip Saturday afternoon
+
+                bookings.push({
+                    id: 'BK-' + (Date.now() - i * 1000000),
+                    service: services[serviceIdx],
+                    specialist: 'cualquiera',
+                    date: bookingDate.toISOString().split('T')[0],
+                    time: hour,
+                    clientName: names[nameIdx],
+                    clientPhone: phones[nameIdx],
+                    clientNotes: notes[notesIdx],
+                    status: statuses[statusIdx]
+                });
+            }
+
+            saveBookingsToStorage(bookings);
+            refreshCRM();
+            closeDetailPanel();
+            alert('¡Citas de prueba generadas con éxito! Base de datos inicializada.');
+        }
+
+        // HELPERS
+        function formatDateFriendly(dateStr) {
+            const parts = dateStr.split('-');
+            const d = new Date(parts[0], parts[1] - 1, parts[2]);
+            return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        function escapeHTML(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function escapeJS(str) {
+            if (!str) return '';
+            return str.replace(/'/g, "\\'");
+        }
+    </script>
+
+</body>
+</html>
