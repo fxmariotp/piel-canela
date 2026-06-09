@@ -882,12 +882,99 @@ body.loading-state {
     background-color: rgba(255, 255, 255, 0.75);
     border: 1px solid rgba(223, 186, 140, 0.18);
     border-radius: var(--radius-md);
-    padding: 20px 24px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    transition: var(--transition-quick);
+    overflow: hidden;
+}
+
+.service-card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 20px 24px;
     gap: 24px;
-    transition: var(--transition-quick);
+    width: 100%;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color var(--transition-quick);
+}
+
+.service-card-header:hover {
+    background-color: rgba(223, 186, 140, 0.04);
+}
+
+.service-info-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-grow: 1;
+}
+
+.service-chevron {
+    color: var(--color-gold-dark);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1.5rem;
+}
+
+.service-card.active .service-chevron {
+    transform: rotate(180deg);
+}
+
+.service-card-details {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease, padding 0.35s ease;
+    padding: 0 24px;
+}
+
+.service-card.active .service-card-details {
+    max-height: 600px;
+    opacity: 1;
+    padding: 0 24px 24px 24px;
+    border-top: 1px dashed rgba(223, 186, 140, 0.15);
+}
+
+.service-card-details-inner {
+    display: flex;
+    flex-direction: column;
+    padding-top: 16px;
+}
+
+.details-grid-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 16px 0;
+    padding: 16px;
+    background: rgba(223, 186, 140, 0.05);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(223, 186, 140, 0.1);
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.meta-label {
+    font-size: 0.7rem;
+    font-weight: 750;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-gold-dark);
+}
+
+.meta-value {
+    font-size: 0.8rem;
+    color: var(--color-chocolate-dark);
+    font-weight: 400;
+    line-height: 1.4;
 }
 
 .service-card:hover {
@@ -2301,10 +2388,21 @@ body.loading-state {
     }
     
     .service-card {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 16px;
-        padding: 16px;
+        padding: 0 !important;
+        gap: 0 !important;
+    }
+    
+    .service-card-header {
+        padding: 16px !important;
+    }
+    
+    .service-card.active .service-card-details {
+        padding: 0 16px 16px 16px !important;
+    }
+    
+    .details-grid-meta {
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
     
     .book-service-btn {

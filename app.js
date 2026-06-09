@@ -448,6 +448,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Service Accordion programmatic tap/click handlers
+    const serviceCardHeaders = document.querySelectorAll('.service-card-header');
+    serviceCardHeaders.forEach(header => {
+        header.addEventListener('click', (e) => {
+            e.preventDefault();
+            const card = header.closest('.service-card');
+            if (!card) return;
+
+            const section = card.closest('.catalog-section');
+            const isActive = card.classList.contains('active');
+
+            if (isActive) {
+                card.classList.remove('active');
+            } else {
+                // Close other cards in the SAME section to maintain order
+                if (section) {
+                    section.querySelectorAll('.service-card').forEach(el => {
+                        el.classList.remove('active');
+                    });
+                }
+                card.classList.add('active');
+                
+                // Smoothly scroll the card into view if it goes off screen on mobile
+                setTimeout(() => {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 350);
+            }
+        });
+    });
+
     // ----------------------------------------------------
     // 7. BOOKING SYSTEM LOGIC (MODAL STATE MACHINE)
     // ----------------------------------------------------

@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
     
     <!-- Custom Style Sheet -->
-    <link rel="stylesheet" href="index.css?v=1.0.8"/>
+    <link rel="stylesheet" href="index.css?v=1.0.9"/>
 </head>
 <body class="loading-state">
 
@@ -221,9 +221,7 @@
                 <div class="mobile-search-wrapper">
                     <input type="text" id="search-services-mobile" placeholder="Buscar servicios..." class="search-input-mobile">
                     <span class="material-symbols-outlined search-icon-mobile">search</span>
-                </div>
-
-                <!-- Services Container -->
+                        <!-- Services Container -->
                 <div id="services-catalog" class="services-catalog">
                     
                     <!-- CATEGORY: Bronceados -->
@@ -236,82 +234,187 @@
                             
                             <!-- Service Item 1 -->
                             <div class="service-card card-tilt" data-name="bronceado sencillo" data-desc="servicio basico para un tono dorado natural">
-                                <div class="service-info">
-                                    <h5 class="service-name">Bronceado sencillo</h5>
-                                    <div class="service-meta">
-                                        <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>45 min</span>
-                                        <span class="meta-dot">&bull;</span>
-                                        <span class="price-meta">50,00 €</span>
+                                <div class="service-card-header">
+                                    <div class="service-info-header">
+                                        <h5 class="service-name">Bronceado sencillo</h5>
+                                        <div class="service-meta">
+                                            <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>45 min</span>
+                                            <span class="meta-dot">&bull;</span>
+                                            <span class="price-meta">50,00 €</span>
+                                        </div>
                                     </div>
-                                    <p class="service-desc">Servicio básico para lograr un tono dorado natural y uniforme desde la primera sesión.</p>
+                                    <span class="material-symbols-outlined service-chevron">expand_more</span>
                                 </div>
-                                <button class="book-service-btn" data-service-id="bronceado-sencillo" data-service-name="Bronceado sencillo" data-service-price="50.00" data-service-duration="45 min">
-                                    Reservar
-                                </button>
+                                <div class="service-card-details">
+                                    <div class="service-card-details-inner">
+                                        <p class="service-desc">Servicio básico para lograr un tono dorado natural y uniforme desde la primera sesión.</p>
+                                        <div class="details-grid-meta">
+                                            <div class="meta-item">
+                                                <span class="meta-label">Procedimiento</span>
+                                                <span class="meta-value">Aplicación uniforme en cabina con aerógrafo de nuestra fórmula de bronceado brasilero clásico.</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Duración</span>
+                                                <span class="meta-value">45 minutos en cabina</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Durabilidad</span>
+                                                <span class="meta-value">De 7 a 10 días de duración con el cuidado adecuado de la piel.</span>
+                                            </div>
+                                        </div>
+                                        <button class="book-service-btn" data-service-id="bronceado-sencillo" data-service-name="Bronceado sencillo" data-service-price="50.00" data-service-duration="45 min">
+                                            Reservar Cita
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                             
                             <!-- Service Item 2 -->
                             <div class="service-card card-tilt" data-name="dark tanning" data-desc="bronceado de alta intensidad para un tono chocolate mas marcado">
-                                <div class="service-info">
-                                    <h5 class="service-name">Dark tanning</h5>
-                                    <div class="service-meta">
-                                        <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>45 min</span>
-                                        <span class="meta-dot">&bull;</span>
-                                        <span class="price-meta">65,00 €</span>
+                                <div class="service-card-header">
+                                    <div class="service-info-header">
+                                        <h5 class="service-name">Dark tanning</h5>
+                                        <div class="service-meta">
+                                            <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>45 min</span>
+                                            <span class="meta-dot">&bull;</span>
+                                            <span class="price-meta">65,00 €</span>
+                                        </div>
                                     </div>
-                                    <p class="service-desc">Bronceado de alta intensidad formulado para un tono chocolate profundo y duradero.</p>
+                                    <span class="material-symbols-outlined service-chevron">expand_more</span>
                                 </div>
-                                <button class="book-service-btn" data-service-id="dark-tanning" data-service-name="Dark tanning" data-service-price="65.00" data-service-duration="45 min">
-                                    Reservar
-                                </button>
+                                <div class="service-card-details">
+                                    <div class="service-card-details-inner">
+                                        <p class="service-desc">Bronceado de alta intensidad formulado para un tono chocolate profundo y duradero.</p>
+                                        <div class="details-grid-meta">
+                                            <div class="meta-item">
+                                                <span class="meta-label">Procedimiento</span>
+                                                <span class="meta-value">Exfoliación rápida y vaporización de loción ultra-oscura con pigmentos de alta intensidad para un tono marcado.</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Duración</span>
+                                                <span class="meta-value">45 minutos en cabina</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Durabilidad</span>
+                                                <span class="meta-value">De 10 a 12 días con una hidratación constante.</span>
+                                            </div>
+                                        </div>
+                                        <button class="book-service-btn" data-service-id="dark-tanning" data-service-name="Dark tanning" data-service-price="65.00" data-service-duration="45 min">
+                                            Reservar Cita
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Service Item 3 -->
                             <div class="service-card card-tilt" data-name="berry bronze" data-desc="bronceado premium con efecto berry luminoso e hidratacion profunda">
-                                <div class="service-info">
-                                    <h5 class="service-name">Berry bronze</h5>
-                                    <div class="service-meta">
-                                        <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>1h</span>
-                                        <span class="meta-dot">&bull;</span>
-                                        <span class="price-meta">100,00 €</span>
+                                <div class="service-card-header">
+                                    <div class="service-info-header">
+                                        <h5 class="service-name">Berry bronze</h5>
+                                        <div class="service-meta">
+                                            <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>1h</span>
+                                            <span class="meta-dot">&bull;</span>
+                                            <span class="price-meta">100,00 €</span>
+                                        </div>
                                     </div>
-                                    <p class="service-desc">Bronceado premium enriquecido con efecto berry luminoso e hidratación profunda antienvejecimiento.</p>
+                                    <span class="material-symbols-outlined service-chevron">expand_more</span>
                                 </div>
-                                <button class="book-service-btn" data-service-id="berry-bronze" data-service-name="Berry bronze" data-service-price="100.00" data-service-duration="1h">
-                                    Reservar
-                                </button>
+                                <div class="service-card-details">
+                                    <div class="service-card-details-inner">
+                                        <p class="service-desc">Bronceado premium enriquecido con efecto berry luminoso e hidratación profunda antienvejecimiento.</p>
+                                        <div class="details-grid-meta">
+                                            <div class="meta-item">
+                                                <span class="meta-label">Procedimiento</span>
+                                                <span class="meta-value">Vaporización de fórmula premium con infusión antioxidante de frutos rojos y ácido hialurónico para un brillo espectacular.</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Duración</span>
+                                                <span class="meta-value">60 minutos en cabina</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Durabilidad</span>
+                                                <span class="meta-value">De 10 a 14 días con un acabado luminoso y ultra hidratado.</span>
+                                            </div>
+                                        </div>
+                                        <button class="book-service-btn" data-service-id="berry-bronze" data-service-name="Berry bronze" data-service-price="100.00" data-service-duration="1h">
+                                            Reservar Cita
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Service Item 4 -->
                             <div class="service-card card-tilt" data-name="metamorfosis" data-desc="el tratamiento mas completo para una transformacion total del bronceado brasilero">
-                                <div class="service-info">
-                                    <h5 class="service-name">Metamorfosis</h5>
-                                    <div class="service-meta">
-                                        <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>1h</span>
-                                        <span class="meta-dot">&bull;</span>
-                                        <span class="price-meta">150,00 €</span>
+                                <div class="service-card-header">
+                                    <div class="service-info-header">
+                                        <h5 class="service-name">Metamorfosis</h5>
+                                        <div class="service-meta">
+                                            <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>1h</span>
+                                            <span class="meta-dot">&bull;</span>
+                                            <span class="price-meta">150,00 €</span>
+                                        </div>
                                     </div>
-                                    <p class="service-desc">El ritual más exclusivo y completo. Diseñado para una transformación total con exfoliación, hidratación y bronceado de lujo.</p>
+                                    <span class="material-symbols-outlined service-chevron">expand_more</span>
                                 </div>
-                                <button class="book-service-btn" data-service-id="metamorfosis" data-service-name="Metamorfosis" data-service-price="150.00" data-service-duration="1h">
-                                    Reservar
-                                </button>
+                                <div class="service-card-details">
+                                    <div class="service-card-details-inner">
+                                        <p class="service-desc">El ritual más exclusivo y completo. Diseñado para una transformación total con exfoliación, hidratación y bronceado de lujo.</p>
+                                        <div class="details-grid-meta">
+                                            <div class="meta-item">
+                                                <span class="meta-label">Procedimiento</span>
+                                                <span class="meta-value">Ritual completo: exfoliación corporal profunda, aplicación de mascarilla nutritiva, masaje de hidratación e inducción de bronceado personalizado.</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Duración</span>
+                                                <span class="meta-value">60 minutos en cabina</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Durabilidad</span>
+                                                <span class="meta-value">Hasta 15 días con un tono excepcionalmente uniforme y natural.</span>
+                                            </div>
+                                        </div>
+                                        <button class="book-service-btn" data-service-id="metamorfosis" data-service-name="Metamorfosis" data-service-price="150.00" data-service-duration="1h">
+                                            Reservar Cita
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Service Item 5 -->
                             <div class="service-card card-tilt" data-name="mantenimiento" data-desc="sesion expres para conservar tu tono ideal">
-                                <div class="service-info">
-                                    <h5 class="service-name">Mantenimiento</h5>
-                                    <div class="service-meta">
-                                        <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>30 min</span>
-                                        <span class="meta-dot">&bull;</span>
-                                        <span class="price-meta">35,00 €</span>
+                                <div class="service-card-header">
+                                    <div class="service-info-header">
+                                        <h5 class="service-name">Mantenimiento</h5>
+                                        <div class="service-meta">
+                                            <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>30 min</span>
+                                            <span class="meta-dot">&bull;</span>
+                                            <span class="price-meta">35,00 €</span>
+                                        </div>
                                     </div>
-                                    <p class="service-desc">Sesión exprés para prolongar, retocar y conservar tu tono ideal por más tiempo.</p>
+                                    <span class="material-symbols-outlined service-chevron">expand_more</span>
                                 </div>
-                                <button class="book-service-btn" data-service-id="mantenimiento" data-service-name="Mantenimiento" data-service-price="35.00" data-service-duration="30 min">
-                                    Reservar
-                                </button>
+                                <div class="service-card-details">
+                                    <div class="service-card-details-inner">
+                                        <p class="service-desc">Sesión exprés para prolongar, retocar y conservar tu tono ideal por más tiempo.</p>
+                                        <div class="details-grid-meta">
+                                            <div class="meta-item">
+                                                <span class="meta-label">Procedimiento</span>
+                                                <span class="meta-value">Sesión rápida localizada con aerógrafo en zonas que pierden intensidad antes (rostro, manos, escote).</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Duración</span>
+                                                <span class="meta-value">30 minutos en cabina</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Durabilidad</span>
+                                                <span class="meta-value">Extiende la vida útil de tu bronceado previo por 5 a 7 días más.</span>
+                                            </div>
+                                        </div>
+                                        <button class="book-service-btn" data-service-id="mantenimiento" data-service-name="Mantenimiento" data-service-price="35.00" data-service-duration="30 min">
+                                            Reservar Cita
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -325,40 +428,82 @@
                         <div class="services-grid">
                             <!-- Service Item 6 -->
                             <div class="service-card card-tilt" data-name="bono dark tanning" data-desc="pack de 3 sesiones de dark tanning">
-                                <div class="service-info">
-                                    <h5 class="service-name">
-                                        BONO DARK TANNING
-                                        <span class="promo-badge">Ahorro</span>
-                                    </h5>
-                                    <div class="service-meta">
-                                        <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>1h</span>
-                                        <span class="meta-dot">&bull;</span>
-                                        <span class="price-meta">195,00 €</span>
+                                <div class="service-card-header">
+                                    <div class="service-info-header">
+                                        <h5 class="service-name">
+                                            BONO DARK TANNING
+                                            <span class="promo-badge">Ahorro</span>
+                                        </h5>
+                                        <div class="service-meta">
+                                            <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>1h</span>
+                                            <span class="meta-dot">&bull;</span>
+                                            <span class="price-meta">195,00 €</span>
+                                        </div>
                                     </div>
-                                    <p class="service-desc">Pack promocional de 3 sesiones completas de bronceado brasileño Dark Tanning.</p>
+                                    <span class="material-symbols-outlined service-chevron">expand_more</span>
                                 </div>
-                                <button class="book-service-btn" data-service-id="bono-dark-tanning" data-service-name="BONO DARK TANNING" data-service-price="195.00" data-service-duration="1h">
-                                    Reservar
-                                </button>
+                                <div class="service-card-details">
+                                    <div class="service-card-details-inner">
+                                        <p class="service-desc">Pack promocional de 3 sesiones completas de bronceado brasileño Dark Tanning.</p>
+                                        <div class="details-grid-meta">
+                                            <div class="meta-item">
+                                                <span class="meta-label">Procedimiento</span>
+                                                <span class="meta-value">3 visitas de tratamiento completo Dark Tanning: vaporización y secado de la fórmula de alta intensidad.</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Duración</span>
+                                                <span class="meta-value">3 sesiones de 60 minutos cada una</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Durabilidad</span>
+                                                <span class="meta-value">Mantiene un color chocolate profundo continuo y uniforme a lo largo del mes.</span>
+                                            </div>
+                                        </div>
+                                        <button class="book-service-btn" data-service-id="bono-dark-tanning" data-service-name="BONO DARK TANNING" data-service-price="195.00" data-service-duration="1h">
+                                            Reservar Cita
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Service Item 7 -->
                             <div class="service-card card-tilt" data-name="bono berry bronze" data-desc="pack de 3 sesiones de berry bronze">
-                                <div class="service-info">
-                                    <h5 class="service-name">
-                                        BONO BERRY BRONZE
-                                        <span class="promo-badge">Ahorro</span>
-                                    </h5>
-                                    <div class="service-meta">
-                                        <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>1h</span>
-                                        <span class="meta-dot">&bull;</span>
-                                        <span class="price-meta">300,00 €</span>
+                                <div class="service-card-header">
+                                    <div class="service-info-header">
+                                        <h5 class="service-name">
+                                            BONO BERRY BRONZE
+                                            <span class="promo-badge">Ahorro</span>
+                                        </h5>
+                                        <div class="service-meta">
+                                            <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>1h</span>
+                                            <span class="meta-dot">&bull;</span>
+                                            <span class="price-meta">300,00 €</span>
+                                        </div>
                                     </div>
-                                    <p class="service-desc">Pack de ahorro con 3 sesiones completas del tratamiento premium Berry Bronze.</p>
+                                    <span class="material-symbols-outlined service-chevron">expand_more</span>
                                 </div>
-                                <button class="book-service-btn" data-service-id="bono-berry-bronze" data-service-name="BONO BERRY BRONZE" data-service-price="300.00" data-service-duration="1h">
-                                    Reservar
-                                </button>
+                                <div class="service-card-details">
+                                    <div class="service-card-details-inner">
+                                        <p class="service-desc">Pack de ahorro con 3 sesiones completas del tratamiento premium Berry Bronze.</p>
+                                        <div class="details-grid-meta">
+                                            <div class="meta-item">
+                                                <span class="meta-label">Procedimiento</span>
+                                                <span class="meta-value">3 visitas de la fórmula premium Berry Bronze con antioxidantes, brillo luminoso e hidratación intensa.</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Duración</span>
+                                                <span class="meta-value">3 sesiones de 60 minutos cada una</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Durabilidad</span>
+                                                <span class="meta-value">Color radiante, piel cuidada y bronceado impecable a largo plazo.</span>
+                                            </div>
+                                        </div>
+                                        <button class="book-service-btn" data-service-id="bono-berry-bronze" data-service-name="BONO BERRY BRONZE" data-service-price="300.00" data-service-duration="1h">
+                                            Reservar Cita
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -372,50 +517,113 @@
                         <div class="services-grid">
                             <!-- Service Item 8 -->
                             <div class="service-card card-tilt" data-name="quemadores de grasa" data-desc="tratamiento corporal quemagrasa localizado">
-                                <div class="service-info">
-                                    <h5 class="service-name">Quemadores de grasa</h5>
-                                    <div class="service-meta">
-                                        <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>45 min</span>
-                                        <span class="meta-dot">&bull;</span>
-                                        <span class="price-meta">65,00 €</span>
+                                <div class="service-card-header">
+                                    <div class="service-info-header">
+                                        <h5 class="service-name">Quemadores de grasa</h5>
+                                        <div class="service-meta">
+                                            <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>45 min</span>
+                                            <span class="meta-dot">&bull;</span>
+                                            <span class="price-meta">65,00 €</span>
+                                        </div>
                                     </div>
-                                    <p class="service-desc">Tratamiento de estética corporal enfocado en activar la quema de grasa localizada.</p>
+                                    <span class="material-symbols-outlined service-chevron">expand_more</span>
                                 </div>
-                                <button class="book-service-btn" data-service-id="quemadores-grasa" data-service-name="Quemadores de grasa" data-service-price="65.00" data-service-duration="45 min">
-                                    Reservar
-                                </button>
+                                <div class="service-card-details">
+                                    <div class="service-card-details-inner">
+                                        <p class="service-desc">Tratamiento de estética corporal enfocado en activar la quema de grasa localizada.</p>
+                                        <div class="details-grid-meta">
+                                            <div class="meta-item">
+                                                <span class="meta-label">Procedimiento</span>
+                                                <span class="meta-value">Masaje reductor manual asistido por aparatología especializada y aplicación de envoltura lipolítica térmica.</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Duración</span>
+                                                <span class="meta-value">45 minutos en cabina</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Durabilidad</span>
+                                                <span class="meta-value">Resultados progresivos y duraderos acumulables con sesiones periódicas y buena hidratación.</span>
+                                            </div>
+                                        </div>
+                                        <button class="book-service-btn" data-service-id="quemadores-grasa" data-service-name="Quemadores de grasa" data-service-price="65.00" data-service-duration="45 min">
+                                            Reservar Cita
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Service Item 9 -->
                             <div class="service-card card-tilt" data-name="tratamiento tonificante" data-desc="tonificacion intensiva de la piel">
-                                <div class="service-info">
-                                    <h5 class="service-name">Tratamiento tonificante</h5>
-                                    <div class="service-meta">
-                                        <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>45 min</span>
-                                        <span class="meta-dot">&bull;</span>
-                                        <span class="price-meta">65,00 €</span>
+                                <div class="service-card-header">
+                                    <div class="service-info-header">
+                                        <h5 class="service-name">Tratamiento tonificante</h5>
+                                        <div class="service-meta">
+                                            <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>45 min</span>
+                                            <span class="meta-dot">&bull;</span>
+                                            <span class="price-meta">65,00 €</span>
+                                        </div>
                                     </div>
-                                    <p class="service-desc">Sesión de estimulación reafirmante corporal para aportar elasticidad y tono a la piel.</p>
+                                    <span class="material-symbols-outlined service-chevron">expand_more</span>
                                 </div>
-                                <button class="book-service-btn" data-service-id="tratamiento-tonificante" data-service-name="Tratamiento tonificante" data-service-price="65.00" data-service-duration="45 min">
-                                    Reservar
-                                </button>
+                                <div class="service-card-details">
+                                    <div class="service-card-details-inner">
+                                        <p class="service-desc">Sesión de estimulación reafirmante corporal para aportar elasticidad y tono a la piel.</p>
+                                        <div class="details-grid-meta">
+                                            <div class="meta-item">
+                                                <span class="meta-label">Procedimiento</span>
+                                                <span class="meta-value">Estimulación reafirmante mediante masajes drenantes estimulantes y aplicación de geles con activos tensores.</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Duración</span>
+                                                <span class="meta-value">45 minutos en cabina</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Durabilidad</span>
+                                                <span class="meta-value">Efecto tensor inmediato, se recomienda tratamiento continuo para mejorar la firmeza a largo plazo.</span>
+                                            </div>
+                                        </div>
+                                        <button class="book-service-btn" data-service-id="tratamiento-tonificante" data-service-name="Tratamiento tonificante" data-service-price="65.00" data-service-duration="45 min">
+                                            Reservar Cita
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Service Item 10 -->
                             <div class="service-card card-tilt" data-name="aclarador de zonas" data-desc="aclarado estetico de zonas intimas o axilas e ingles">
-                                <div class="service-info">
-                                    <h5 class="service-name">Aclarador de zonas</h5>
-                                    <div class="service-meta">
-                                        <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>30 min</span>
-                                        <span class="meta-dot">&bull;</span>
-                                        <span class="price-meta">30,00 €</span>
+                                <div class="service-card-header">
+                                    <div class="service-info-header">
+                                        <h5 class="service-name">Aclarador de zonas</h5>
+                                        <div class="service-meta">
+                                            <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>30 min</span>
+                                            <span class="meta-dot">&bull;</span>
+                                            <span class="price-meta">30,00 €</span>
+                                        </div>
                                     </div>
-                                    <p class="service-desc">Tratamiento estético despigmentante para aclarar zonas oscurecidas (axilas, ingles o zonas íntimas).</p>
+                                    <span class="material-symbols-outlined service-chevron">expand_more</span>
                                 </div>
-                                <button class="book-service-btn" data-service-id="aclarador-zonas" data-service-name="Aclarador de zonas" data-service-price="30.00" data-service-duration="30 min">
-                                    Reservar
-                                </button>
+                                <div class="service-card-details">
+                                    <div class="service-card-details-inner">
+                                        <p class="service-desc">Tratamiento estético despigmentante para aclarar zonas oscurecidas (axilas, ingles o zonas íntimas).</p>
+                                        <div class="details-grid-meta">
+                                            <div class="meta-item">
+                                                <span class="meta-label">Procedimiento</span>
+                                                <span class="meta-value">Peeling suave químico no invasivo adaptado a pieles sensibles, seguido de la aplicación de suero despigmentante.</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Duración</span>
+                                                <span class="meta-value">30 minutos en cabina</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Durabilidad</span>
+                                                <span class="meta-value">Aclarado progresivo de las zonas. Se aprecian cambios significativos a partir de la 3ra sesión.</span>
+                                            </div>
+                                        </div>
+                                        <button class="book-service-btn" data-service-id="aclarador-zonas" data-service-name="Aclarador de zonas" data-service-price="30.00" data-service-duration="30 min">
+                                            Reservar Cita
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -429,36 +637,80 @@
                         <div class="services-grid">
                             <!-- Service Item 11 -->
                             <div class="service-card card-tilt" data-name="lifting de cejas" data-desc="lifting de cejas para mirada alzada">
-                                <div class="service-info">
-                                    <h5 class="service-name">Lifting de cejas</h5>
-                                    <div class="service-meta">
-                                        <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>20 min</span>
-                                        <span class="meta-dot">&bull;</span>
-                                        <span class="price-meta">10,00 €</span>
+                                <div class="service-card-header">
+                                    <div class="service-info-header">
+                                        <h5 class="service-name">Lifting de cejas</h5>
+                                        <div class="service-meta">
+                                            <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>20 min</span>
+                                            <span class="meta-dot">&bull;</span>
+                                            <span class="price-meta">10,00 €</span>
+                                        </div>
                                     </div>
-                                    <p class="service-desc">Definición y peinado semipermanente de cejas para levantar y dar volumen a la mirada.</p>
+                                    <span class="material-symbols-outlined service-chevron">expand_more</span>
                                 </div>
-                                <button class="book-service-btn" data-service-id="lifting-cejas" data-service-name="Lifting de cejas" data-service-price="10.00" data-service-duration="20 min">
-                                    Reservar
-                                </button>
+                                <div class="service-card-details">
+                                    <div class="service-card-details-inner">
+                                        <p class="service-desc">Definición y peinado semipermanente de cejas para levantar y dar volumen a la mirada.</p>
+                                        <div class="details-grid-meta">
+                                            <div class="meta-item">
+                                                <span class="meta-label">Procedimiento</span>
+                                                <span class="meta-value">Peinado y laminado químico ultra suave para domar vellos rebeldes y fijarlos en dirección ascendente.</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Duración</span>
+                                                <span class="meta-value">20 minutos</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Durabilidad</span>
+                                                <span class="meta-value">Mantiene el vello de las cejas ordenado y definido durante 4 a 6 semanas.</span>
+                                            </div>
+                                        </div>
+                                        <button class="book-service-btn" data-service-id="lifting-cejas" data-service-name="Lifting de cejas" data-service-price="10.00" data-service-duration="20 min">
+                                            Reservar Cita
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Service Item 12 -->
                             <div class="service-card card-tilt" data-name="lifting y diseno de cejas" data-desc="completo tratamiento de cejas con diseno">
-                                <div class="service-info">
-                                    <h5 class="service-name">Lifting + diseño de cejas</h5>
-                                    <div class="service-meta">
-                                        <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>45 min</span>
-                                        <span class="meta-dot">&bull;</span>
-                                        <span class="price-meta">30,00 €</span>
+                                <div class="service-card-header">
+                                    <div class="service-info-header">
+                                        <h5 class="service-name">Lifting + diseño de cejas</h5>
+                                        <div class="service-meta">
+                                            <span class="duration-meta"><span class="material-symbols-outlined">schedule</span>45 min</span>
+                                            <span class="meta-dot">&bull;</span>
+                                            <span class="price-meta">30,00 €</span>
+                                        </div>
                                     </div>
-                                    <p class="service-desc">Tratamiento completo: laminado/lifting, depilación de precisión y tinte para unas cejas perfectas.</p>
+                                    <span class="material-symbols-outlined service-chevron">expand_more</span>
                                 </div>
-                                <button class="book-service-btn" data-service-id="lifting-diseno-cejas" data-service-name="Lifting + diseño de cejas" data-service-price="30.00" data-service-duration="45 min">
-                                    Reservar
-                                </button>
+                                <div class="service-card-details">
+                                    <div class="service-card-details-inner">
+                                        <p class="service-desc">Tratamiento completo: laminado/lifting, depilación de precisión y tinte para unas cejas perfectas.</p>
+                                        <div class="details-grid-meta">
+                                            <div class="meta-item">
+                                                <span class="meta-label">Procedimiento</span>
+                                                <span class="meta-value">Combinación de laminado/lifting de cejas, depilación de precisión con pinza e hilo, y tinte personalizado.</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Duración</span>
+                                                <span class="meta-value">45 minutos</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">Durabilidad</span>
+                                                <span class="meta-value">Cejas tupidas, perfectamente esculpidas y teñidas durante 4 a 6 semanas.</span>
+                                            </div>
+                                        </div>
+                                        <button class="book-service-btn" data-service-id="lifting-diseno-cejas" data-service-name="Lifting + diseño de cejas" data-service-price="30.00" data-service-duration="45 min">
+                                            Reservar Cita
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                </div>       </div>
                     </div>
                 </div>
 
@@ -930,6 +1182,6 @@
     </div>
 
     <!-- Core Scripts -->
-    <script src="app.js?v=1.0.8"></script>
+    <script src="app.js?v=1.0.9"></script>
 </body>
 </html>
