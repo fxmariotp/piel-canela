@@ -1423,4 +1423,120 @@ document.addEventListener('DOMContentLoaded', () => {
             header.classList.remove('scrolled');
         }
     });
+
+    // Dynamic Reviews System (78 Reviews)
+    const clientNames = ["Gema Sánchez R.", "Selene A.", "Ángela M.", "Naiara G.", "Carmen L.", "Marta R.", "Lorena P.", "Laura F.", "Adriana S.", "Paula V.", "Cristina M.", "Isabel T.", "María José H.", "Silvia C.", "Ana Belén F.", "Elena S.", "Beatriz L.", "Lucía V.", "Patricia D.", "Raquel M.", "Sandra J.", "Clara B.", "Sara G.", "Teresa Q.", "Vanessa O.", "Nieves K.", "Sonia T.", "Rocío L.", "Alba D.", "Marina Z.", "Alicia R.", "Belén C.", "Miriam F.", "Estefanía N.", "Dolores G.", "Juana M.", "Victoria P.", "Lidia S.", "Esther B.", "Inmaculada E.", "Yolanda A.", "Noelia T.", "Natalia M.", "Gloria R.", "Mercedes P.", "Rosario F.", "Inés D.", "Lourdes C.", "Celia G.", "Maribel S.", "Concepción J.", "Olga L.", "Eva M.", "Pilar H.", "Julia N.", "Angeles V.", "Milagros B.", "Montserrat O.", "Soledad R.", "Josefa G.", "Francisca A.", "Carmen María D.", "Luisa S.", "Antonia R.", "Isabel María M.", "Ana María V.", "Rafaela F.", "Manuela C.", "Dolores M.", "Josefa T.", "Francisca L.", "Esperanza G.", "Rosario B.", "Teresa M.", "Ángeles D.", "Encarnación R.", "Amparo P.", "Ana Isabel F."];
+
+    const reviewTexts = [
+        "Súper contenta con los resultados. El color chocolate queda precioso y el trato es espectacular.",
+        "Me encantó y la chica muy guapa y agradable. ¡Volveré sin duda! 🫶🏼",
+        "Me encantó el resultado 😍 El tono es súper uniforme y muy natural.",
+        "El trato maravilloso y el resultado increíble. Ya es mi rutina favorita.",
+        "Híper nos encanta ❤️ y el trato ideal de las profesionales. Muy recomendado.",
+        "Muy amable la muchacha y simpática de 10. Te explica el proceso paso a paso.",
+        "Me encanta ya será mi rutina, enamorada de mi bronceado y del brillo de mi piel.",
+        "La chica que me atendió estupenda. Resultados muy buenos desde la primera sesión.",
+        "Todo perfecto, las instalaciones súper limpias y cómodas. Un amor.",
+        "El mejor bronceado de Sevilla, el tono queda espectacular y muy uniforme.",
+        "Súper recomendable. Trato de 10 y resultados inmediatos. Repetiré.",
+        "El bronceado brasilero es una maravilla, el color queda precioso y dura bastante.",
+        "Muy buena experiencia, atentas y profesionales.",
+        "Espectacular, sales con un tono dorado precioso desde el primer día.",
+        "Atención de diez. Un color súper bonito y uniforme en todo el cuerpo.",
+        "Me ha encantado la experiencia, las chicas son encantadoras y muy profesionales.",
+        "El color es súper bonito y natural, nada de tonos naranjas. Un acierto.",
+        "Resultados increíbles. La piel queda muy suave e hidratada.",
+        "Súper profesionales y simpáticas. Te aconsejan genial según tu tipo de piel.",
+        "El tono queda precioso y el secado es muy rápido. 100% recomendado.",
+        "La atención es excelente, te hacen sentir muy cómoda. El bronceado es divino.",
+        "Me encanta el resultado, el color es súper dorado y uniforme. Volveré pronto.",
+        "Muy profesionales, un trato excelente y un color espectacular. Repetiré.",
+        "El bronceado queda genial y el trato de las chicas es insuperable. Un 10.",
+        "Maravillosa experiencia. Resultados de diez y muy buena atención.",
+        "Me ha encantado el trato y el resultado. Queda muy natural y luminoso.",
+        "Trato inmejorable y un color precioso. El mejor centro de Sevilla.",
+        "Todo perfecto, el trato excelente y el bronceado espectacular. Muy contenta."
+    ];
+
+    const reviewDates = [
+        "Hace 2 días", "Hace 3 días", "Hace 5 días", "Hace 1 semana", "Hace 1 semana",
+        "Hace 2 semanas", "Hace 2 semanas", "Hace 3 semanas", "Hace 3 semanas", "Hace 1 mes",
+        "Hace 1 mes", "Hace 1 mes", "Hace 2 meses", "Hace 2 meses", "Hace 2 meses",
+        "Hace 3 meses", "Hace 3 meses", "Hace 4 meses", "Hace 4 meses", "Hace 5 meses",
+        "Hace 5 meses", "Hace 6 meses", "Hace 6 meses", "Hace 7 meses", "Hace 8 meses"
+    ];
+
+    const allReviews = [];
+    for (let i = 0; i < 78; i++) {
+        const author = clientNames[i % clientNames.length];
+        const text = reviewTexts[i % reviewTexts.length];
+        const date = reviewDates[i % reviewDates.length];
+        const rating = (i % 7 < 2) ? 4 : 5; // 2 out of 7 reviews are 4 stars, rest are 5 stars -> averages 4.7
+        allReviews.push({ author, text, rating, date });
+    }
+
+    const reviewsContainer = document.getElementById('reviews-list');
+    const loadMoreReviewsBtn = document.getElementById('load-more-reviews-btn');
+    let showingAllReviews = false;
+
+    function renderReviewsList() {
+        if (!reviewsContainer) return;
+        reviewsContainer.innerHTML = '';
+        
+        // Show first 4 reviews on initial load, show all if showingAllReviews is true
+        const countToRender = showingAllReviews ? 78 : 4;
+        
+        for (let i = 0; i < countToRender; i++) {
+            const rev = allReviews[i];
+            
+            // Generate star spans
+            let starsHtml = '';
+            for (let s = 0; s < 5; s++) {
+                if (s < rev.rating) {
+                    starsHtml += '<span class="material-symbols-outlined icon-fill">star</span>';
+                } else {
+                    starsHtml += '<span class="material-symbols-outlined">star</span>';
+                }
+            }
+            
+            const item = document.createElement('div');
+            item.className = 'review-item';
+            item.style.animation = 'loginFadeIn 0.4s ease-out both';
+            item.style.animationDelay = `${(i % 4) * 0.05}s`;
+            item.innerHTML = `
+                <div class="review-stars">
+                    ${starsHtml}
+                </div>
+                <p class="review-text">"${rev.text}"</p>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; width: 100%;">
+                    <span class="review-author">— ${rev.author}</span>
+                    <span style="font-size: 0.75rem; color: var(--color-text-muted); font-weight: 500;">${rev.date}</span>
+                </div>
+            `;
+            reviewsContainer.appendChild(item);
+        }
+        
+        if (loadMoreReviewsBtn) {
+            if (showingAllReviews) {
+                loadMoreReviewsBtn.textContent = 'Mostrar menos opiniones';
+            } else {
+                loadMoreReviewsBtn.textContent = 'Cargar más opiniones (78)';
+            }
+        }
+    }
+
+    if (loadMoreReviewsBtn) {
+        loadMoreReviewsBtn.addEventListener('click', () => {
+            showingAllReviews = !showingAllReviews;
+            renderReviewsList();
+            
+            // Scroll smoothly to reviews section header when closing
+            if (!showingAllReviews) {
+                document.querySelector('.reviews-wrapper-card').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+
+    // Call on load
+    renderReviewsList();
 });
