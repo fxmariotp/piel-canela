@@ -1066,19 +1066,27 @@ document.addEventListener('DOMContentLoaded', () => {
     function appendMessage(text, direction, isHtml = false) {
         const wrap = document.createElement('div');
         
+        let parsedText = isHtml ? text : escapeHTML(text);
+        // Replace **text** with <strong>text</strong>
+        parsedText = parsedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        
         if (direction === 'in') {
             wrap.className = 'chat-bubble-row message-in';
+            // Convert newlines to <br> if not raw HTML
+            if (!isHtml) {
+                parsedText = parsedText.replace(/\n/g, '<br>');
+            }
             wrap.innerHTML = `
                 <div class="chat-avatar">C</div>
                 <div class="chat-text">
-                    ${isHtml ? text : escapeHTML(text).replace(/\n/g, '<br>')}
+                    ${parsedText}
                 </div>
             `;
         } else {
             wrap.className = 'chat-bubble-row message-out';
             wrap.innerHTML = `
                 <div class="chat-text">
-                    ${escapeHTML(text)}
+                    ${parsedText}
                 </div>
             `;
         }
