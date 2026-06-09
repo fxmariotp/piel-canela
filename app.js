@@ -9,26 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     const preloader = document.getElementById('preloader');
     
-    // Hide preloader with luxury animation after assets load
-    window.addEventListener('load', () => {
+    // Hide preloader with luxury animation almost immediately on DOMContentLoaded for instant interactive mobile viewport scaling
+    if (preloader) {
         setTimeout(() => {
             preloader.classList.add('preloader-hidden');
             document.body.classList.remove('loading-state');
             setTimeout(() => {
                 preloader.style.display = 'none';
             }, 800); // Wait for transition opacity 0.8s to finish
-        }, 1000); // Small delay to appreciate the entry animation
-    });
-
-    // In case load event fired before listener
-    if (document.readyState === 'complete') {
-        setTimeout(() => {
-            preloader.classList.add('preloader-hidden');
-            document.body.classList.remove('loading-state');
-            setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 800);
-        }, 1000);
+        }, 300); // Short delay to appreciate the entry logo animation
     }
 
     // ----------------------------------------------------
