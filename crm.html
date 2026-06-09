@@ -1177,12 +1177,287 @@
                 min-height: 80px;
             }
         }
+
+        /* CRM LOGIN SCREEN STYLES */
+        .auth-hidden {
+            display: none !important;
+        }
+
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 50% 50%, var(--color-linen-dark) 0%, var(--color-linen) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: var(--color-white);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-heavy);
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 28px;
+            position: relative;
+            animation: loginFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes loginFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-logo-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            text-align: center;
+        }
+
+        .login-logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid var(--color-gold);
+            padding: 4px;
+            background: var(--color-white);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .login-title-serif {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--color-chocolate-dark);
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+        }
+
+        .login-subtitle {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-gold-dark);
+            font-weight: 700;
+        }
+
+        .login-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+        }
+
+        .input-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--color-chocolate-dark);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .input-field-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-field-wrapper .material-symbols-outlined {
+            position: absolute;
+            left: 14px;
+            color: var(--color-text-muted);
+            font-size: 20px;
+            pointer-events: none;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 14px 14px 14px 44px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(74, 53, 47, 0.15);
+            background-color: var(--color-linen);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            color: var(--color-chocolate-dark);
+            outline: none;
+            transition: var(--transition-quick);
+        }
+
+        .login-input:focus {
+            border-color: var(--color-gold);
+            background-color: var(--color-white);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-chocolate);
+        }
+
+        .remember-me-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .remember-checkbox {
+            accent-color: var(--color-chocolate);
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .btn-login-submit {
+            width: 100%;
+            background-color: var(--color-chocolate);
+            color: var(--color-gold-light);
+            border: none;
+            padding: 14px;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition-quick);
+            box-shadow: 0 4px 15px rgba(109, 76, 65, 0.25);
+            margin-top: 10px;
+        }
+
+        .btn-login-submit:hover {
+            background-color: var(--color-gold);
+            color: var(--color-chocolate-dark);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+        }
+
+        .login-error-msg {
+            font-size: 0.8rem;
+            color: #d32f2f;
+            background-color: #ffebee;
+            border: 1px solid #ffcdd2;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            width: 100%;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            animation: shake 0.4s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+
+        .login-back-to-site {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition-quick);
+            margin-top: 5px;
+        }
+
+        .login-back-to-site:hover {
+            color: var(--color-chocolate-dark);
+        }
     </style>
 </head>
 <body>
 
+    <!-- LOGIN OVERLAY -->
+    <div id="login-overlay-container" class="login-overlay">
+        <div class="login-card">
+            <div class="login-logo-box">
+                <img src="assets/brand_logo.png" alt="Piel Canela Logo" class="login-logo">
+                <h2 class="login-title-serif">PIEL CANELA</h2>
+                <span class="login-subtitle">Gestión CRM</span>
+            </div>
+            
+            <div class="login-error-msg" id="login-error">
+                <span class="material-symbols-outlined" style="font-size: 18px;">error</span>
+                <span id="login-error-text">Credenciales incorrectas</span>
+            </div>
+
+            <form class="login-form" id="login-form-el" onsubmit="handleCrmLogin(event)">
+                <div class="input-group">
+                    <label class="input-label" for="login-username">Usuario</label>
+                    <div class="input-field-wrapper">
+                        <span class="material-symbols-outlined">person</span>
+                        <input type="text" id="login-username" class="login-input" placeholder="Ingresa tu usuario" required autocomplete="username">
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="login-password">Contraseña</label>
+                    <div class="input-field-wrapper">
+                        <span class="material-symbols-outlined">lock</span>
+                        <input type="password" id="login-password" class="login-input" placeholder="Ingresa tu contraseña" required autocomplete="current-password">
+                    </div>
+                </div>
+
+                <div class="login-options">
+                    <label class="remember-me-label">
+                        <input type="checkbox" id="login-remember" class="remember-checkbox">
+                        Recordarme en este equipo
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-login-submit">
+                    Iniciar Sesión
+                    <span class="material-symbols-outlined">login</span>
+                </button>
+            </form>
+
+            <a href="index.html" class="login-back-to-site">
+                <span class="material-symbols-outlined" style="font-size: 16px;">arrow_back</span>
+                Volver a la web principal
+            </a>
+        </div>
+    </div>
+
     <!-- SIDEBAR -->
-    <aside class="sidebar">
+    <aside class="sidebar auth-hidden">
         <div class="logo-wrapper">
             <img src="assets/brand_logo.png" alt="Piel Canela" class="logo-img">
             <div class="brand-text">
@@ -1217,12 +1492,16 @@
                 <span class="material-symbols-outlined">arrow_back</span>
                 Ver Web Clientes
             </a>
-            <div>&copy; 2026 Piel Canela Bronze</div>
+            <button onclick="handleCrmLogout()" class="back-to-site-btn" style="background: rgba(211, 47, 47, 0.1); border-color: rgba(211, 47, 47, 0.3); color: #ff5252; margin-top: 8px; width: 100%;">
+                <span class="material-symbols-outlined" style="font-size: 18px;">logout</span>
+                Cerrar Sesión
+            </button>
+            <div style="margin-top: 8px;">&copy; 2026 Piel Canela Bronze</div>
         </div>
     </aside>
 
     <!-- MAIN WRAPPER -->
-    <main class="main-wrapper">
+    <main class="main-wrapper auth-hidden">
         
         <!-- HEADER BAR -->
         <header class="header-bar">
@@ -1528,9 +1807,73 @@
             // Set current date input default for manual form
             document.getElementById('manual-date').value = new Date().toISOString().split('T')[0];
             
-            // Sync/Read bookings
-            refreshCRM();
+            // Check authorization
+            checkCrmAuth();
         });
+
+        // Authentication checks
+        function checkCrmAuth() {
+            const isLoggedIn = sessionStorage.getItem('crm_logged_in') === 'true' || 
+                               localStorage.getItem('crm_logged_in') === 'true';
+            
+            const overlay = document.getElementById('login-overlay-container');
+            const sidebar = document.querySelector('.sidebar');
+            const mainWrapper = document.querySelector('.main-wrapper');
+            
+            if (isLoggedIn) {
+                overlay.style.display = 'none';
+                sidebar.classList.remove('auth-hidden');
+                mainWrapper.classList.remove('auth-hidden');
+                // Sync/Read bookings only when authenticated
+                refreshCRM();
+            } else {
+                overlay.style.display = 'flex';
+                sidebar.classList.add('auth-hidden');
+                mainWrapper.classList.add('auth-hidden');
+            }
+        }
+
+        // Handle Login Submission
+        function handleCrmLogin(event) {
+            event.preventDefault();
+            const userField = document.getElementById('login-username').value.trim();
+            const passField = document.getElementById('login-password').value.trim();
+            const rememberMe = document.getElementById('login-remember').checked;
+            
+            const errorDiv = document.getElementById('login-error');
+            const errorText = document.getElementById('login-error-text');
+            
+            if (userField === 'admin' && passField === 'admin1234') {
+                errorDiv.style.display = 'none';
+                
+                if (rememberMe) {
+                    localStorage.setItem('crm_logged_in', 'true');
+                } else {
+                    sessionStorage.setItem('crm_logged_in', 'true');
+                }
+                
+                // Reset form fields
+                document.getElementById('login-username').value = '';
+                document.getElementById('login-password').value = '';
+                
+                checkCrmAuth();
+            } else {
+                errorText.textContent = "Usuario o contraseña incorrectos";
+                errorDiv.style.display = 'flex';
+                
+                // Trigger animation reset to replay shake
+                errorDiv.style.animation = 'none';
+                void errorDiv.offsetWidth; // Trigger reflow
+                errorDiv.style.animation = 'shake 0.4s ease-in-out';
+            }
+        }
+
+        // Handle Logout
+        function handleCrmLogout() {
+            sessionStorage.removeItem('crm_logged_in');
+            localStorage.removeItem('crm_logged_in');
+            checkCrmAuth();
+        }
 
         // Load & Refresh Data
         function refreshCRM() {
