@@ -636,10 +636,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateStepUI() {
         // Hide all steps
-        step1.classList.add('hidden');
-        step2.classList.add('hidden');
-        step3.classList.add('hidden');
-        step4.classList.add('hidden');
+        step1.classList.remove('active');
+        step2.classList.remove('active');
+        step3.classList.remove('active');
+        step4.classList.remove('active');
         
         // Remove active indicators
         ind1.classList.remove('active');
@@ -651,20 +651,20 @@ document.addEventListener('DOMContentLoaded', () => {
         modalNextBtn.textContent = 'Siguiente';
 
         if (currentStep === 1) {
-            step1.classList.remove('hidden');
+            step1.classList.add('active');
             ind1.classList.add('active');
         } else if (currentStep === 2) {
-            step2.classList.remove('hidden');
+            step2.classList.add('active');
             ind2.classList.add('active');
             modalBackBtn.classList.remove('hidden');
         } else if (currentStep === 3) {
-            step3.classList.remove('hidden');
+            step3.classList.add('active');
             ind3.classList.add('active');
             modalBackBtn.classList.remove('hidden');
             modalNextBtn.textContent = 'Confirmar Reserva';
             updatePricePreview();
         } else if (currentStep === 4) {
-            step4.classList.remove('hidden');
+            step4.classList.add('active');
             modalNextBtn.textContent = 'Entendido';
             
             // Fill summaries
