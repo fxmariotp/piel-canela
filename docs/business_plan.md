@@ -51,21 +51,49 @@ Hemos entrenado exhaustivamente a **Canela AI** con toda la información y base 
 
 ## 4. Análisis de Ahorro y ROI (Retorno de Inversión)
 
-Hagamos una estimación del tiempo diario y mensual recuperado gracias a la plataforma:
+A continuación, cuantificamos tanto el tiempo diario y mensual recuperado gracias a la automatización de la plataforma como su **traducción directa a valor económico (ROI)** para el salón.
 
-| Tarea Administrativa | Tiempo Estimado | Frecuencia Diaria | Ahorro Diario | Ahorro Mensual (26 días) |
-| :--- | :--- | :--- | :--- | :--- |
-| Responder consultas de precios/servicios | 4 minutos | 15 mensajes | 60 minutos | 26 horas |
-| Responder dudas sobre preparación/toallas | 4 minutos | 10 mensajes | 40 minutos | 17.3 horas |
-| Agendar/modificar reservas manualmente | 6 minutos | 8 reservas | 48 minutos | 20.8 horas |
-| **Total Tiempo Recuperado** | | | **148 minutos (2.5h)** | **~64 horas al mes** |
+### A. Ahorro en Tiempo de Gestión (Eficiencia Operativa)
+Estimamos el valor de las horas administrativas basándonos en un coste de oportunidad conservador para la dueña de **25 €/hora** (tiempo empleado en tareas repetitivas de poco valor añadido en lugar de supervisión de calidad, marketing estratégico o descanso):
 
-### Impacto en el Negocio:
-* **Recuperar 64 horas al mes** equivale a ganar **8 días laborables completos** para que la dueña los dedique a supervisar la calidad, gestionar compras, o descansar.
-* **Cero pérdida de reservas nocturnas:** La web y Canela AI agendan citas a cualquier hora del día o de la noche de manera autónoma.
-* **Reducción de cancelaciones de última hora:** Los recordatorios de WhatsApp con plantilla integrada permiten confirmar la asistencia cómodamente.
+| Tarea Administrativa Automatizada | Tiempo Ahorrado Diario | Ahorro Mensual (26 días) | Valor Económico Mensual (a 25€/h) |
+| :--- | :--- | :--- | :--- |
+| Responder consultas de precios/servicios (Chatbot 24/7) | 60 minutos (15 msgs) | 26 horas | 650 € |
+| Responder dudas sobre preparación/normas (Chatbot 24/7) | 40 minutos (10 msgs) | 17,3 horas | 432,50 € |
+| Agendar/modificar reservas manualmente (Web de Reservas) | 48 minutos (8 citas) | 20,8 horas | 520 € |
+| **Ahorro Total por Tiempo Recuperado** | **148 minutos (2.5h)** | **~64 horas al mes** | **1.602,50 € / mes** |
+
+*Equivale a recuperar **8 días laborables completos al mes** que la dueña puede reinvertir en la rentabilidad de su negocio.*
 
 ---
+
+### B. Incremento de Ingresos por Captura de Clientes (Nuevas Ventas)
+Utilizamos un **ticket medio por servicio de 65 €** (promedio ponderado entre bronceados individuales de 50 €-100 € y bonos de ahorro de 150 €-300 €):
+
+1. **Recuperación de Reservas Fuera de Horario / Sin Espera:**
+   La demora al contestar en Instagram o WhatsApp a menudo resulta en que el cliente busque un competidor directo. Al responder de forma instantánea 24/7 con **Canela AI** y la web de reservas, estimamos recuperar de forma muy conservadora **1 reserva adicional por día laborable**.
+   * **Cálculo:** 26 reservas recuperadas al mes × 65 € (ticket medio) = **1.690 € / mes**.
+   
+2. **Reducción de Ausencias (No-Shows):**
+   Gracias al sistema de descarga automática de citas al calendario del cliente (Google Calendar e iCal) y a las plantillas de recordatorio rápido por WhatsApp para el staff, se reduce el índice de citas olvidadas o canceladas a última hora en un mínimo de **3 citas al mes**.
+   * **Cálculo:** 3 no-shows evitados al mes × 65 € (ticket medio) = **195 € / mes**.
+
+---
+
+### C. Resumen del Impacto Financiero Anualizado
+
+| Concepto de Retorno de Inversión (ROI) | Impacto Mensual | Impacto Anual (12 meses) |
+| :--- | :--- | :--- |
+| **Ahorro Directo en Tiempo (Horas de Gestión)** | 1.602,50 € | 19.230,00 € |
+| **Nuevos Ingresos Capturados (Chatbot + Web 24/7)** | 1.690,00 € | 20.280,00 € |
+| **Ingresos Protegidos (Reducción de No-Shows)** | 195,00 € | 2.340,00 € |
+| **VALOR TOTAL RECUPERADO / GENERADO** | **3.487,50 €** | **41.850,00 €** |
+
+> [!WARNING]
+> **El coste real de seguir gestionando el salón de forma manual es de 3.487,50 € al mes en pérdidas invisibles** (tiempo personal regalado a labores de recepción y clientes que se van a la competencia por no recibir respuesta inmediata). Con la web y el chatbot, Piel Canela Bronze recupera el control de sus operaciones y capta más de **41.000 € anuales** en valor comercial adicional.
+
+---
+
 
 ## 5. Estrategia de Lanzamiento y Canalización
 
