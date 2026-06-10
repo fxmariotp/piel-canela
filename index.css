@@ -2834,6 +2834,12 @@ body.loading-state {
     display: none !important;
 }
 
+/* Hero location link hover */
+.hero-map-link:hover {
+    color: var(--color-gold-light) !important;
+}
+
+
 
 
 
