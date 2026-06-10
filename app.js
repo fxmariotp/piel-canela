@@ -1296,6 +1296,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let parsedText = isHtml ? text : escapeHTML(text);
         // Replace **text** with <strong>text</strong>
         parsedText = parsedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        // Replace [text](url) with <a href="url" target="_blank">text</a>
+        parsedText = parsedText.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>');
         
         if (direction === 'in') {
             wrap.className = 'chat-bubble-row message-in';
@@ -1366,7 +1368,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (action === 'preparar') {
                     appendMessage("🧖‍♀️ **Preparación de la Piel:**\n\n1. Exfolia tu cuerpo 24h antes.\n2. Ven limpia, sin perfumes, maquillaje, desodorantes ni cremas.\n3. Viste ropa cómoda y oscura (preferiblemente suelta).", 'in');
                 } else if (action === 'donde') {
-                    appendMessage("📍 **Ubicación:**\nEstamos en Calle Luis de Morales, 32, Edificio Fórum, local 9, Sevilla (Nervión).\n\n📞 **Teléfono:** 955 19 18 95", 'in');
+                    appendMessage("📍 **Ubicación:**\nEstamos en [Calle Luis de Morales, 32 (Edificio Fórum), Local 9, Sevilla](https://www.google.com/maps/search/?api=1&query=Calle+Luis+de+Morales%2C+32+%28Edif.+F%C3%B3rum%29%2C+Local+9%2C+Sevilla) (Nervión).\n\n📞 **Teléfono:** [955 19 18 95](tel:955191895)", 'in');
                 } else if (action === 'reservar') {
                     startChatBookingFlow();
                 }
@@ -1590,7 +1592,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } 
             // 5. Ubicación y cómo llegar
             else if (cleanMsg.includes('donde') || cleanMsg.includes('direccion') || cleanMsg.includes('calle') || cleanMsg.includes('ubicacion') || cleanMsg.includes('como llegar') || cleanMsg.includes('metro') || cleanMsg.includes('nervion') || cleanMsg.includes('estadio') || cleanMsg.includes('pizjuan') || cleanMsg.includes('parking') || cleanMsg.includes('aparcamiento')) {
-                appendMessage("📍 **Ubicación y Cómo Llegar:**\nEstamos en **Calle Luis de Morales, 32 (Edificio Fórum), Local 9, Sevilla**.\n• A pocos metros del Estadio Ramón Sánchez-Pizjuán y de la parada de Metro **Nervión**.\n• El local cuenta con fácil acceso para personas con capacidad reducida.", 'in');
+                appendMessage("📍 **Ubicación y Cómo Llegar:**\nEstamos en [Calle Luis de Morales, 32 (Edificio Fórum), Local 9, Sevilla](https://www.google.com/maps/search/?api=1&query=Calle+Luis+de+Morales%2C+32+%28Edif.+F%C3%B3rum%29%2C+Local+9%2C+Sevilla).\n• A pocos metros del Estadio Ramón Sánchez-Pizjuán y de la parada de Metro **Nervión**.\n• El local cuenta con fácil acceso para personas con capacidad reducida.", 'in');
             } 
             // 6. Precios y servicios detallados
             else if (cleanMsg.includes('precio') || cleanMsg.includes('precios') || cleanMsg.includes('servicio') || cleanMsg.includes('servicios') || cleanMsg.includes('tratamiento') || cleanMsg.includes('tratamientos') || cleanMsg.includes('catalogo') || cleanMsg.includes('cejas') || cleanMsg.includes('pestañas') || cleanMsg.includes('lifting') || cleanMsg.includes('corporales') || cleanMsg.includes('bonos') || cleanMsg.includes('ahorro') || cleanMsg.includes('quemadores') || cleanMsg.includes('aclarador') || cleanMsg.includes('metamorfosis') || cleanMsg.includes('sencillo')) {
@@ -1614,7 +1616,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } 
             // 11. Contacto
             else if (cleanMsg.includes('contacto') || cleanMsg.includes('telefono') || cleanMsg.includes('llamar') || cleanMsg.includes('email') || cleanMsg.includes('correo') || cleanMsg.includes('whatsapp') || cleanMsg.includes('movil') || cleanMsg.includes('hablar')) {
-                appendMessage("📞 **Información de Contacto:**\n• Teléfono de atención: **955 19 18 95**\n• Correo electrónico: **info@obrasyreformassevilla.com** (o consúltanos a través de nuestro Staff en el local).\n• También puedes reservar y gestionar todo desde esta misma web las 24 horas.", 'in');
+                appendMessage("📞 **Información de Contacto:**\n• Teléfono de atención: [955 19 18 95](tel:955191895)\n• Correo electrónico: [info@obrasyreformassevilla.com](mailto:info@obrasyreformassevilla.com) (o consúltanos a través de nuestro Staff en el local).\n• También puedes reservar y gestionar todo desde esta misma web las 24 horas.", 'in');
             } 
             // 12. Métodos de pago y amenities
             else if (cleanMsg.includes('tarjeta') || cleanMsg.includes('tarjetas') || cleanMsg.includes('tarjeta de credito') || cleanMsg.includes('pagar') || cleanMsg.includes('pago') || cleanMsg.includes('wifi') || cleanMsg.includes('internet') || cleanMsg.includes('minusvalido') || cleanMsg.includes('silla de ruedas') || cleanMsg.includes('acceso')) {
