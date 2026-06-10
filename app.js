@@ -1365,12 +1365,10 @@ document.addEventListener('DOMContentLoaded', () => {
             simulateTypingReply(() => {
                 if (action === 'recomendar') {
                     sendRecommendationOptions();
-                } else if (action === 'preparar') {
-                    appendMessage("🧖‍♀️ **Preparación de la Piel:**\n\n1. Exfolia tu cuerpo 24h antes.\n2. Ven limpia, sin perfumes, maquillaje, desodorantes ni cremas.\n3. Viste ropa cómoda y oscura (preferiblemente suelta).", 'in');
-                } else if (action === 'donde') {
-                    appendMessage("📍 **Ubicación:**\nEstamos en [Calle Luis de Morales, 32 (Edificio Fórum), Local 9, Sevilla](https://www.google.com/maps/search/?api=1&query=Calle+Luis+de+Morales%2C+32+%28Edif.+F%C3%B3rum%29%2C+Local+9%2C+Sevilla) (Nervión).\n\n📞 **Teléfono:** [955 19 18 95](tel:955191895)", 'in');
                 } else if (action === 'reservar') {
                     startChatBookingFlow();
+                } else {
+                    processBotReply(action);
                 }
             });
         });

@@ -2236,8 +2236,16 @@ body.loading-state {
     background-color: var(--color-white);
     border-top: 1px solid rgba(212, 175, 55, 0.12);
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 8px;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.chat-quick-replies::-webkit-scrollbar {
+    display: none;
 }
 
 .chat-reply-pill {
@@ -2250,6 +2258,7 @@ body.loading-state {
     border-radius: var(--radius-full);
     cursor: pointer;
     transition: var(--transition-quick);
+    flex-shrink: 0;
 }
 
 .chat-reply-pill:hover {
