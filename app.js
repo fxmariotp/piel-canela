@@ -542,6 +542,15 @@ document.addEventListener('DOMContentLoaded', () => {
         currentStep = 1;
         updateStepUI();
         
+        // Reset promo state
+        appliedPromo = null;
+        const promoInput = document.getElementById('client-promo-code');
+        if (promoInput) promoInput.value = '';
+        const errorEl = document.getElementById('promo-error');
+        if (errorEl) errorEl.style.display = 'none';
+        const successEl = document.getElementById('promo-success');
+        if (successEl) successEl.style.display = 'none';
+        
         bookingModal.classList.add('active');
         // Small timeout to allow active display before sliding animation
         setTimeout(() => {
@@ -653,6 +662,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ind3.classList.add('active');
             modalBackBtn.classList.remove('hidden');
             modalNextBtn.textContent = 'Confirmar Reserva';
+            updatePricePreview();
         } else if (currentStep === 4) {
             step4.classList.remove('hidden');
             modalNextBtn.textContent = 'Entendido';
@@ -662,8 +672,215 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('summary-date').textContent = new Date(bookingData.date).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             document.getElementById('summary-time').textContent = bookingData.time;
             document.getElementById('summary-specialist').textContent = bookingData.specialist === 'cualquiera' ? 'Cualquier profesional' : bookingData.specialist;
-            document.getElementById('summary-price').textContent = `${selectedService.price} €`;
+            
+            const finalPriceInfo = calculateFinalPrice();
+            const summaryPriceEl = document.getElementById('summary-price');
+            if (summaryPriceEl) {
+                if (finalPriceInfo.discount > 0) {
+                    summaryPriceEl.innerHTML = `<span style="text-decoration: line-through; color: var(--color-text-muted); font-size: 0.85em; margin-right: 8px;">${parseFloat(selectedService.price).toFixed(2)} €</span><span>${finalPriceInfo.finalPrice.toFixed(2)} €</span>`;
+                } else {
+                    summaryPriceEl.textContent = `${parseFloat(selectedService.price).toFixed(2)} €`;
+                }
+            }
+            
+            updateCalendarLinks();
         }
+    }
+
+    // ----------------------------------------------------
+    // PROMO CODES & CALENDAR SYNCHRONIZATION HELPERS
+    // ----------------------------------------------------
+    let appliedPromo = null;
+
+    // Initialize default promo codes if not present
+    function initDefaultPromos() {
+        if (!localStorage.getItem('piel_canela_promos')) {
+            const defaultPromos = [
+                { code: 'PIELCANELA10', type: 'percentage', value: 10, active: true },
+                { code: 'BIENVENIDA5', type: 'fixed', value: 5, active: true }
+            ];
+            localStorage.setItem('piel_canela_promos', JSON.stringify(defaultPromos));
+        }
+    }
+    initDefaultPromos();
+
+    function calculateFinalPrice() {
+        const basePrice = parseFloat(selectedService.price) || 0;
+        if (!appliedPromo) {
+            return { finalPrice: basePrice, discount: 0 };
+        }
+        let discount = 0;
+        if (appliedPromo.type === 'percentage') {
+            discount = basePrice * (parseFloat(appliedPromo.value) / 100);
+        } else if (appliedPromo.type === 'fixed') {
+            discount = parseFloat(appliedPromo.value);
+        }
+        // Don't let discount exceed price
+        discount = Math.min(discount, basePrice);
+        const finalPrice = Math.max(0, basePrice - discount);
+        return { finalPrice, discount };
+    }
+
+    function updatePricePreview() {
+        const basePrice = parseFloat(selectedService.price) || 0;
+        const { finalPrice, discount } = calculateFinalPrice();
+        
+        const originalPricePreview = document.getElementById('booking-original-price-preview');
+        const pricePreview = document.getElementById('booking-price-preview');
+        
+        if (pricePreview) {
+            pricePreview.textContent = `${finalPrice.toFixed(2)} €`;
+        }
+        
+        if (originalPricePreview) {
+            if (discount > 0) {
+                originalPricePreview.textContent = `${basePrice.toFixed(2)} €`;
+                originalPricePreview.style.display = 'inline';
+            } else {
+                originalPricePreview.style.display = 'none';
+            }
+        }
+    }
+
+    // Hook up apply promo button
+    const btnApplyPromo = document.getElementById('btn-apply-promo');
+    if (btnApplyPromo) {
+        btnApplyPromo.addEventListener('click', () => {
+            const codeInput = document.getElementById('client-promo-code').value.trim().toUpperCase();
+            const errorEl = document.getElementById('promo-error');
+            const successEl = document.getElementById('promo-success');
+            
+            errorEl.style.display = 'none';
+            successEl.style.display = 'none';
+            
+            if (!codeInput) {
+                errorEl.textContent = 'Por favor, ingresa un código.';
+                errorEl.style.display = 'block';
+                return;
+            }
+            
+            const promos = JSON.parse(localStorage.getItem('piel_canela_promos')) || [];
+            const foundPromo = promos.find(p => p.code.toUpperCase() === codeInput);
+            
+            if (!foundPromo) {
+                errorEl.textContent = 'Código no válido.';
+                errorEl.style.display = 'block';
+                appliedPromo = null;
+                updatePricePreview();
+                return;
+            }
+            
+            if (!foundPromo.active) {
+                errorEl.textContent = 'Este código ha expirado.';
+                errorEl.style.display = 'block';
+                appliedPromo = null;
+                updatePricePreview();
+                return;
+            }
+            
+            appliedPromo = foundPromo;
+            
+            let descText = '';
+            if (foundPromo.type === 'percentage') {
+                descText = `${foundPromo.value}% de descuento`;
+            } else {
+                descText = `${foundPromo.value} € de descuento`;
+            }
+            
+            successEl.textContent = `¡Código aplicado! ${descText}`;
+            successEl.style.display = 'block';
+            updatePricePreview();
+        });
+    }
+
+    function updateCalendarLinks() {
+        const startDate = new Date(bookingData.date + 'T' + bookingData.time + ':00');
+        let durationMins = 45;
+        if (selectedService.duration.includes('h')) {
+            durationMins = 60;
+        } else {
+            const match = selectedService.duration.match(/(\d+)\s*min/);
+            if (match) durationMins = parseInt(match[1]);
+        }
+        const endDate = new Date(startDate.getTime() + durationMins * 60 * 1000);
+        
+        const pad = (n) => String(n).padStart(2, '0');
+        const formatGoogleDate = (date) => {
+            return `${date.getUTCFullYear()}${pad(date.getUTCMonth() + 1)}${pad(date.getUTCDate())}T${pad(date.getUTCHours())}${pad(date.getUTCMinutes())}${pad(date.getUTCSeconds())}Z`;
+        };
+        
+        const dates = `${formatGoogleDate(startDate)}/${formatGoogleDate(endDate)}`;
+        const text = encodeURIComponent(`Cita PIEL CANELA: ${selectedService.name}`);
+        
+        const finalPriceInfo = calculateFinalPrice();
+        const priceStr = finalPriceInfo.finalPrice.toFixed(2);
+        
+        const details = encodeURIComponent(`Hola ${bookingData.name},\nTu cita de bronceado está confirmada.\n\nEspecialista: ${bookingData.specialist === 'cualquiera' ? 'Cualquiera' : bookingData.specialist}\nPrecio: ${priceStr} €\nNotas: ${bookingData.notes || 'Ninguna'}`);
+        const location = encodeURIComponent(`Calle Luis de Morales, 32 (Edif. Fórum), Local 9, Sevilla`);
+        
+        const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${dates}&details=${details}&location=${location}`;
+        
+        const googleCalBtn = document.getElementById('btn-add-google-cal');
+        if (googleCalBtn) {
+            googleCalBtn.setAttribute('href', googleCalUrl);
+        }
+    }
+
+    function downloadICS() {
+        const startDate = new Date(bookingData.date + 'T' + bookingData.time + ':00');
+        let durationMins = 45;
+        if (selectedService.duration.includes('h')) {
+            durationMins = 60;
+        } else {
+            const match = selectedService.duration.match(/(\d+)\s*min/);
+            if (match) durationMins = parseInt(match[1]);
+        }
+        const endDate = new Date(startDate.getTime() + durationMins * 60 * 1000);
+        
+        const pad = (n) => String(n).padStart(2, '0');
+        const formatICSDate = (date) => {
+            return `${date.getUTCFullYear()}${pad(date.getUTCMonth() + 1)}${pad(date.getUTCDate())}T${pad(date.getUTCHours())}${pad(date.getUTCMinutes())}${pad(date.getUTCSeconds())}Z`;
+        };
+        
+        const dtstamp = formatICSDate(new Date());
+        const dtstart = formatICSDate(startDate);
+        const dtend = formatICSDate(endDate);
+        
+        const finalPriceInfo = calculateFinalPrice();
+        const priceStr = finalPriceInfo.finalPrice.toFixed(2);
+        
+        const summary = `Cita PIEL CANELA: ${selectedService.name}`;
+        const description = `Hola ${bookingData.name},\\nTu cita de bronceado está confirmada.\\n\\nEspecialista: ${bookingData.specialist === 'cualquiera' ? 'Cualquiera' : bookingData.specialist}\\nPrecio: ${priceStr} €\\nNotas: ${bookingData.notes || 'Ninguna'}`;
+        const location = `Calle Luis de Morales, 32 (Edif. Fórum), Local 9, Sevilla`;
+        
+        const icsContent = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//Piel Canela Bronze//NONSGML Cita//ES',
+            'BEGIN:VEVENT',
+            `UID:BK-${Date.now()}@pielcanelabronze.com`,
+            `DTSTAMP:${dtstamp}`,
+            `DTSTART:${dtstart}`,
+            `DTEND:${dtend}`,
+            `SUMMARY:${summary}`,
+            `DESCRIPTION:${description}`,
+            `LOCATION:${location}`,
+            'END:VEVENT',
+            'END:VCALENDAR'
+        ].join('\r\n');
+        
+        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `cita-pielcanela-${bookingData.date}.ics`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    const btnDownloadIcs = document.getElementById('btn-download-ics');
+    if (btnDownloadIcs) {
+        btnDownloadIcs.addEventListener('click', downloadICS);
     }
 
     // CALENDAR DRAW ENGINE
@@ -812,15 +1029,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function saveBookingToLocalStorage() {
         let currentBookings = JSON.parse(localStorage.getItem('piel_canela_bookings')) || [];
+        const finalPriceInfo = calculateFinalPrice();
         const newBooking = {
             id: 'BK-' + Date.now(),
-            service: selectedService,
+            service: {
+                id: selectedService.id,
+                name: selectedService.name,
+                price: finalPriceInfo.finalPrice.toFixed(2),
+                duration: selectedService.duration
+            },
             specialist: bookingData.specialist,
             date: bookingData.date,
             time: bookingData.time,
             clientName: bookingData.name,
             clientPhone: bookingData.phone,
-            clientNotes: bookingData.notes
+            clientEmail: bookingData.email,
+            clientNotes: bookingData.notes,
+            promoApplied: appliedPromo ? appliedPromo.code : null,
+            discountAmount: finalPriceInfo.discount.toFixed(2),
+            status: 'pendiente'
         };
         
         currentBookings.push(newBooking);

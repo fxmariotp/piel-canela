@@ -202,14 +202,16 @@
                         <span class="material-symbols-outlined text-gold">map</span>
                         Ubicación
                     </h3>
-                    <div class="mock-map">
-                        <div class="map-inner-content">
-                            <span class="material-symbols-outlined map-pin">location_on</span>
-                            <span class="map-title">Luis de Morales, 32</span>
-                            <span class="map-subtitle">Edificio Fórum, Sevilla</span>
-                            <a href="https://maps.google.com/?q=Calle+Luis+de+Morales+32+Sevilla" target="_blank" class="map-link">Ver en Google Maps</a>
-                        </div>
-                        <div class="map-grid-bg"></div>
+                    <div class="mock-map" style="padding: 0; overflow: hidden; position: relative; height: 220px; border-radius: var(--radius-sm);">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170.1652431610444!2d-5.9754888846934445!3d37.383359999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd12c1181283c749%3A0xb3de436603a11128!2sEdificio%20F%C3%B3rum!5e0!3m2!1ses!2ses!4v1686323450201!5m2!1ses!2ses" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0; filter: grayscale(0.5) sepia(0.3) hue-rotate(345deg) saturate(1.2) contrast(1.05); transition: filter 0.3s ease; display: block;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
                     </div>
                 </div>
             </aside>
@@ -1043,6 +1045,26 @@
                             <label class="form-label" for="client-notes">Notas (Opcional)</label>
                             <textarea id="client-notes" rows="2" class="form-textarea" placeholder="Alguna indicación o preferencia..."></textarea>
                         </div>
+                        
+                        <!-- Promo Code Section -->
+                        <div class="promo-code-container" style="margin-top: 16px; padding-top: 16px; border-top: 1.5px dashed rgba(109, 76, 65, 0.15);">
+                            <label class="form-label">¿Tienes un código de descuento?</label>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <input type="text" id="client-promo-code" class="form-input" placeholder="Ingresa código" style="text-transform: uppercase; flex-grow: 1; margin-bottom: 0;">
+                                <button type="button" id="btn-apply-promo" class="btn-secondary" style="padding: 10px 16px; height: 42px; border-radius: var(--radius-sm); margin-top: 0; font-size: 0.8rem; font-weight: 700; flex-shrink: 0;">Aplicar</button>
+                            </div>
+                            <p id="promo-error" style="color: #ff5252; font-size: 0.75rem; margin-top: 4px; display: none;"></p>
+                            <p id="promo-success" style="color: #25d366; font-size: 0.75rem; margin-top: 4px; display: none; font-weight: 600;"></p>
+                        </div>
+
+                        <!-- Price Summary Preview -->
+                        <div id="booking-price-preview-box" style="margin-top: 12px; display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: rgba(109, 76, 65, 0.05); border-radius: var(--radius-sm); font-size: 0.85rem;">
+                            <span style="font-weight: 600; color: var(--color-chocolate-dark);">Total a pagar:</span>
+                            <div>
+                                <span id="booking-original-price-preview" style="text-decoration: line-through; color: var(--color-text-muted); margin-right: 6px; display: none;">-</span>
+                                <span id="booking-price-preview" style="font-weight: 850; color: var(--color-gold-dark);">-</span>
+                            </div>
+                        </div>
                     </form>
                 </div>
 
@@ -1062,6 +1084,21 @@
                         <div class="receipt-row"><span class="receipt-label">Hora:</span><span class="receipt-val" id="summary-time">-</span></div>
                         <div class="receipt-row"><span class="receipt-label">Profesional:</span><span class="receipt-val" id="summary-specialist">-</span></div>
                         <div class="receipt-row total-row"><span class="receipt-label">Precio:</span><span class="receipt-val" id="summary-price">-</span></div>
+                    </div>
+
+                    <!-- Calendar sync buttons -->
+                    <div class="calendar-sync-box" style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px; width: 100%;">
+                        <span class="calendar-sync-title" style="font-size: 0.8rem; font-weight: 700; color: var(--color-chocolate-dark); text-transform: uppercase; letter-spacing: 0.05em; text-align: center; display: block;">Añadir a mi calendario</span>
+                        <div class="calendar-buttons-row" style="display: flex; gap: 10px; justify-content: center; width: 100%;">
+                            <a id="btn-add-google-cal" class="btn-calendar-sync" href="#" target="_blank" style="display: flex; align-items: center; gap: 8px; padding: 10px 16px; background-color: var(--color-white); border: 1.5px solid rgba(109, 76, 65, 0.15); border-radius: var(--radius-sm); color: var(--color-chocolate-dark); text-decoration: none; font-size: 0.85rem; font-weight: 700; transition: all 0.2s ease;">
+                                <span class="material-symbols-outlined" style="color: #4285F4; font-size: 20px;">calendar_today</span>
+                                Google Calendar
+                            </a>
+                            <button id="btn-download-ics" class="btn-calendar-sync" style="display: flex; align-items: center; gap: 8px; padding: 10px 16px; background-color: var(--color-white); border: 1.5px solid rgba(109, 76, 65, 0.15); border-radius: var(--radius-sm); color: var(--color-chocolate-dark); cursor: pointer; font-size: 0.85rem; font-weight: 700; transition: all 0.2s ease;">
+                                <span class="material-symbols-outlined" style="color: #6d4c41; font-size: 20px;">download</span>
+                                iCalendar (.ics)
+                            </button>
+                        </div>
                     </div>
                 </div>
 

@@ -1479,6 +1479,12 @@
                     Base de Clientes
                 </button>
             </li>
+            <li class="nav-item" id="nav-analiticas">
+                <button onclick="switchTab('analiticas')">
+                    <span class="material-symbols-outlined">analytics</span>
+                    Análisis y Estadísticas
+                </button>
+            </li>
             <li class="nav-item" id="nav-ajustes">
                 <button onclick="switchTab('ajustes')">
                     <span class="material-symbols-outlined">settings</span>
@@ -1650,11 +1656,85 @@
 
         </section>
 
+        <!-- CRM TAB ANALITICAS SECTION -->
+        <section class="crm-panel-container" id="section-analiticas-panel" style="display: none;">
+            <!-- Analytics Summary Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon-box" style="background-color: rgba(109, 76, 65, 0.1); color: var(--color-chocolate);">
+                        <span class="material-symbols-outlined">payments</span>
+                    </div>
+                    <div class="stat-details">
+                        <span class="stat-value" id="analytics-total-ingresos">0,00 €</span>
+                        <span class="stat-label">Caja Realizada</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-box success" style="background-color: rgba(37, 211, 102, 0.1); color: var(--color-whatsapp);">
+                        <span class="material-symbols-outlined">analytics</span>
+                    </div>
+                    <div class="stat-details">
+                        <span class="stat-value" id="analytics-ticket-medio">0,00 €</span>
+                        <span class="stat-label">Ticket Promedio</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-box pending" style="background-color: rgba(212, 175, 55, 0.15); color: var(--color-gold-dark);">
+                        <span class="material-symbols-outlined">spa</span>
+                    </div>
+                    <div class="stat-details">
+                        <span class="stat-value" id="analytics-top-service">-</span>
+                        <span class="stat-label">Tratamiento Estrella</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-box" style="background-color: rgba(74, 53, 47, 0.1); color: var(--color-chocolate-dark);">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div class="stat-details">
+                        <span class="stat-value" id="analytics-peak-hour">-</span>
+                        <span class="stat-label">Hora Más Concurrida</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row 1: Daily Revenue Trend -->
+            <div style="display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 8px;">
+                <div class="glass-card" style="background-color: var(--color-white); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-soft); border: 1px solid rgba(223, 186, 140, 0.2);">
+                    <h3 class="ajustes-section-title" style="font-family: var(--font-serif); margin-bottom: 20px; color: var(--color-chocolate-dark);">Proyección de Ingresos por Día de la Semana</h3>
+                    <div id="daily-revenue-svg-container" style="width: 100%; min-height: 200px;">
+                        <!-- SVG chart will be injected dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row 2: Service Popularity & Peak Hours -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 24px; margin-top: 8px;">
+                <div class="glass-card" style="background-color: var(--color-white); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-soft); border: 1px solid rgba(223, 186, 140, 0.2);">
+                    <h3 class="ajustes-section-title" style="font-family: var(--font-serif); margin-bottom: 20px; color: var(--color-chocolate-dark);">Popularidad de Tratamientos</h3>
+                    <div id="top-treatments-svg-container" style="width: 100%; min-height: 200px;">
+                        <!-- SVG chart will be injected dynamically -->
+                    </div>
+                </div>
+                
+                <div class="glass-card" style="background-color: var(--color-white); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-soft); border: 1px solid rgba(223, 186, 140, 0.2);">
+                    <h3 class="ajustes-section-title" style="font-family: var(--font-serif); margin-bottom: 20px; color: var(--color-chocolate-dark);">Curva de Citas por Hora del Día</h3>
+                    <div id="busiest-hours-svg-container" style="width: 100%; min-height: 200px;">
+                        <!-- SVG chart will be injected dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- CRM TAB CLIENTES SECTION -->
         <section class="crm-panel-container" id="section-clientes-panel" style="display: none;">
             <div class="clients-panel-container">
-                <div class="search-row">
-                    <input type="text" id="client-search-input" placeholder="Buscar clientes por nombre o teléfono..." class="search-input-crm" oninput="searchClients()">
+                <div class="search-row" style="display: flex; gap: 16px; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                    <input type="text" id="client-search-input" placeholder="Buscar clientes por nombre o teléfono..." class="search-input-crm" oninput="searchClients()" style="flex-grow: 1; margin-bottom: 0;">
+                    <button class="btn-primary" onclick="exportClientsToCSV()" style="flex-shrink: 0; padding: 10px 20px; font-size: 0.8rem; display: flex; align-items: center; gap: 8px;">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">download</span>
+                        Exportar a CSV
+                    </button>
                 </div>
                 <div class="clients-table-wrapper">
                     <table class="clients-table">
@@ -1703,6 +1783,47 @@
                 <div class="form-group">
                     <label class="form-label">Mensaje de Recordatorio</label>
                     <textarea class="form-input" id="whatsapp-reminder-template" style="min-height: 80px; resize: vertical; font-family: var(--font-sans);">Hola [NOMBRE], ¡te recordamos tu cita de bronceado mañana [FECHA] a las [HORA] ([SERVICIO])! Recuerda venir con la piel exfoliada y ropa holgada oscura. ¡Te esperamos! 🧴☀️</textarea>
+                </div>
+            </div>
+            
+            <div class="ajustes-section" style="margin-top: 24px;">
+                <h3 class="ajustes-section-title">Gestión de Códigos Promocionales</h3>
+                <p class="ajustes-desc">Crea y gestiona cupones de descuento aplicables por los clientes durante el proceso de reserva.</p>
+                
+                <form id="add-promo-form" onsubmit="savePromoCode(event)" style="display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; align-items: flex-end;">
+                    <div class="form-group" style="margin-bottom: 0; flex: 1; min-width: 150px;">
+                        <label class="form-label" for="new-promo-code">Código *</label>
+                        <input type="text" id="new-promo-code" class="form-input" placeholder="Ej. DESCUENTO10" required style="text-transform: uppercase; margin-bottom: 0;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0; width: 140px;">
+                        <label class="form-label" for="new-promo-type">Tipo *</label>
+                        <select id="new-promo-type" class="form-select" required style="padding: 10px 12px; border-radius: var(--radius-sm); border: 1.5px solid rgba(74, 53, 47, 0.15); width: 100%; height: 42px; background: white;">
+                            <option value="percentage">Porcentaje (%)</option>
+                            <option value="fixed">Fijo (€)</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0; width: 100px;">
+                        <label class="form-label" for="new-promo-value">Valor *</label>
+                        <input type="number" id="new-promo-value" class="form-input" placeholder="Ej. 10" required min="1" step="any" style="margin-bottom: 0;">
+                    </div>
+                    <button type="submit" class="btn-primary" style="height: 42px; padding: 0 24px; border-radius: var(--radius-sm); margin-top: 0;">Crear Código</button>
+                </form>
+
+                <div class="clients-table-wrapper" style="margin-top: 20px; box-shadow: none; border: 1px solid rgba(74, 53, 47, 0.08);">
+                    <table class="clients-table" style="font-size: 0.85rem;">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Tipo</th>
+                                <th>Descuento</th>
+                                <th>Estado</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="promos-table-body">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
@@ -1881,6 +2002,12 @@
             updateStats(bookings);
             renderCalendarView(bookings);
             renderClientsList(bookings);
+            
+            if (activeTab === 'analiticas') {
+                renderAnalyticsView();
+            } else if (activeTab === 'ajustes') {
+                renderPromosList();
+            }
         }
 
         function getBookingsFromStorage() {
@@ -1902,6 +2029,7 @@
             // Toggle panel visibility
             document.getElementById('section-citas-panel').style.display = (tab === 'citas') ? 'grid' : 'none';
             document.getElementById('section-clientes-panel').style.display = (tab === 'clientes') ? 'block' : 'none';
+            document.getElementById('section-analiticas-panel').style.display = (tab === 'analiticas') ? 'block' : 'none';
             document.getElementById('section-ajustes-panel').style.display = (tab === 'ajustes') ? 'block' : 'none';
 
             // Change header details
@@ -1918,6 +2046,11 @@
                 pageSubtitle.textContent = "Analiza el historial de visitas, gastos acumulados y preferencias de contacto";
                 document.getElementById('crm-header-actions').style.display = 'none';
                 document.getElementById('crm-stats-grid').style.display = 'none';
+            } else if (tab === 'analiticas') {
+                pageTitle.textContent = "Análisis y Estadísticas";
+                pageSubtitle.textContent = "Métricas operativas, tratamientos estrella y distribución de ingresos";
+                document.getElementById('crm-header-actions').style.display = 'none';
+                document.getElementById('crm-stats-grid').style.display = 'none';
             } else if (tab === 'ajustes') {
                 pageTitle.textContent = "Ajustes del Sistema";
                 pageSubtitle.textContent = "Configura plantillas de WhatsApp y gestiona la base de datos local";
@@ -1927,6 +2060,370 @@
             
             closeDetailPanel();
             refreshCRM();
+        }
+
+        // CSV EXPORT FOR CLIENT DATABASE
+        function exportClientsToCSV() {
+            const bookings = getBookingsFromStorage();
+            
+            const clientsMap = {};
+            bookings.forEach(b => {
+                const key = (b.clientName + '_' + b.clientPhone).toLowerCase();
+                const price = parseFloat(b.service.price) || 0;
+                const status = b.status || 'pendiente';
+                
+                if (!clientsMap[key]) {
+                    clientsMap[key] = {
+                        name: b.clientName,
+                        phone: b.clientPhone,
+                        totalCitas: 0,
+                        visitasRealizadas: 0,
+                        gastado: 0,
+                        ultimaVisita: b.date
+                    };
+                }
+                
+                clientsMap[key].totalCitas++;
+                
+                if (status === 'confirmada') {
+                    clientsMap[key].visitasRealizadas++;
+                    clientsMap[key].gastado += price;
+                }
+                
+                if (new Date(b.date) > new Date(clientsMap[key].ultimaVisita)) {
+                    clientsMap[key].ultimaVisita = b.date;
+                }
+            });
+
+            const clientsArray = Object.values(clientsMap);
+            
+            if (clientsArray.length === 0) {
+                alert('No hay datos de clientes para exportar.');
+                return;
+            }
+            
+            let csvLines = [
+                'Cliente;Teléfono;Citas Totales;Visitas Realizadas;Gastado Acumulado;Última Visita'
+            ];
+            
+            clientsArray.forEach(c => {
+                const name = `"${c.name.replace(/"/g, '""')}"`;
+                const phone = `"${c.phone.replace(/"/g, '""')}"`;
+                const gastado = `"${c.gastado.toFixed(2).replace('.', ',')} €"`;
+                const date = c.ultimaVisita;
+                
+                csvLines.push(`${name};${phone};${c.totalCitas};${c.visitasRealizadas};${gastado};${date}`);
+            });
+            
+            const csvContent = '\uFEFF' + csvLines.join('\r\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `clientes_piel_canela_${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // ANALYTICS & SVG GRAPHICS DRAW ENGINES
+        function renderAnalyticsView() {
+            const bookings = getBookingsFromStorage();
+            
+            let totalIngresos = 0;
+            let totalVisitas = 0;
+            let serviceCounts = {};
+            let hourCounts = {};
+            
+            bookings.forEach(b => {
+                if (b.status === 'cancelada') return;
+                
+                const price = parseFloat(b.service.price) || 0;
+                
+                if (b.status === 'confirmada') {
+                    totalIngresos += price;
+                    totalVisitas++;
+                }
+                
+                const sName = b.service.name;
+                serviceCounts[sName] = (serviceCounts[sName] || 0) + 1;
+                
+                const hourPrefix = b.time.split(':')[0] + ':00';
+                hourCounts[hourPrefix] = (hourCounts[hourPrefix] || 0) + 1;
+            });
+            
+            const ticketMedio = totalVisitas > 0 ? (totalIngresos / totalVisitas) : 0;
+            
+            let topService = '-';
+            let topServiceCount = 0;
+            Object.entries(serviceCounts).forEach(([name, count]) => {
+                if (count > topServiceCount) {
+                    topServiceCount = count;
+                    topService = name;
+                }
+            });
+            
+            let peakHour = '-';
+            let peakHourCount = 0;
+            Object.entries(hourCounts).forEach(([hour, count]) => {
+                if (count > peakHourCount) {
+                    peakHourCount = count;
+                    peakHour = hour;
+                }
+            });
+            
+            document.getElementById('analytics-total-ingresos').textContent = totalIngresos.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' €';
+            document.getElementById('analytics-ticket-medio').textContent = ticketMedio.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' €';
+            document.getElementById('analytics-top-service').textContent = topService;
+            document.getElementById('analytics-peak-hour').textContent = peakHour;
+            
+            drawDailyRevenueChart(bookings);
+            drawTopTreatmentsChart(bookings);
+            drawBusiestHoursChart(bookings);
+        }
+
+        function drawDailyRevenueChart(bookings) {
+            const daysSpanish = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+            const orderedDays = [1, 2, 3, 4, 5, 6, 0];
+            const revenue = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 0: 0 };
+            
+            bookings.forEach(b => {
+                if (b.status === 'cancelada') return;
+                const dateObj = new Date(b.date);
+                const day = dateObj.getDay();
+                if (revenue[day] !== undefined) {
+                    revenue[day] += parseFloat(b.service.price) || 0;
+                }
+            });
+            
+            const maxVal = Math.max(...Object.values(revenue), 100);
+            
+            const width = 600;
+            const height = 200;
+            const paddingX = 40;
+            const paddingY = 30;
+            const chartWidth = width - 2 * paddingX;
+            const chartHeight = height - 2 * paddingY;
+            const stepX = chartWidth / orderedDays.length;
+            
+            let svgHtml = '';
+            
+            orderedDays.forEach((day, index) => {
+                const value = revenue[day];
+                const x = paddingX + index * stepX + (stepX - 30) / 2;
+                const barHeight = (value / maxVal) * chartHeight;
+                const y = paddingY + chartHeight - barHeight;
+                
+                svgHtml += `
+                    <g>
+                        <rect x="${x}" y="${y}" width="30" height="${barHeight}" rx="4" fill="var(--color-chocolate)" style="transition: all 0.3s ease;"></rect>
+                        <text x="${x + 15}" y="${height - 10}" fill="var(--color-text-muted)" font-size="10" font-weight="700" text-anchor="middle">${daysSpanish[day].substring(0,3)}</text>
+                        <text x="${x + 15}" y="${y - 8}" fill="var(--color-chocolate-dark)" font-size="10" font-weight="800" text-anchor="middle">${Math.round(value)} €</text>
+                    </g>
+                `;
+            });
+            
+            const container = document.getElementById('daily-revenue-svg-container');
+            if (container) {
+                container.innerHTML = `
+                    <svg width="100%" height="${height}" viewBox="0 0 ${width} ${height}" style="overflow: visible;">
+                        ${svgHtml}
+                    </svg>
+                `;
+            }
+        }
+
+        function drawTopTreatmentsChart(bookings) {
+            const counts = {};
+            bookings.forEach(b => {
+                if (b.status === 'cancelada') return;
+                const name = b.service.name;
+                counts[name] = (counts[name] || 0) + 1;
+            });
+            
+            const sorted = Object.entries(counts).sort((a,b) => b[1] - a[1]);
+            const maxVal = sorted.length > 0 ? sorted[0][1] : 1;
+            const totalBookings = bookings.filter(b => b.status !== 'cancelada').length || 1;
+            
+            let svgHtml = '';
+            const barHeight = 20;
+            const barSpacing = 12;
+            const startY = 15;
+            
+            sorted.forEach(([name, count], index) => {
+                const y = startY + index * (barHeight + barSpacing);
+                const barWidth = (count / maxVal) * 200;
+                
+                svgHtml += `
+                    <g>
+                        <text x="10" y="${y + 14}" fill="var(--color-chocolate-dark)" font-size="11" font-weight="700">${escapeHTML(name)}</text>
+                        <rect x="180" y="${y}" width="${barWidth}" height="${barHeight}" rx="4" fill="var(--color-gold)" style="transition: all 0.3s ease;"></rect>
+                        <text x="${180 + barWidth + 8}" y="${y + 14}" fill="var(--color-chocolate)" font-size="10" font-weight="800">${count} (${Math.round(count/totalBookings*100)}%)</text>
+                    </g>
+                `;
+            });
+            
+            const totalHeight = startY + sorted.length * (barHeight + barSpacing) + 10;
+            const container = document.getElementById('top-treatments-svg-container');
+            if (container) {
+                container.innerHTML = `
+                    <svg width="100%" height="${totalHeight}" viewBox="0 0 450 ${totalHeight}" style="overflow: visible;">
+                        ${svgHtml}
+                    </svg>
+                `;
+            }
+        }
+
+        function drawBusiestHoursChart(bookings) {
+            const allSlots = ["10:00", "11:00", "12:00", "13:00", "14:00", "16:00", "17:00", "18:00", "19:00", "20:00"];
+            const counts = {};
+            allSlots.forEach(s => counts[s] = 0);
+            
+            bookings.forEach(b => {
+                if (b.status === 'cancelada') return;
+                const hourPrefix = b.time.split(':')[0] + ':00';
+                if (counts[hourPrefix] !== undefined) {
+                    counts[hourPrefix]++;
+                }
+            });
+            
+            const maxVal = Math.max(...Object.values(counts), 1);
+            
+            const width = 600;
+            const height = 200;
+            const paddingX = 40;
+            const paddingY = 30;
+            const chartWidth = width - 2 * paddingX;
+            const chartHeight = height - 2 * paddingY;
+            const stepX = chartWidth / (allSlots.length - 1);
+            
+            let points = [];
+            allSlots.forEach((slot, index) => {
+                const count = counts[slot];
+                const x = paddingX + index * stepX;
+                const y = paddingY + chartHeight - (count / maxVal) * chartHeight;
+                points.push({ x, y, slot, count });
+            });
+            
+            let areaPath = `M ${points[0].x} ${paddingY + chartHeight} `;
+            points.forEach(p => {
+                areaPath += `L ${p.x} ${p.y} `;
+            });
+            areaPath += `L ${points[points.length - 1].x} ${paddingY + chartHeight} Z`;
+            
+            let linePath = `M ${points[0].x} ${points[0].y} `;
+            for (let i = 1; i < points.length; i++) {
+                linePath += `L ${points[i].x} ${points[i].y} `;
+            }
+            
+            let svgHtml = `
+                <path d="${areaPath}" fill="rgba(212, 175, 55, 0.12)"></path>
+                <path d="${linePath}" fill="none" stroke="var(--color-gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            `;
+            
+            points.forEach(p => {
+                svgHtml += `
+                    <circle cx="${p.x}" cy="${p.y}" r="4" fill="var(--color-chocolate)" stroke="var(--color-white)" stroke-width="1.5">
+                        <title>Hora: ${p.slot} - Citas: ${p.count}</title>
+                    </circle>
+                    <text x="${p.x}" y="${height - 8}" fill="var(--color-text-muted)" font-size="9" font-weight="700" text-anchor="middle">${p.slot}</text>
+                    <text x="${p.x}" y="${p.y - 8}" fill="var(--color-chocolate-dark)" font-size="9" font-weight="800" text-anchor="middle">${p.count}</text>
+                `;
+            });
+            
+            const container = document.getElementById('busiest-hours-svg-container');
+            if (container) {
+                container.innerHTML = `
+                    <svg width="100%" height="${height}" viewBox="0 0 ${width} ${height}" style="overflow: visible;">
+                        ${svgHtml}
+                    </svg>
+                `;
+            }
+        }
+
+        // PROMO CODES ADMIN MANAGEMENT
+        function renderPromosList() {
+            const tbody = document.getElementById('promos-table-body');
+            if (!tbody) return;
+            
+            const promos = JSON.parse(localStorage.getItem('piel_canela_promos')) || [];
+            tbody.innerHTML = '';
+            
+            if (promos.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--color-text-muted); font-style: italic; padding: 20px;">No hay códigos de descuento creados</td></tr>';
+                return;
+            }
+            
+            promos.forEach(p => {
+                const tr = document.createElement('tr');
+                const discountText = p.type === 'percentage' ? `${p.value}%` : `${p.value} €`;
+                const statusBadge = p.active 
+                    ? '<span class="status-pill confirmed">Activo</span>' 
+                    : '<span class="status-pill cancelled">Inactivo</span>';
+                const toggleText = p.active ? 'Desactivar' : 'Activar';
+                
+                tr.innerHTML = `
+                    <td style="font-weight: 800; color: var(--color-chocolate-dark);">${escapeHTML(p.code)}</td>
+                    <td style="text-transform: capitalize;">${p.type === 'percentage' ? 'Porcentaje' : 'Importe Fijo'}</td>
+                    <td style="font-weight: 700;">${discountText}</td>
+                    <td>${statusBadge}</td>
+                    <td>
+                        <div style="display: flex; gap: 8px;">
+                            <button onclick="togglePromoStatus('${escapeJS(p.code)}')" class="btn-secondary" style="padding: 4px 10px; font-size: 0.75rem; font-weight: 600; cursor: pointer; border-radius: var(--radius-sm);">
+                                ${toggleText}
+                            </button>
+                            <button onclick="deletePromoCode('${escapeJS(p.code)}')" class="btn-secondary" style="padding: 4px 10px; font-size: 0.75rem; color: red; border-color: rgba(255,0,0,0.1); font-weight: 600; cursor: pointer; border-radius: var(--radius-sm);">
+                                Eliminar
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        
+        function savePromoCode(e) {
+            e.preventDefault();
+            const codeInput = document.getElementById('new-promo-code').value.trim().toUpperCase();
+            const type = document.getElementById('new-promo-type').value;
+            const value = parseFloat(document.getElementById('new-promo-value').value);
+            
+            if (!codeInput || isNaN(value)) return;
+            
+            const promos = JSON.parse(localStorage.getItem('piel_canela_promos')) || [];
+            if (promos.some(p => p.code.toUpperCase() === codeInput)) {
+                alert('Ya existe un código de descuento con ese nombre.');
+                return;
+            }
+            
+            promos.push({
+                code: codeInput,
+                type: type,
+                value: value,
+                active: true
+            });
+            
+            localStorage.setItem('piel_canela_promos', JSON.stringify(promos));
+            document.getElementById('add-promo-form').reset();
+            renderPromosList();
+        }
+        
+        function togglePromoStatus(code) {
+            const promos = JSON.parse(localStorage.getItem('piel_canela_promos')) || [];
+            const promo = promos.find(p => p.code.toUpperCase() === code.toUpperCase());
+            if (promo) {
+                promo.active = !promo.active;
+                localStorage.setItem('piel_canela_promos', JSON.stringify(promos));
+                renderPromosList();
+            }
+        }
+        
+        function deletePromoCode(code) {
+            if (confirm(`¿Estás segura de eliminar el código ${code}?`)) {
+                let promos = JSON.parse(localStorage.getItem('piel_canela_promos')) || [];
+                promos = promos.filter(p => p.code.toUpperCase() !== code.toUpperCase());
+                localStorage.setItem('piel_canela_promos', JSON.stringify(promos));
+                renderPromosList();
+            }
         }
 
         // VIEW MODE CITAS

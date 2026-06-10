@@ -2807,4 +2807,18 @@ body.loading-state {
     font-size: 24px;
 }
 
+/* Map hover interaction */
+.mock-map iframe:hover {
+    filter: none !important;
+}
+
+/* Calendar Sync Buttons */
+.btn-calendar-sync:hover {
+    border-color: var(--color-gold) !important;
+    background-color: var(--color-gold-light) !important;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.18);
+    transform: translateY(-1px);
+}
+
+
 
