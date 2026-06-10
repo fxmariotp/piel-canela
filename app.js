@@ -1571,16 +1571,62 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // General conversation flow
             const cleanMsg = text.toLowerCase().trim();
-            if (cleanMsg.includes('bronceado') || cleanMsg.includes('servicio') || cleanMsg.includes('precio') || cleanMsg.includes('tratamiento')) {
-                sendRecommendationOptions();
-            } else if (cleanMsg.includes('preparar') || cleanMsg.includes('exfoliar') || cleanMsg.includes('como ir')) {
-                appendMessage("🧖‍♀️ **Preparación:**\nExfolia tu piel 24h antes. Acude sin cremas, desodorante ni perfumes. Usa ropa cómoda y oscura.", 'in');
-            } else if (cleanMsg.includes('donde') || cleanMsg.includes('direccion') || cleanMsg.includes('calle') || cleanMsg.includes('ubicacion')) {
-                appendMessage("📍 Estamos en Calle Luis de Morales, 32, Edificio Fórum, local 9, Sevilla. A pocos metros del Estadio Ramón Sánchez-Pizjuán.", 'in');
-            } else if (cleanMsg.includes('reserva') || cleanMsg.includes('cita') || cleanMsg.includes('fecha') || cleanMsg.includes('calendario')) {
+            
+            // 1. Horarios
+            if (cleanMsg.includes('horario') || cleanMsg.includes('hora') || cleanMsg.includes('abierto') || cleanMsg.includes('abris') || cleanMsg.includes('abren') || cleanMsg.includes('cerrado')) {
+                appendMessage("📅 **Horario de Apertura:**\n• Lunes, Miércoles y Jueves: 10:00 – 20:30\n• Martes y Viernes: 10:00 – 20:00\n• Sábados: 10:00 – 14:00\n• Domingos: Cerrado.", 'in');
+            } 
+            // 2. Financiación
+            else if (cleanMsg.includes('financiar') || cleanMsg.includes('financiacion') || cleanMsg.includes('plazo') || cleanMsg.includes('plazos') || cleanMsg.includes('caixabank') || cleanMsg.includes('caixa')) {
+                appendMessage("💳 **Financiación con CaixaBank:**\n¡Sí! Puedes financiar de forma cómoda en **3 meses sin intereses** todos nuestros **Bonos Ahorro** (como el Bono Dark Tanning de 195€ o el Bono Berry Bronze de 300€). Pregunta al personal al realizar el pago.", 'in');
+            } 
+            // 3. Normas de seguridad y toalla/chanclas
+            else if (cleanMsg.includes('normas') || cleanMsg.includes('seguridad') || cleanMsg.includes('toalla') || cleanMsg.includes('chanclas') || cleanMsg.includes('llevar') || cleanMsg.includes('higiene') || cleanMsg.includes('desinfeccion')) {
+                appendMessage("🛡️ **Normas del local y Seguridad:**\n• Es obligatorio traer **toalla propia y chanclas** a cada sesión.\n• Ven con la **piel limpia**: sin perfumes, maquillaje, desodorantes ni cremas corporales (aplicados en las últimas 24 horas).\n• Desinfectamos todas las cabinas y superficies meticulosamente entre clientes.", 'in');
+            } 
+            // 4. Preparación y exfoliación
+            else if (cleanMsg.includes('preparar') || cleanMsg.includes('preparacion') || cleanMsg.includes('exfoliar') || cleanMsg.includes('exfoliacion') || cleanMsg.includes('cremas') || cleanMsg.includes('perfumes') || cleanMsg.includes('antes de ir')) {
+                appendMessage("🧖‍♀️ **Preparación para tu Sesión:**\n• Te recomendamos **exfoliar tu piel 24 horas antes** para que el bronceado sea más uniforme y duradero.\n• Acude sin maquillaje, desodorante ni perfumes.\n• Viste **ropa cómoda, suelta y de color oscuro** para después de la sesión.", 'in');
+            } 
+            // 5. Ubicación y cómo llegar
+            else if (cleanMsg.includes('donde') || cleanMsg.includes('direccion') || cleanMsg.includes('calle') || cleanMsg.includes('ubicacion') || cleanMsg.includes('como llegar') || cleanMsg.includes('metro') || cleanMsg.includes('nervion') || cleanMsg.includes('estadio') || cleanMsg.includes('pizjuan') || cleanMsg.includes('parking') || cleanMsg.includes('aparcamiento')) {
+                appendMessage("📍 **Ubicación y Cómo Llegar:**\nEstamos en **Calle Luis de Morales, 32 (Edificio Fórum), Local 9, Sevilla**.\n• A pocos metros del Estadio Ramón Sánchez-Pizjuán y de la parada de Metro **Nervión**.\n• El local cuenta con fácil acceso para personas con capacidad reducida.", 'in');
+            } 
+            // 6. Precios y servicios detallados
+            else if (cleanMsg.includes('precio') || cleanMsg.includes('precios') || cleanMsg.includes('servicio') || cleanMsg.includes('servicios') || cleanMsg.includes('tratamiento') || cleanMsg.includes('tratamientos') || cleanMsg.includes('catalogo') || cleanMsg.includes('cejas') || cleanMsg.includes('pestañas') || cleanMsg.includes('lifting') || cleanMsg.includes('corporales') || cleanMsg.includes('bonos') || cleanMsg.includes('ahorro') || cleanMsg.includes('quemadores') || cleanMsg.includes('aclarador') || cleanMsg.includes('metamorfosis') || cleanMsg.includes('sencillo')) {
+                appendMessage("✨ **Nuestros Tratamientos y Precios:**\n\n**1. Bronceado Brasilero:**\n• Bronceado Sencillo (50€ - 45 min)\n• Dark Tanning (65€ - 45 min)\n• Berry Bronze Premium (100€ - 1h)\n• Metamorfosis Ritual Lujo (150€ - 1h)\n• Mantenimiento (35€ - 30 min)\n\n**2. Bonos Ahorro (Financiables 3 meses CaixaBank):**\n• Bono Dark Tanning (3 sesiones - 195€)\n• Bono Berry Bronze (3 sesiones - 300€)\n\n**3. Tratamientos Corporales:**\n• Quemadores de grasa (65€ - 45 min)\n• Tratamiento tonificante (65€ - 45 min)\n• Aclarador de zonas íntimas/axilas (30€ - 30 min)\n\n**4. Cejas y Pestañas:**\n• Lifting de cejas (10€ - 20 min)\n• Lifting + Diseño completo (30€ - 45 min)\n\nEscribe **'reservar'** para agendar tu cita de inmediato.", 'in');
+            } 
+            // 7. Cupones y ofertas
+            else if (cleanMsg.includes('descuento') || cleanMsg.includes('descuentos') || cleanMsg.includes('cupon') || cleanMsg.includes('cupones') || cleanMsg.includes('oferta') || cleanMsg.includes('ofertas') || cleanMsg.includes('codigo') || cleanMsg.includes('codigos') || cleanMsg.includes('promocion') || cleanMsg.includes('promociones') || cleanMsg.includes('pielcanela10') || cleanMsg.includes('bienvenida5')) {
+                appendMessage("🏷️ **Cupones y Descuentos:**\n¡Claro! Disponemos de promociones activas que puedes introducir al reservar:\n• **PIELCANELA10**: Recibe un **10% de descuento** en tu cita.\n• **BIENVENIDA5**: Te descontamos **5,00 €** en tu primer servicio.\nSolo debes escribir el código en la pantalla de datos al agendar o en el checkout.", 'in');
+            } 
+            // 8. Cancelaciones y Mis Citas
+            else if (cleanMsg.includes('cancelar') || cleanMsg.includes('anular') || cleanMsg.includes('cambiar') || cleanMsg.includes('mis citas') || cleanMsg.includes('ver mi cita') || cleanMsg.includes('modificar')) {
+                appendMessage("📅 **Gestión de tu Cita:**\nPuedes consultar, modificar o cancelar tus reservas vigentes pulsando el botón **\"Mis Citas\"** situado en el menú superior. Tus citas se guardan en el navegador y puedes cancelarlas con un solo clic si cambias de opinión.", 'in');
+            } 
+            // 9. Duración del bronceado
+            else if (cleanMsg.includes('dura') || cleanMsg.includes('duracion') || cleanMsg.includes('cuanto tiempo') || cleanMsg.includes('dias')) {
+                appendMessage("⏳ **Duración del Bronceado:**\nNuestro bronceado brasilero dura entre **2 y 3 semanas** (de 7 a 10 días para el bronceado sencillo y hasta 14-15 días para Berry Bronze y Metamorfosis) dependiendo del tipo de piel e hidratación diaria. Te recomendamos aplicar crema hidratante diariamente.", 'in');
+            } 
+            // 10. Diferencia con caña de azúcar / autobronceadores
+            else if (cleanMsg.includes('diferencia') || cleanMsg.includes('caña de azucar') || cleanMsg.includes('quimico') || cleanMsg.includes('naranja') || cleanMsg.includes('manchas') || cleanMsg.includes('mancha')) {
+                appendMessage("☀️ **¿Qué nos diferencia?**\nA diferencia del bronceado químico o de caña de azúcar convencional, nuestra técnica estimula el color y la melanina natural de tu piel. Esto garantiza una **tonalidad dorada radiante, uniforme y 100% libre de manchas naranjas**.", 'in');
+            } 
+            // 11. Contacto
+            else if (cleanMsg.includes('contacto') || cleanMsg.includes('telefono') || cleanMsg.includes('llamar') || cleanMsg.includes('email') || cleanMsg.includes('correo') || cleanMsg.includes('whatsapp') || cleanMsg.includes('movil') || cleanMsg.includes('hablar')) {
+                appendMessage("📞 **Información de Contacto:**\n• Teléfono de atención: **955 19 18 95**\n• Correo electrónico: **info@obrasyreformassevilla.com** (o consúltanos a través de nuestro Staff en el local).\n• También puedes reservar y gestionar todo desde esta misma web las 24 horas.", 'in');
+            } 
+            // 12. Métodos de pago y amenities
+            else if (cleanMsg.includes('tarjeta') || cleanMsg.includes('tarjetas') || cleanMsg.includes('tarjeta de credito') || cleanMsg.includes('pagar') || cleanMsg.includes('pago') || cleanMsg.includes('wifi') || cleanMsg.includes('internet') || cleanMsg.includes('minusvalido') || cleanMsg.includes('silla de ruedas') || cleanMsg.includes('acceso')) {
+                appendMessage("ℹ️ **Servicios y Comodidades del Local:**\n• Aceptamos pagos con tarjeta de crédito/débito y efectivo.\n• Disponemos de **Wi-Fi** gratuito para clientes.\n• El local cuenta con rampa y **fácil acceso** para personas con capacidad reducida.", 'in');
+            } 
+            // 13. Reservas
+            else if (cleanMsg.includes('reserva') || cleanMsg.includes('cita') || cleanMsg.includes('fecha') || cleanMsg.includes('calendario') || cleanMsg.includes('agendar')) {
                 startChatBookingFlow();
-            } else {
-                appendMessage("Entendido. ¿Prefieres reservar un bronceado, saber nuestra dirección, o consultar cómo preparar tu piel? Escribe 'reservar' para agendar directamente.", 'in');
+            } 
+            // Fallback
+            else {
+                appendMessage("Entendido. Soy Canela y puedo resolver tus dudas sobre:\n• 🌟 **Nuestros servicios y precios** (escribe 'servicios')\n• 📅 **Horarios y dirección**\n• 🧖‍♀️ **Preparación previa y normas** (exfoliación, toalla, etc.)\n• 💳 **Financiación y descuentos**\n• ⏳ **Duración y dudas frecuentes**\nEscribe tu pregunta o escribe **'reservar'** para agendar una cita directamente.", 'in');
             }
         }
     }
