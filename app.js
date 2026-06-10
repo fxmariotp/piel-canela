@@ -1248,6 +1248,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatInputField = document.getElementById('chat-input-field');
     const sendChatBtn = document.getElementById('send-chat-btn');
     const chatQuickReplies = document.getElementById('chat-quick-replies');
+    if (chatQuickReplies) {
+        chatQuickReplies.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+                e.preventDefault();
+                chatQuickReplies.scrollLeft += e.deltaY;
+            }
+        }, { passive: false });
+    }
 
     // Bot booking variables
     let botState = {

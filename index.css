@@ -2248,6 +2248,29 @@ body.loading-state {
     display: none;
 }
 
+@media (hover: hover) {
+    .chat-quick-replies::-webkit-scrollbar {
+        display: block;
+        height: 4px;
+    }
+    .chat-quick-replies::-webkit-scrollbar-track {
+        background: rgba(74, 53, 47, 0.03);
+    }
+    .chat-quick-replies::-webkit-scrollbar-thumb {
+        background: var(--color-gold-light);
+        border-radius: var(--radius-full);
+    }
+    .chat-quick-replies::-webkit-scrollbar-thumb:hover {
+        background: var(--color-gold);
+    }
+    .chat-quick-replies {
+        -ms-overflow-style: auto; /* IE/Edge */
+        scrollbar-width: thin; /* Firefox */
+        scrollbar-color: var(--color-gold-light) rgba(74, 53, 47, 0.03); /* Firefox */
+        padding-bottom: 12px; /* Add breathing room for scrollbar */
+    }
+}
+
 .chat-reply-pill {
     background-color: rgba(212, 175, 55, 0.08);
     border: 1px solid rgba(212, 175, 55, 0.25);
