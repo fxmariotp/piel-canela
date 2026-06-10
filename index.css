@@ -55,6 +55,10 @@ body.loading-state {
     overflow: hidden;
 }
 
+.hidden {
+    display: none !important;
+}
+
 /* ----------------------------------------------------
    2. PRELOADER LOADING SCREEN
    ---------------------------------------------------- */
@@ -2846,6 +2850,14 @@ body.loading-state {
 /* Hero location link hover */
 .hero-map-link:hover {
     color: var(--color-gold-light) !important;
+}
+
+/* Hide Chatbot when modals or drawers are open to prevent overlap/clicking issues */
+#booking-modal.active ~ #chatbot-wrapper,
+#appointments-drawer.active ~ #chatbot-wrapper,
+#about-modal.active ~ #chatbot-wrapper,
+#mobile-menu-drawer.active ~ #chatbot-wrapper {
+    display: none !important;
 }
 
 
